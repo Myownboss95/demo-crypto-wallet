@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail\Withdrawal;
+namespace App\Mail\Send;
 
 use App\Models\User;
 use App\Models\Transaction;
@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class Declined extends Mailable
+class Decline extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -20,8 +20,7 @@ class Declined extends Mailable
      */
     public function __construct(public User $user, public Transaction $transaction)
     {
-        //php artisan make:mail Send/Approve --markdown=mail.send.approve
-
+        //
     }
 
     /**
@@ -31,6 +30,6 @@ class Declined extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.withdrawal.declined');
+        return $this->markdown('mail.send.declined');
     }
 }

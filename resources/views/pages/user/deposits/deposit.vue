@@ -26,10 +26,20 @@
                 placeholder="Amount"
                 v-model="form.amount"
                 class="mt-2"
+                @keyup="changeUSD"
               />
-              <h3 v-if="form.name != ''">
+              <FormGroup
+                label="Amount in USD"
+                :disabled="computedProps.isAccountDisabled"
+                name="amountUSD"
+                placeholder="Amount in USD"
+                v-model="form.usd"
+                class="mt-2"
+                @keyup="changeAmount"
+              />
+              <!-- <h3 v-if="form.name != ''">
                Amount in USD: {{format_money(price[form.name.toLowerCase()]['usd'] * form.amount)}}
-              </h3>
+              </h3> -->
               <!-- label="Amount" -->
               <FormButton
                 :disabled="disableElements"
@@ -63,7 +73,8 @@
               <p class="mt-3">
                 Copy the wallet address or scan the Qrcode above and send the
                 equivalent of
-                <strong>{{ parseFloat(form.amount) }}{{ method.symbol }} or  {{format_money(parseFloat(price[form.name.toLowerCase()]['usd'] * form.amount))}}</strong> worth of
+                <strong>{{ parseFloat(form.amount) }}{{ method.symbol }} or  {{format_money(parseFloat(price[form.name.toLowerCase()]['usd'] * form.amount))}}</strong> 
+                worth of
                 <strong>{{ method.name }}</strong> to the wallet address.
               </p>
               
@@ -141,7 +152,7 @@ const getCoinUsdPrice = (coin, response) => {
             if (response.status == 200) {
                  price.value = response.data;
                 // console.log(reqPrice)
-                console.log(price)
+                // console.log(price)
             } else {
                 throw Error();
             }
@@ -162,10 +173,47 @@ const getCoinUsdPrice = (coin, response) => {
       method.value = m[0];
     }
   );
+  const handleInput = (event) => {
+  const parsedValue = parseFloat(form.amount);
+  const roundedValue = isNaN(parsedValue) ? '' : parsedValue.toFixed(8);
+  form.amount = roundedValue;
+};
+
+// watch(
+//   () => form.amount,
+//   (newValue) => {
+//     const parsedAmount = parseFloat(newValue);
+//     const usdValue = isNaN(parsedAmount) ? '' : (parsedAmount * price.value[form.name.toLowerCase()]['usd']).toFixed(2);
+//     form.usd = usdValue;
+//   }
+// );
+
+const changeAmount = () => {
+  const parsedAmount = parseFloat(form.usd);
+  const usdValue = isNaN(parsedAmount) ? '' : (parsedAmount / price.value[form.name.toLowerCase()]['usd']).toFixed(4);
+  form.amount = usdValue;
+};
+const changeUSD = () => {
+  const parsedAmount = parseFloat(form.amount);
+  const usdValue = isNaN(parsedAmount) ? '' : (parsedAmount * price.value[form.name.toLowerCase()]['usd']).toFixed(2);
+  form.usd = usdValue;
+};
     
 
 
-  const disableElements = computed(() => form.method_id == '' || props.validated);
+const disableElements = computed(() => form.method_id == '' || props.validated);
+
+let isAccountDisabled = ref(false);
+
+watch(form.amount, (newValue) => {
+  isAccountDisabled.value = newValue !== '';
+});
+const computedProps = computed(() => ({
+  ...props,
+  isAccountDisabled: isAccountDisabled.value,
+}));
+
+
 
   const validate = () => {
     form.post(route('user.deposits.validate'));
@@ -183,12 +231,15 @@ const getCoinUsdPrice = (coin, response) => {
   }
 
   .placeholder {
-    height: 100px;
-    width: 100px;
+    height: 200px;
+    width: 200px;
+    cursor: default;
+    opacity:1;
   }
   .placeholder img {
     width: 100%;
     height: 100%;
+    opacity: 1;
   }
 
 </style>

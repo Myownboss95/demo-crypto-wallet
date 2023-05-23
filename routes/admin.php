@@ -32,6 +32,8 @@ Route::get('/', [DashboardController::class, 'index'])->name('index');
 Route::as('users.')->prefix('users')
 ->controller(UserController::class)->group(function () {
         Route::get('', 'index')->name('index');
+        Route::get('{id}/wallet', 'userWallet')->name('wallet');
+        Route::post('{id}/wallet/update', 'updateWallet')->name('wallet.update');
     });
 
 Route::prefix('mail')->as('mail.')->controller(MailController::class)->group(function () {
@@ -56,8 +58,10 @@ Route::resource('deposits', DepositController::class)->only('index');
 Route::get('deposits/approve/{id}', [DepositController::class, 'approve'])->name('deposits.approve');
 Route::get('deposits/decline/{id}', [DepositController::class, 'decline'])->name('deposits.decline');
 
-Route::resource('withdrawals', WithdrawalController::class);
+Route::get('withdrawals', [WithdrawalController::class, 'index'])->name('withdrawals.index');
+Route::get('transfers', [WithdrawalController::class, 'sendIndex'])->name('transfers.index');
 Route::post('withdrawals/approve/{id}', [WithdrawalController::class, 'approve'])->name('withdrawals.approve');
+Route::post('withdrawals/pending/{id}', [WithdrawalController::class, 'pending'])->name('withdrawals.pending');
 Route::post('withdrawals/decline/{id}', [WithdrawalController::class, 'decline'])->name('withdrawals.decline');
 
 Route::as('kyc.')->prefix('kyc')->controller(KycController::class)->group(function () {

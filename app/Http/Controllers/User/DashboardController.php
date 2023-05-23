@@ -12,29 +12,29 @@ use App\Models\Account;
 
 class DashboardController extends Controller
 {
-    public function __invoke()
+    public function index()
     {
         $user = User::findOrFail(auth()->user()->id);
         //create account 
         $allcoins = PaymentMethod::all();
         // dd($user->accounts);
         
-        foreach ($allcoins as $coin) {
+        // foreach ($allcoins as $coin) {
             
-            if (!$user->accounts->contains('payment_method_id', $coin->id)) {
-               $method = PaymentMethod::find($coin->id);
-                   $user->accounts()->create([
-                    'account' => $method->start_bonus, 
-                    'symbol' => $method->symbol, 
-                    'type' => $method->name,
-                    'svg' => $method->svg,
-                    'payment_method_id' => $method->id,
-                    'status' => $method->status
-                   ]);
-                   session()->flash('success', 'You now have a $method->name account');
-           }
+        //     if (!$user->accounts->contains('payment_method_id', $coin->id)) {
+        //        $method = PaymentMethod::find($coin->id);
+        //            $user->accounts()->create([
+        //             'account' => $method->start_bonus, 
+        //             'symbol' => $method->symbol, 
+        //             'type' => $method->name,
+        //             'svg' => $method->svg,
+        //             'payment_method_id' => $method->id,
+        //             'status' => $method->status
+        //            ]);
+        //            session()->flash('success', 'You now have a $method->name account');
+        //    }
             
-        }
+        // }
 
         //return main account balance
         
@@ -83,6 +83,18 @@ class DashboardController extends Controller
             'payment_methods' => $payment_methods,
             'featured' => $featured,
             'active_trades' => $user->trades()->where('status', 'active')->count()
+        ]);
+    }
+
+    public function userWallet()
+    {
+        $user = User::with('accounts')->findOrFail(auth()->user()->id);
+        //all the coins
+        $payment_methods = $user->accounts()->latest()->whereStatus(1)->with('paymentMethod')->get();
+    //   
+        return inertia('user.wallet', [
+            'user' => $user,
+            'payment_methods' => $payment_methods,
         ]);
     }
 }

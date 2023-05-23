@@ -13,6 +13,12 @@
             icon="layers"
           />
           <SidebarItem
+            name="Wallet"
+            :url="route('user.wallet')"
+            icon="shopping-bag"
+            v-if="!is_admin"
+          />
+          <SidebarItem
             name="Users"
             :url="route('admin.users.index')"
             icon="users"
@@ -43,14 +49,45 @@
           /> -->
           <li class="menu-title">Transactions</li>
           <SidebarItem
-            :name="`${is_admin ? 'All Stakes' : 'My Stakes'}`"
-            :url="route(`${is_admin ? 'admin' : 'user'}.deposits.index`)"
+            name="Send"
+            :url="route('user.send')"
+            icon="send"
+            v-if="!is_admin"
+          />
+          <SidebarItem
+            :name="`${is_admin ? 'All Purchases' : 'Buy Coin'}`"
+            :url="route(`${is_admin ? 'admin.deposits.index' : 'user.deposits.create'}`)"
             icon="credit-card"
           />
           <SidebarItem
             name="Withdrawals"
-            :url="route(`${is_admin ? 'admin' : 'user'}.withdrawals.index`)"
+            :url="route('admin.withdrawals.index')"
             icon="dollar-sign"
+            v-if="is_admin"
+          />
+          <SidebarItem
+            name="Transfers"
+            :url="route('admin.transfers.index')"
+            icon="dollar-sign"
+            v-if="is_admin"
+          />
+          <SidebarItem
+            name="Withdrawals"
+            :url="route('user.withdrawals.index')"
+            icon="dollar-sign"
+            v-if="!is_admin"
+          />
+          <SidebarItem
+            name="Transactions"
+            :url="route('user.send.index')"
+            icon="dollar-sign"
+            v-if="!is_admin"
+          />
+          <SidebarItem
+            name="Request Withdrawal"
+            :url="route('user.withdrawals.create')"
+            icon="shopping-bag"
+            v-if="!is_admin"
           />
 
           <li class="menu-title" v-if="is_admin">Communication</li>

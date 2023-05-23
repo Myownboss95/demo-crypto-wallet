@@ -1,5 +1,5 @@
 <template>
-  <Head title="Payment Methods" />
+  <Head title="All Coins" />
   <breadcrumb title="Add Coins" :crumbs="['Dashboard', 'Settings', 'Add Coins']" />
   <div class="card shadow col-lg-8 mx-auto">
     <div class="card-body">

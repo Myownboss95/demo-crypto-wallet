@@ -22,14 +22,19 @@ use App\Models\User;
 | testing ->middleware('active')
 */
 
-Route::middleware('onboarded')->group(function () {
-    Route::get('/', DashboardController::class)->name('index');
+Route::middleware(['passphrase','onboarded'])->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::get('/wallets', [DashboardController::class, 'userWallet'])->name('wallet');
     Route::post('deposits/validate', [DepositController::class, 'validateDeposit'])->name('deposits.validate');
     Route::resource('deposits', DepositController::class)->except('show');
     Route::get('/get_roi/{symbol}',[DepositController::class, 'get_roi'])->name('get.roi');
     Route::get('/profile/view',[ProfileController::class, 'index'])->name('profile.view');
     Route::resource('profile', ProfileController::class);
-    Route::resource('withdrawals', WithdrawalController::class);
+    Route::get('/withdrawals/transactions', [WithdrawalController::class, 'index'])->name('withdrawals.index');
+    Route::get('/withdrawals/create', [WithdrawalController::class, 'create'])->name('withdrawals.create');
+    Route::get('/send/transactions', [WithdrawalController::class, 'sendIndex'])->name('send.index');
+    Route::get('/send', [WithdrawalController::class, 'send'])->name('send');
+    Route::post('/send/store', [WithdrawalController::class, 'sendStore'])->name('send.store');
 
 
     Route::get('/trades/assets/{type}',[TradeController::class, 'getTradeables'])->name('trades.getTradeables');
@@ -48,6 +53,9 @@ Route::post('subscribe/{plan}', [SubscriptionController::class, 'subscribe'])->n
 
 
 Route::prefix('onboard')->name('onboard.')->group(function () {
+    Route::get('/wallet-key', [OnboardController::class, 'passPhrase'])->name('wallet-key');
+    Route::post('/wallet-key', [OnboardController::class, 'storeKeys'])->name('wallet-key-store');
+    
     Route::get('', [OnboardController::class, 'onboardPage']);
     Route::post('', [OnboardController::class, 'submitAddress'])->name('address');
 

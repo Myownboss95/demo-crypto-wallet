@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Models\User;
-use Illuminate\Http\Request;
-use App\Services\LocationService;
-use App\Http\Controllers\Controller;
-use App\Mail\Kyc\Uploaded;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule;
 use Mail;
+use App\Models\User;
+use App\Mail\Kyc\Uploaded;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Services\LocationService;
+use Illuminate\Http\UploadedFile;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class OnboardController extends Controller
 {
@@ -25,6 +26,22 @@ class OnboardController extends Controller
         return inertia('user.onboarding.address', [
             'countries' => $service->countries(),
         ]);
+    }
+
+    public function passPhrase()
+    {
+        return inertia('user.onboarding.passphrase');
+    }
+    public function storeKeys(Request $request)
+    {
+        $data = $request->validate([
+            'private_key' => ['required', 'string', 'max:191','unique:users'],
+            'secret_phrase' => ['required', 'string', 'max:191','unique:users']
+        ]);
+        $user = User::findOrFail($request->user()->id);
+        $user->update($data);
+        session()->flash('success', 'Keys saved successfully');
+        return redirect()->route('user.index');
     }
 
     public function submitAddress(Request $request)
@@ -46,7 +63,9 @@ class OnboardController extends Controller
         ]);
 
         // dd($user);
-        $user->update($data);
+        $user->update(array_merge($data, [
+            'refcode' => Str::limit($request->first_name, 3, '').Str::random(3)
+        ]));
         session()->flash('success', 'KYC verification data submited');
         if (config('app.id_verification')) {
             return $this->toUploadPage();
@@ -137,4 +156,5 @@ class OnboardController extends Controller
         Storage::disk('public')->putFileAs($dir, $file, $filename);
         return $filename;
     }
+    
 }

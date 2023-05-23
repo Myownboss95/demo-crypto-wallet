@@ -63,9 +63,10 @@ class DepositController extends Controller
         }
 
         $user = User::findOrFail(auth()->user()->id);
-
+        $amount = round($request->input('amount'), 4);
+        
         $user->transactions()->create([
-            'amount' => $request->input('amount'),
+            'amount' => $amount,
             'symbol' => strtoupper($request->input('symbol')),
             'options' => ['payment_method_id' => $request->input('method_id')],
             'type' => 'deposit',

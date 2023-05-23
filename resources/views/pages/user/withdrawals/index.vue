@@ -3,12 +3,7 @@
   <breadcrumb title="Withdrawals" :crumbs="['Dashboard', 'Withdrawals']" />
   <div class="card shadow-lg col-lg-9 mx-auto radius-20">
     <div class="card-body">
-        <div class="mb-3 text-end">
-            <inertia-link :href="route('user.withdrawals.create')" class="btn btn-outline-info btn-rounded">
-            <i class="fa fa-dollar-sign"></i>
-            Request withdrawal
-            </inertia-link>
-        </div>
+        
         <div class="table-responsive">
           <table class="table">
               <thead>

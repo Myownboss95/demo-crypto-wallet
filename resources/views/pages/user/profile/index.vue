@@ -22,7 +22,7 @@
                 <div class="flex-grow-1">
                   <div class="ml-3">
                     <h5 class="font-size-16 mb-1">
-                      {{ user.first_name }} {{ user.last_name }}
+                      {{ user.first_name }} {{ user.last_name }} 
                     </h5>
                     <p class="text-muted font-size-13">
                       {{ user.email }}
@@ -147,10 +147,10 @@
                   <div class="col-md-6">
                     <div class="row">
                       <div class="col-7 border p-1">
-                        <strong class="font-size-16 my-1">{{hostname}}ref/{{form.referral_code}}</strong>
+                        <strong class="font-size-16 my-1">{{hostname}}ref/{{user?.refcode}}</strong>
                       </div>
                       <div class="col-5 border p-1 ref">
-                        <span class="ml-2" @click="copy('https://'+hostname+'ref/'+form.referral_code)"><i class="fa fa-copy"></i>
+                        <span class="ml-2" @click="copy('https://'+hostname+'ref/'+user?.refcode)"><i class="fa fa-copy"></i>
                          <strong> Click to Copy</strong>
                         </span>
                         
@@ -238,10 +238,10 @@
                 <div class="row justify-content-center">
                   <div class="row">
                       <div class="col-md-5 col-sm-12 border p-1">
-                        <strong class="font-size-16 my-1">{{hostname}}ref/{{form.referral_code}}</strong>
+                        <strong class="font-size-16 my-1">{{hostname}}ref/{{user?.refcode}}</strong>
                       </div>
                       <div class="col-md-3 col-sm-12 border p-1 ref">
-                        <span class="ml-2" @click="copy('https://'+hostname+'ref/'+form.referral_code)"><i class="fa fa-copy"></i>
+                        <span class="ml-2" @click="copy('https://'+hostname+'ref/'+user?.refcode)"><i class="fa fa-copy"></i>
                          <strong> Click to Copy</strong>
                         </span>
                         

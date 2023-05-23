@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\UpdateWallet;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
 
 class UserController extends Controller
@@ -59,5 +61,37 @@ class UserController extends Controller
         session()->forget('admin_id');
         auth()->loginUsingId($user->id);
         return redirect()->route('admin.index');
+    }
+    
+    public function userWallet($id)
+    {
+        $user = User::with('accounts')->findOrFail($id);
+        return inertia('admin.users.wallet', [
+            'user' => $user
+        ]);
+    }
+    public function updateWallet(UpdateWallet $request, $id)
+    {
+        $data = $request->except(['coin_id']);
+        $user = User::findOrFail($id);
+        $user->accounts()->where('payment_method_id', $request->coin_id)->update(array_merge($data, [
+            'qr_code' => $this->uploadFile($request),
+        ]));
+        return redirect()->route('admin.users.wallet', ['id'=>$id])->withSuccess('Wallet Saved successfully');
+   
+
+    }
+    private function uploadFile(Request $request)
+    {
+        if(!$request->hasFile('qr_code')) return null;
+        $uploadedFile = $request->file('qr_code');
+        $filename = time().$uploadedFile->getClientOriginalName();
+
+        Storage::disk('public')->putFileAs(
+            'user_wallets',
+          $uploadedFile,
+          $filename
+        );
+        return $filename;
     }
 }

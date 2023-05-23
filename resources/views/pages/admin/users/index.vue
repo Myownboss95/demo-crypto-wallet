@@ -52,16 +52,22 @@
               </div>
               <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-3 text-lg-center">
                 <small class="mb-2 d-block font-size-12 fw-bold"
-                  >Phone Number</small
-                >
-                <span class="font-size-12">{{ user.phone }}</span>
+                  >Wallet
+                  </small>
+                  <span class="font-size-12">
+                  <InertiaLink :href="route('admin.users.wallet',user.id)" class="btn btn-outline-primary btn-sm">
+                  <i class="fa fa-eye"></i> View Wallet
+                  </InertiaLink>
+                  </span>
               </div>
               <div class="col-xl-2 col-lg-6 col-sm-4 mb-sm-3 mb-3">
                 <small class="mb-2 d-block font-size-12 fw-bold"
-                  >Email Address</small
+                  >Contact</small
                 >
                 <span class="font-size-12">{{ user.email }}</span>
+                <span class="font-size-12">{{ user.phone }}</span>
               </div>
+              
               <div class="col-xl-2 col-md-12 col-lg-6 col-sm-12 mb-sm-4 mb-0">
                 <hr class="d-md-none mt-0" />
                 <div class="d-flex justify-content-between items-center my-auto">
