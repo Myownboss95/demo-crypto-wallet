@@ -1,7 +1,6 @@
 import { createApp, h } from 'vue'
-import { createInertiaApp, Link, Head } from '@inertiajs/inertia-vue3'
+import { createInertiaApp, Link, Head } from '@inertiajs/vue3'
 import { importPageComponent } from '@/scripts/vite/import-page-component'
-import { InertiaProgress } from '@inertiajs/progress'
 import { createPinia } from 'pinia';
 import route from 'ziggy-js'
 
@@ -30,7 +29,12 @@ import DefaultVue from '@/views/layouts/default.vue';
 createInertiaApp({
     title: title => `${ title } - ${ import.meta.env.VITE_APP_NAME }`,
     resolve: async (name) => {
-        const { default: page } = await importPageComponent(name, import.meta.glob('../views/pages/**/*.vue'))
+        let page_dir = window.location.toString().includes('user') ? 'userpages' : 'pages';
+            // let { default: page } = await importPageComponent(name, import.meta.glob('../views/userpages/pages/**/*.vue'))
+        console.log(page_dir)
+        
+        const { default: page } = await importPageComponent(name, import.meta.glob(`../views/${page_dir}/**/*.vue`)) 
+
         if (name.startsWith('auth.')) {
             page.layout = AuthVue;
         } else {
@@ -38,8 +42,8 @@ createInertiaApp({
         }
         return page;
     },
-    setup({ el, app, props, plugin }) {
-        const vue = createApp({ render: () => h(app, props) })
+    setup({ el, App, props, plugin }) {
+        const vue = createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(pinia)
             // .use(vGoogleTranslate)
@@ -55,6 +59,5 @@ createInertiaApp({
         vue.mount(el)
     },
 });
-InertiaProgress.init();
 
 

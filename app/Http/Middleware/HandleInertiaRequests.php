@@ -3,8 +3,8 @@
 namespace App\Http\Middleware;
 
 use App\Models\User;
-use Inertia\Middleware;
 use Illuminate\Http\Request;
+use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -16,6 +16,11 @@ class HandleInertiaRequests extends Middleware
      */
     protected $rootView = 'app';
 
+    public function __construct()
+    {
+        $this->rootView = 'user';
+    }
+
     /**
      * Determines the current asset version.
      *
@@ -23,7 +28,7 @@ class HandleInertiaRequests extends Middleware
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
-    public function version(Request $request): ?string
+    public function version(Request $request):  ? string
     {
         return vite()->getHash();
     }
@@ -35,28 +40,31 @@ class HandleInertiaRequests extends Middleware
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function share(Request $request): array
+    public function share(Request $request) : array
     {
         $user = auth()->check() ? User::findOrFail($request->user()->id) : null;
         return array_merge(parent::share($request), [
             'app.locale' => app()->getLocale(),
             'auth.user' => function () use ($request, $user) {
-                if (!$user) return null;
+                if (!$user) {
+                    return null;
+                }
+
                 return $user->only('id', 'is_admin', 'email', 'first_name', 'last_name', 'phone', 'image');
             },
-            'admin_id' => fn () => $request->session()->get('admin_id'),
-            'flash.status' => fn () => $request->session()->get('status'),
-            'flash.success' => fn () => $request->session()->get('success'),
-            'flash.error' => fn () => $request->session()->get('error'),
-            'flash.email' => fn () => $request->session()->get('email'),
-            'validated' => fn () => $request->session()->get('validated'),
-            'data' => fn () => $request->session()->get('data'),
+            'admin_id' => fn() => $request->session()->get('admin_id'),
+            'flash.status' => fn() => $request->session()->get('status'),
+            'flash.success' => fn() => $request->session()->get('success'),
+            'flash.error' => fn() => $request->session()->get('error'),
+            'flash.email' => fn() => $request->session()->get('email'),
+            'validated' => fn() => $request->session()->get('validated'),
+            'data' => fn() => $request->session()->get('data'),
             'url.previous' => function () {
                 return (url()->current() != route('login')
                     && url()->previous() !== ''
                     && url()->previous() != url()->current())
-                    ? url()->previous()
-                    : null;
+                ? url()->previous()
+                : null;
             },
         ]);
     }

@@ -10,10 +10,10 @@
 import LabelVue from './FormLabel.vue';
 import InputVue from './FormInput.vue';
 import ErrorVue from '@/views/components/alerts/error.vue'
-import { usePage } from '@inertiajs/inertia-vue3'
+import { usePage } from '@inertiajs/vue3'
 import { computed } from 'vue';
 
-const props = computed(() => usePage().props.value)
+const props = computed(() => usePage().props)
 
 defineProps({
     type: {

@@ -4,7 +4,10 @@
       <div class="d-flex">
         <!-- LOGO -->
         <div class="navbar-brand-box">
-          <inertia-link :href="route(`${is_admin ? 'admin':'user'}.index`)" class="logo logo-dark">
+          <inertia-link
+            :href="route(`${is_admin ? 'admin' : 'user'}.index`)"
+            class="logo logo-dark"
+          >
             <span class="logo-sm">
               <img src="@/assets/images/logo-sm.png" alt="" height="24" />
             </span>
@@ -14,7 +17,10 @@
             </span>
           </inertia-link>
 
-          <inertia-link :href="route(`${is_admin ? 'admin':'user'}.index`)" class="logo logo-light">
+          <inertia-link
+            :href="route(`${is_admin ? 'admin' : 'user'}.index`)"
+            class="logo logo-light"
+          >
             <span class="logo-sm">
               <img src="@/assets/images/logo-sm.svg" alt="" height="24" />
             </span>
@@ -46,7 +52,6 @@
       </div>
 
       <div class="d-flex align-content-center">
-
         <!-- <div class="dropdown">
           <button
             type="button"
@@ -81,8 +86,8 @@
             </div>
           </div>
         </div> -->
-        <div style="margin: 5px;">
-            <div id="google_translate_element"></div>
+        <div style="margin: 5px">
+          <div id="google_translate_element"></div>
         </div>
 
         <div class="dropdown">
@@ -243,7 +248,6 @@
           </div>
         </div> -->
 
-
         <div class="dropdown d-inline-block">
           <button
             type="button"
@@ -263,21 +267,34 @@
             <i class="mdi mdi-chevron-down d-inline-block"></i>
           </button>
           <div class="dropdown-menu dropdown-menu-end">
-            <inertia-link v-if="!is_admin" class="dropdown-item" :href="route('user.profile.view')"
-              ><i
-                class="mdi mdi-user font-size-16 align-middle me-1"
-              ></i>
+            <inertia-link
+              v-if="!is_admin"
+              class="dropdown-item"
+              :href="route('user.profile.view')"
+              ><i class="mdi mdi-user font-size-16 align-middle me-1"></i>
               Profile
             </inertia-link>
-            <inertia-link as="button" method="post" v-if="$page.props.admin_id" class="dropdown-item" :href="route('switch-to-admin',$page.props.admin_id)">
-            <i class="mdi mdi-user font-size-16 align-middle me-1"></i>
+            <inertia-link
+              as="button"
+              method="post"
+              v-if="$page.props.admin_id"
+              class="dropdown-item"
+              :href="route('switch-to-admin', $page.props.admin_id)"
+            >
+              <i class="mdi mdi-user font-size-16 align-middle me-1"></i>
               Switch to Admin
             </inertia-link>
             <div class="dropdown-divider"></div>
-            <inertia-link method="post" as="button" class="dropdown-item" :href="route('logout')" replace>
-                <i class="mdi mdi-logout font-size-16 align-middle me-1"></i>
+            <inertia-link
+              method="post"
+              as="button"
+              class="dropdown-item"
+              :href="route('logout')"
+              replace
+            >
+              <i class="mdi mdi-logout font-size-16 align-middle me-1"></i>
               Logout
-              </inertia-link>
+            </inertia-link>
           </div>
         </div>
       </div>
@@ -286,82 +303,82 @@
 </template>
 
 <script setup>
-  import { ref, onMounted, watch, computed } from 'vue';
-  import feather from 'feather-icons';
-  import { useTheme } from '@/stores/theme';
-import { usePage } from '@inertiajs/inertia-vue3';
-import { profile_picture } from '@/js/functions';
-import { Inertia } from '@inertiajs/inertia';
-import route from 'ziggy-js';
+import { ref, onMounted, watch, computed } from "vue";
+import feather from "feather-icons";
+import { useTheme } from "@/stores/theme";
+import { usePage } from "@inertiajs/vue3";
+import { profile_picture } from "@/js/functions";
+import { router } from "@inertiajs/vue3";
+import route from "ziggy-js";
 
- 
-const user = computed(() => usePage().props.value.auth.user);
+const user = computed(() => usePage().props.auth.user);
 const is_admin = user.value.is_admin;
 
 const locales = ref([
-    {
-        name: 'English',
-        short_name: 'en',
-        flag: 'us.jpg',
-    },
-    {
-        name: 'Spanish',
-        short_name: 'es',
-        flag: 'spain.jpg',
-    },
-    {
-        name: 'German',
-        short_name: 'de',
-        flag: 'germany.jpg',
-    },
-    {
-        name: 'Italian',
-        short_name: 'it',
-        flag: 'italy.jpg',
-    },
+  {
+    name: "English",
+    short_name: "en",
+    flag: "us.jpg",
+  },
+  {
+    name: "Spanish",
+    short_name: "es",
+    flag: "spain.jpg",
+  },
+  {
+    name: "German",
+    short_name: "de",
+    flag: "germany.jpg",
+  },
+  {
+    name: "Italian",
+    short_name: "it",
+    flag: "italy.jpg",
+  },
 ]);
 
-const loadFlag = flag => {
-    return `/storage/flags/${ flag }`;
-}
+const loadFlag = (flag) => {
+  return `/storage/flags/${flag}`;
+};
 
-const locale = computed(() => usePage().props.value.app.locale);
+const locale = computed(() => usePage().props.app.locale);
 
-const activeLocale = computed(() => locales.value.filter(loc => loc.short_name == locale.value)[0]);
+const activeLocale = computed(
+  () => locales.value.filter((loc) => loc.short_name == locale.value)[0]
+);
 
-const setLocale = locale => Inertia.post(route('set-locale', locale.short_name ));
+const setLocale = (locale) =>
+  router.post(route("set-locale", locale.short_name));
 
+const theme = useTheme();
 
+const appName = import.meta.env.VITE_APP_NAME;
 
-  const theme = useTheme();
+const toggleMode = theme.toggleTheme;
 
-  const appName = import.meta.env.VITE_APP_NAME;
+onMounted((_) => {
+  theme.initTheme();
+  feather.replace();
+});
 
-  const toggleMode = theme.toggleTheme;
-
-  onMounted((_) => {
-    theme.initTheme();
-    feather.replace();
-  });
-
-  const toggleSidebar = (_) => {
-    var body = document.body;
-    var e = body.getAttribute('data-sidebar-size');
-    body.classList.toggle('sidebar-enable');
-    if (992 <= window.innerWidth) {
-      if (null == e || e == 'lg') {
-        body.setAttribute('data-sidebar-size', (e = 'sm'));
-      } else {
-        body.setAttribute('data-sidebar-size', (e = 'lg'));
-      }
-      localStorage.setItem('sidebar-size', e);
+const toggleSidebar = (_) => {
+  var body = document.body;
+  var e = body.getAttribute("data-sidebar-size");
+  body.classList.toggle("sidebar-enable");
+  if (992 <= window.innerWidth) {
+    if (null == e || e == "lg") {
+      body.setAttribute("data-sidebar-size", (e = "sm"));
+    } else {
+      body.setAttribute("data-sidebar-size", (e = "lg"));
     }
-  };
+    localStorage.setItem("sidebar-size", e);
+  }
+};
 </script>
 
 <style>
-  #notification-items-wrapper {
-    max-height: 250px;
-    overflow-y: scroll;
-  }
+#notification-items-wrapper {
+  max-height: 250px;
+  overflow-y: scroll;
+}
 </style>

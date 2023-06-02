@@ -150,9 +150,9 @@
   import feather from 'feather-icons';
   import MetisMenu from 'metismenujs';
   import SidebarItem from './sidebarItem.vue';
-  import { usePage } from '@inertiajs/inertia-vue3';
+  import { usePage } from '@inertiajs/vue3';
 
-const is_admin = computed(() => usePage().props.value.auth.user.is_admin == 1);
+const is_admin = computed(() => usePage().props.auth.user.is_admin == 1);
 
 const botsMenu = computed(() => is_admin == true ? 'Trade Bots' : 'Trade Bot');
 const stakes = computed(() => is_admin == true ? 'All Stakes' : 'My Stakes');
