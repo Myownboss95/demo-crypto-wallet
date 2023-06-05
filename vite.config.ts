@@ -41,16 +41,16 @@ export default defineConfig(({ mode }) => {
             }),
         ],
         server: serverData(),
-        build: {
-            rollupOptions: {
-                external: [
-                    "/storage/svg/send.png",
-                    "/storage/svg/arrow-swap.png",
-                    "/storage/svg/shopping-cart.png",
-                    "/storage/svg/receivewallet.png",
-                    "/storage/svg/nft-coming-soon.webp"
-                ],
-            },
-        },
+        // build: {
+        //     rollupOptions: {
+        //         external: [
+        //             "/storage/svg/send.png",
+        //             "/storage/svg/arrow-swap.png",
+        //             "/storage/svg/shopping-cart.png",
+        //             "/storage/svg/receivewallet.png",
+        //             "/storage/svg/nft-coming-soon.webp"
+        //         ],
+        //     },
+        // },
     };
 });
