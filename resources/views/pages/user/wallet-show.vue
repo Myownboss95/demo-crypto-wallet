@@ -41,7 +41,7 @@
             </div>
            
             </div>
-</div>
+
   <!-- options starts -->
   <section class="section-t-space">
     <div class="custom-container">
@@ -54,7 +54,8 @@
             </a>
           </li>
           <li>
-            <a style="background-color: transparent;" data-bs-toggle="offcanvas" data-bs-target="#choosecoin" class="category-boxes">
+            <!-- @click="showModal(coin) -->
+            <a style="background-color: transparent;"  @click="showModal(coin)" class="category-boxes" data-bs-toggle="offcanvas" data-bs-target="#receive-coin" >
               <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="@/assets/images/receivewallet.png" alt="receive" />
               <h5>Receive</h5>
             </a>
@@ -75,6 +76,7 @@
       </div>
     </div>
   </section>
+  </div>
   <!-- options end -->
 
 
@@ -91,11 +93,15 @@
               <div class="nft-horizontal-box">
                 <div class="product-details">
                   <div class="product-image">
-                    <img style="height: 15px; width: 15px; margin-left: 15px;" fill="#FFFFFF" class="img-fluid" src="@/assets/images/send.png" alt="send" />
+                    <img style="height: 15px; width: 15px; margin-left: 15px;" fill="#FFFFFF" class="img-fluid" src="@/assets/images/send.png"  v-if="transaction.type=='send'" :alt="transaction.type" />
+                    <img style="height: 15px; width: 15px; margin-left: 15px;" fill="#FFFFFF" class="img-fluid" src="@/assets/images/receivewallet.png"  v-if="transaction.type=='deposit'" :alt="transaction.type" />
+                    <img style="height: 15px; width: 15px; margin-left: 15px;" fill="#FFFFFF" class="img-fluid" src="@/assets/images/arrow-head.png"  v-if="transaction.type=='withdrawal'" :alt="transaction.type" />
+
+
                   </div>
                   <div class="product-content">
                     <div>
-                      <h4>Transfer</h4>
+                      <h4>{{  transactionType(transaction.type) }}</h4>
                       <h6>ref: {{ transaction.reference }}</h6>
                      
                     </div>
@@ -120,11 +126,11 @@
               <ul class="nft-horizontal-content">
                 <li>
                   <h5>Status</h5>
-                  <h6 class="text-success">{{ transaction.status }}</h6>
+                  <h6 class="text-success" :class="Red(transaction.status) ||Yellow(transaction.status) || Green(transaction.status)" style="background-color: inherit !important">{{ transaction.status }}</h6>
                 </li>
                 <li>
-                  <h5>comfirmation</h5>
-                  <h6>3/3</h6>
+                  <h5>Confirmation</h5>
+                  <h6>{{ confirmation(transaction.status) }}/3</h6>
                 </li>
               </ul>
             </div>
@@ -139,67 +145,47 @@
     <!-- end table part -->
 
 
-
-
-
-
-      <div class="row card shadow-lg radius-20" v-for="(coin, key) in payment_methods" :key="key">
-        <div class="col card-body">
-          <div class="row" v-if="coin.wallet_address != '' && coin.qr_code != ''">
-            <div class="col-md-8 col-lg-8 col-sm-12 p-3 text-muted">
-              <!-- span -->
-                <div class="row">
-                  <p class="h4">{{ coin.symbol }} Wallet Details</p>
-                  <span
-                  class="text-muted mb-3 lh-1 d-block h6"
-                  style="text-transform: capitalize; text-align: left">
-                   You have {{ coin.account === '0.0000' ? '0' : coin.account }}{{ coin.symbol }} = {{ (data[coin.type] * coin.account).toFixed(2) }}USD
-                  <hr>
-                  1{{ coin.symbol }} - {{ data[coin.type] }}USD
-                  </span>
-                  <div class="col-md-8 col-sm-12 border">
-                    <p class="fw-bold">{{ coin.wallet_address }}</p>
-                  </div>
-
-                  <div class="col-md-4 col-sm-12 border ref">
-                    <span class="ml-4" @click="copy(coin.wallet_address)"
-                      ><i class="fa fa-copy"></i>
-                      <strong> Click to Copy</strong>
-                    </span>
-                  </div>
-                </div>
-                <!-- span end -->
-              
-            </div>
-            <div class="col-md-4 col-sm-12 p-3">
-              <div class="" v-if="coin.qr_code != null">
-                <img
-                  :src="`/storage/user_wallets/${coin.qr_code}`"
-                  alt=""
-                  class="w-100 img-fluid"
-                />
-              </div>
-              <div v-else>
-                <p class="fw-bold">No Image Yet</p>
-              </div>
-            </div>
-            </div>
-            <div class="row" v-else>
-            <div class="col-md-8 col-lg-8 col-sm-12 p-3 text-muted">
-              <!-- span -->
-                <div class="row">
-                  <p class="h5">{{ coin.symbol }} Wallet Has not been activated. Contact Admin</p>
-                  
-                </div>
-                <!-- span end -->
-              
-            </div>
-           
-            </div>
-          </div>
+    <div class="offcanvas theme-offcanvas share-offcanvas offcanvas-bottom px-4 pb-4 h-auto" tabindex="-1"
+    id="receive-coin">
+    <div class="offcanvas-header">
+      <div class="header-panel">
+        <a class="text-light right-title" data-bs-dismiss="offcanvas" aria-label="Close" >
+          <i class="ri-close-line"></i>
+        </a>
+        <h3 class="text-white left-title">Receive {{ coinPop.symbol }}</h3>
         
       </div>
-    
+    </div>
+    <div style="margin: 0 auto;" class="offcanvas-body">
+      <div style="background-color: white; border-radius: 10px; max-width: 250px; padding: 15px 15px;" class="offer-title">
+        <img class="img-fluid" style="width: 220px; height: 220px;" :src="`/storage/user_wallets/${coinPop.qr_code}`" alt="Qr Code" />
+        <h4 style="word-wrap: break-word; margin-bottom: -3px;">{{  coinPop.wallet_address }}</h4>
+      </div>
+    </div>
+    <div style="margin: 0 auto;"  class="offcanvas-body">
+      <div class="offer-title">
+        <h4 style="word-wrap: break-word;">Send only ( {{ coinPop.symbol }} ) to this address. 
+          Sending any other coin may result in permanent loss.</h4>
+      </div>
+    </div>
+    <div style="margin: 0 auto;" class="offcanvas-body">
+      <div class="wallet-options d-flex align-items-center justify-content-center">
+        <ul class="category-slide">
+          <li>
+            
+            <div style="background-color: transparent;" class="category-boxes"  @click="copy(coinPop.wallet_address)">
+              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="@/assets/images/copy.png" alt="copy" />
+              
+              <h5>Copy</h5>
+              
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
 </template>
 
 <script setup>
@@ -210,7 +196,7 @@ import FormGroup from "@/views/components/form/FormGroup.vue";
 import FormSelect from "@/views/components/form/FormSelect.vue";
 import { useForm } from "@inertiajs/vue3";
 import { ref, watch, reactive, onMounted } from "vue";
-import Modal from "@/views/components/modal.vue";
+import Modal from "@/views/components/walletmodal.vue";
 import axios from "axios";
 import route from "ziggy-js";
 import { profile_picture } from "@/js/functions";
@@ -265,6 +251,36 @@ const Yellow = (status) => {
     const Red = (status) => {
         if (status == 'failed') return 'red';
     };
+const depositType = computed(() => transactionType(type));
+const transactionType = (type) => type;
+const iconType = (type) => {
+   return (type != 'send') ?
+        ((type != 'deposit') ? ((type == 'withdrawal') ? "arrow-head.png":"send.png")
+        : "receivewallet.png")
+        : "send.png";
+}
+const confirmation = (status) => {
+   return (status == 'failed') ? 1 :
+        ((status == 'pending') ? 2:  ((status == 'successful') ? 3:0)
+        )
+        
+}
+const openModal = ref(false);
+const modalCoin = ref({});
+const coinPop = ref({});
+const showModal = (coin) => {
+    // return console.log(coin);
+    modalCoin.value = coin.symbol;
+    coinPop.value = coin;
+ 
+//   openModal.value = true;
+};
+
+const closeModal = () => {
+  document.querySelectorAll(".btn-close").forEach((element) => {
+    element.click();
+  });
+};
 </script>
 
 
@@ -324,11 +340,14 @@ const Yellow = (status) => {
 
 .green {
   background-color: #96c432 !important;
+  color: #96c432 !important;
 }
 .yellow {
   background-color: #facf5a !important;
+  color: #facf5a !important;
 }
 .red {
   background-color: #bf4733 !important;
+   color: #bf4733 !important;
 }
 </style>
