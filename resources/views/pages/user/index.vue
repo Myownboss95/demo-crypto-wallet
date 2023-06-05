@@ -19,25 +19,25 @@
         <ul class="category-slide">
           <li>
             <a style="background-color: transparent;" data-bs-toggle="offcanvas" data-bs-target="#choosecoin" class="category-boxes">
-              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="/storage/svg/send.svg" alt="send" />
+              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="/storage/svg/send.png" alt="send" />
               <h5>Send</h5>
             </a>
           </li>
           <li>
             <a style="background-color: transparent;" data-bs-toggle="offcanvas" data-bs-target="#choosecoin" class="category-boxes">
-              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="/storage/svg/receivewallet.svg" alt="receive" />
+              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="/storage/svg/receivewallet.png" alt="receive" />
               <h5>Receive</h5>
             </a>
           </li>
           <li>
             <a style="background-color: transparent;" href="https://paybis.com/" class="category-boxes">
-              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="/storage/svg/shopping-cart.svg" alt="buy" />
+              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="/storage/svg/shopping-cart.png" alt="buy" />
               <h5>Buy</h5>
             </a>
           </li>
           <li>
             <a style="background-color: transparent;" data-bs-toggle="modal" data-bs-target="#swap" class="category-boxes">
-              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="/storage/svg/arrow-swap.svg" alt="swap" />
+              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="/storage/svg/arrow-swap.png" alt="swap" />
               <h5>Swap</h5>
             </a>
           </li>
