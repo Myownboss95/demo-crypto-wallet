@@ -100,7 +100,7 @@
         </div>
         <div class="tab-pane fade" id="nft-tab-pane" role="tabpanel" tabindex="0">
           <div style="margin-top: -60px;" class="empty-tab">
-            <img class="img-fluid bell" style="height: 150px; width: 150px;" src="@/assets/images/nft-coming-soon.webp" alt="coming soon" />
+            <img class="img-fluid bell" style="height: 150px; width: 150px;" src="@/assets/images/nft-coming-soon.png" alt="coming soon" />
             <h3>Coming Soon</h3>
             <h4>Store and exchange NFTs</h4>
           </div>
@@ -187,35 +187,8 @@ const calculatedPrice = ref(0);
 var price = reactive({});
 const selectMethod = (amount, name) => {
   if (name == "" || amount == "") return;
-  // price.value[name] = amount
-  // axios
-  //   .get(
-  //     `https://api.coingecko.com/api/v3/simple/price?ids=${name}&vs_currencies=usd`
-  //   )
-  //   .then((response) => {
-  //     if (response.status == 200 && response.data[name.toLowerCase()]) {
-  //       price.value[name] = response.data[name.toLowerCase()]['usd'];
-  //       } else {
-  //       throw Error();
-  //     }
-  //   })
-  //   .catch((error) => {
-  //    console.log(error);
-  //   });
+  
 };
-// const formattedAmount = computed(() => {
-//       return (amount, symbol) => {
-//         return selectMethod(amount, symbol);
-//       };
-//     });
-
-//  onMounted(() => {
-//       const methodsArray = Array.from(props.payment_methods);
-//    for (const method of methodsArray) {
-//         // console.log(method)
-//         selectMethod(method.amount, method.name);
-//       }
-//     });
 const data = reactive([]);
 onMounted(async () => {
   props.payment_methods.forEach(async (method) => {
@@ -227,12 +200,12 @@ onMounted(async () => {
 
       if (response.status === 200) {
         data[type] = response.data[type.toLowerCase()]["usd"];
-        console.log(data["bitcoin"]);
+        // console.log(data["bitcoin"]);
       } else {
         throw new Error();
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   });
 });
@@ -275,7 +248,7 @@ const formatAmount = async (value, type) => {
       throw new Error();
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 </script>
