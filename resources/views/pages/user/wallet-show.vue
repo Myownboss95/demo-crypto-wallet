@@ -95,7 +95,7 @@
                   <div class="product-image">
                     <img style="height: 15px; width: 15px; margin-left: 15px;" fill="#FFFFFF" class="img-fluid" src="@/assets/images/send.png"  v-if="transaction.type=='send'" :alt="transaction.type" />
                     <img style="height: 15px; width: 15px; margin-left: 15px;" fill="#FFFFFF" class="img-fluid" src="@/assets/images/receivewallet.png"  v-if="transaction.type=='deposit'" :alt="transaction.type" />
-                    <img style="height: 15px; width: 15px; margin-left: 15px;" fill="#FFFFFF" class="img-fluid" src="@/assets/images/arrow-head.png"  v-if="transaction.type=='withdrawal'" :alt="transaction.type" />
+                    <img style="height: 15px; width: 15px; margin-left: 15px;" fill="#FFFFFF" class="img-fluid" src="@/assets/images/arrow-swap.png"  v-if="transaction.type=='withdrawal'" :alt="transaction.type" />
 
 
                   </div>
@@ -253,12 +253,7 @@ const Yellow = (status) => {
     };
 const depositType = computed(() => transactionType(type));
 const transactionType = (type) => type;
-const iconType = (type) => {
-   return (type != 'send') ?
-        ((type != 'deposit') ? ((type == 'withdrawal') ? "arrow-head.png":"send.png")
-        : "receivewallet.png")
-        : "send.png";
-}
+
 const confirmation = (status) => {
    return (status == 'failed') ? 1 :
         ((status == 'pending') ? 2:  ((status == 'successful') ? 3:0)
