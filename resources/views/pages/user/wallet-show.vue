@@ -7,9 +7,9 @@
   <header class="section-t-space">
     <div class="custom-container">
       <div class="header-panel">
-        <a class="text-light" href="dashboard.html">
+        <inertia-link class="text-light" :href="route('user.index')">
           <i class="ri-arrow-left-s-line"></i> Wallet
-        </a>
+        </inertia-link>
         <h3 class="middle-title">{{ coin.type }}</h3>
         <h4 class="right-title" style="color: #adb5bd;">${{ data[coin.type] }} &nbsp;<span class="text-success">+1.24%</span></h4>
       </div>
@@ -48,10 +48,10 @@
       <div class="wallet-options d-flex align-items-center justify-content-center">
         <ul class="category-slide">
           <li>
-             <inertia-link :href="route('user.send')" class="category-boxes" style="background-color: transparent;" >
-              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="@/assets/images/send.png" alt="send" />
+              <a style="background-color: transparent;" data-bs-toggle="offcanvas" data-bs-target="#send-coin" class="category-boxes">
+             <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="@/assets/images/send.png" alt="send" />
               <h5>Send</h5>
-            </inertia-link>
+            </a>
           </li>
           <li>
             <!-- @click="showModal(coin) -->
@@ -61,10 +61,10 @@
             </a>
           </li>
           <li>
-            <a style="background-color: transparent;" href="https://paybis.com/" class="category-boxes">
+            <inertia-link style="background-color: transparent;" :href="route('user.deposits.create')" class="category-boxes">
               <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="@/assets/images/shopping-cart.png" alt="buy" />
-              <h5>Buy</h5>
-            </a>
+              <h5>Deposit</h5>
+            </inertia-link>
           </li>
           
         </ul>
@@ -109,7 +109,9 @@
                             </div>
                         </div>
                         
-                      <h4>- {{ transaction.amount }}{{ transaction.symbol }}</h4>
+                      <h4> <span v-if="transaction.type == 'deposit'">
+                        +</span>
+                        <span v-else>-</span> {{ (transaction.amount).toFixed(2) }}{{ transaction.symbol }}</h4>
                     </div>
                   </div>
                 </div>
@@ -139,7 +141,38 @@
         </section>
     <!-- end table part -->
 
-
+ <!-- Offcanvas Send Coin -->
+  <div class="offcanvas theme-offcanvas share-offcanvas offcanvas-bottom px-4 pb-4 h-auto" tabindex="-1"
+    id="send-coin">
+    <div class="offcanvas-header">
+      <div class="header-panel">
+        <a class="text-light right-title" data-bs-dismiss="offcanvas" aria-label="Close">
+          Cancel
+        </a>
+        <h3 class="text-white left-title">Send BTC</h3>
+        
+      </div>
+    </div>
+    <div style="margin: 0 auto;" class="offcanvas-body">
+      <form class="auth-form" target="_blank">
+        <div class="form-group">
+          <div class="form-input">
+            <input type="text" class="form-control" id="inputusername" placeholder="Wallet Address" required/>
+            <i class="ri-qr-scan-2-line"></i>
+          </div>
+          <div style="margin-top: 5px;" class="form-input">
+            <input type="number" class="form-control" id="inputusername" placeholder="BTC Amount" required/>
+            <i class="ri-send-plane-line"></i>
+          </div>
+        </div>
+  
+        <div class="submit-btn">
+          <a href="confirm-coin-transfer.html" class="btn theme-btn">Next</a>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Offcanvas Send Coin End -->
     <div class="offcanvas theme-offcanvas share-offcanvas offcanvas-bottom px-4 pb-4 h-auto" tabindex="-1"
     id="receive-coin">
     <div class="offcanvas-header">
@@ -199,6 +232,7 @@ import FormButton from "@/views/components/form/FormButton.vue";
 import ButtonLoader from "@/views/components/form/ButtonLoader.vue";
 import Error from "@/views/components/alerts/error.vue";
 import { info } from "@/js/toast";
+import { router } from "@inertiajs/vue3";
 import { copy } from "@/js/functions";
 import Paginator from "@/views/components/paginator.vue";
 

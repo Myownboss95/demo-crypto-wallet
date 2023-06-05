@@ -6,7 +6,7 @@
   <section class="section-lg-t-space">
     <div class="custom-container">
       <div class="wallet-profile">
-        <h2 style="font-size: 40px;">$104,801.63</h2>
+         <h2 style="font-size: 40px;">${{ totalAmount }}</h2>
         <h5 class="mt-3" style="font-size: 15px; color: #adb5bd;">Wallet Balance</h5>
       </div>
     </div>
@@ -30,10 +30,10 @@
             </a>
           </li>
           <li>
-            <a style="background-color: transparent;" href="https://paybis.com/" class="category-boxes">
+            <inertia-link style="background-color: transparent;" :href="route('user.deposits.create')" class="category-boxes">
               <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="@/assets/images/shopping-cart.png" alt="buy" />
               <h5>Buy</h5>
-            </a>
+            </inertia-link>
           </li>
           <li>
             <a style="background-color: transparent;" data-bs-toggle="modal" data-bs-target="#swap" class="category-boxes">
@@ -178,6 +178,7 @@ import FormGroup from "@/views/components/form/FormGroup.vue";
 import FormSelect from "@/views/components/form/FormSelect.vue";
 import Error from "@/views/components/alerts/error.vue";
 import { reactive } from "@vue/reactivity";
+import { router } from "@inertiajs/vue3";
 
 const props = defineProps({
   userMainBalance: Number,
@@ -301,6 +302,14 @@ const formatAmount = async (value, type) => {
     // console.log(error);
   }
 };
+const totalAmount = computed(() => {
+  let sum = 0;
+  props.payment_methods.forEach((featureds) => {
+    const amount = data[featureds.type] * featureds.account;
+    sum += amount;
+  });
+  return sum.toFixed(2);
+});
 </script>
 
 
