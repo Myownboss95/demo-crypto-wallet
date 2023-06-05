@@ -18,10 +18,10 @@
                   <slot />
 
                   <div class="text-center pt-5">
-                    <div @click="toggleTheme" class="cursor-pointer">
+                    <!-- <div @click="toggleTheme" class="cursor-pointer">
                       <i data-feather="moon" class="icon-lg dark"></i>
                       <i data-feather="sun" class="icon-lg light"></i>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
                 </div>
@@ -55,10 +55,11 @@
   import feather from 'feather-icons';
   import { useTheme } from '@/stores/theme';
   import { error, success } from '@/js/toast';
+  import "@/assets/css/sapp.css"
 
-  const theme = useTheme();
+  // const theme = useTheme();
 
-  const toggleTheme = theme.toggleTheme;
+  // const toggleTheme = theme.toggleTheme;
 
   const props = defineProps(['errors']);
   watch(
@@ -72,7 +73,7 @@
   );
 
   onMounted(() => {
-    theme.initTheme();
+    // theme.initTheme();
     feather.replace();
   });
 </script>

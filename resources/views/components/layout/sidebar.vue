@@ -1,11 +1,28 @@
 <template>
   <!-- ========== Left Sidebar Start ========== -->
-  <div class="vertical-menu">
-    <div data-simplebar class="h-100">
-      <!--- Sidemenu -->
-      <div id="sidebar-menu">
-        <!-- Left Menu Start -->
-        <ul class="metismenu list-unstyled" id="side-menu">
+  <!-- side bar start -->
+  <div
+    class="offcanvas sidebar-offcanvas offcanvas-start"
+    tabindex="-1"
+    id="offcanvasLeft"
+  >
+    <div class="offcanvas-header">
+      <img
+        class="img-fluid img"
+        src="assets/images/icons/pro11.png"
+        alt="pro11"
+      />
+      <h3>Elon Musk</h3>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="sidebar-content">
+        <ul class="link-section">
           <li class="menu-title">Menu</li>
           <SidebarItem
             name="Dashboard"
@@ -30,23 +47,7 @@
             icon="user-x"
             v-if="is_admin"
           />
-          <!-- <li class="menu-title">Trading</li>
-          <SidebarItem
-            name="Trades History"
-            :url="route(`${is_admin ? 'admin' : 'user'}.trades.index`)"
-            icon="table"
-          />
-          <SidebarItem
-            name="Place Trade"
-            :url="route('user.trades.view')"
-            icon="server"
-            v-if="!is_admin"
-          />
-          <SidebarItem
-            :name="botsMenu"
-            :url="route(`${is_admin ? 'admin' : 'user'}.bots.index`)"
-            icon="cpu"
-          /> -->
+          
           <li class="menu-title">Transactions</li>
           <SidebarItem
             name="Send"
@@ -139,28 +140,77 @@
           />
         </ul>
       </div>
-      <!-- Sidebar -->
     </div>
   </div>
+  <!-- side bar end -->
   <!-- Left Sidebar End -->
+   <!-- bottom navbar start -->
+  <div class="navbar-menu">
+    <ul>
+      <li class="active">
+        <a href="dashboard.html">
+          <div class="icon">
+            <i class="ri-shield-fill active"></i>
+            <i class="ri-shield-fill unactive"></i>
+          </div>
+          <span>Wallet</span>
+        </a>
+      </li>
+      <li>
+        <a href="discover.html">
+          <div class="icon">
+            <i class="ri-compass-3-fill active"></i>
+            <i class="ri-compass-3-fill unactive"></i>
+          </div>
+          <span>Discover</span>
+        </a>
+      </li>
+      <li>
+        <a class="plus" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft">
+          <i class="ri-add-line plus-icon"></i>
+        </a>
+      </li>
+      <li>
+        <a href="browser.html">
+          <div class="icon">
+            <i class="ri-layout-grid-fill active"></i>
+            <i class="ri-layout-grid-fill unactive"></i>
+          </div>
+          <span>Browser</span>
+        </a>
+      </li>
+      <li>
+        <a href="settings.html">
+          <div class="icon">
+            <i class="ri-settings-5-fill active"></i>
+            <i class="ri-settings-5-fill unactive"></i>
+          </div>
+          <span>Settings</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- bottom navbar end -->
 </template>
 
 <script setup>
-  import { computed, onMounted } from 'vue';
-  import feather from 'feather-icons';
-  import MetisMenu from 'metismenujs';
-  import SidebarItem from './sidebarItem.vue';
-  import { usePage } from '@inertiajs/vue3';
+import { computed, onMounted } from "vue";
+import feather from "feather-icons";
+// import MetisMenu from "metismenujs";
+import SidebarItem from "./sidebarItem.vue";
+import { usePage } from "@inertiajs/vue3";
 
 const is_admin = computed(() => usePage().props.auth.user.is_admin == 1);
 
-const botsMenu = computed(() => is_admin == true ? 'Trade Bots' : 'Trade Bot');
-const stakes = computed(() => is_admin == true ? 'All Stakes' : 'My Stakes');
+const botsMenu = computed(() =>
+  is_admin == true ? "Trade Bots" : "Trade Bot"
+);
+const stakes = computed(() => (is_admin == true ? "All Stakes" : "My Stakes"));
 
-  onMounted((_) => {
-    new MetisMenu('#side-menu');
-    feather.replace();
-  });
+onMounted((_) => {
+  // new MetisMenu("#side-menu");
+  feather.replace();
+});
 </script>
 
 <style>

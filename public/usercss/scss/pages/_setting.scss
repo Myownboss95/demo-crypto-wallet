@@ -1,0 +1,57 @@
+/*=====================
+    Setting Page CSS start
+==========================*/
+
+.setting-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+
+  li {
+    padding: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(var(--light-bg), 0.05);
+    border: 1px solid rgba(var(--white), 0.1);
+    border-radius: 6px;
+    .setting-details {
+      display: flex;
+      align-items: center;
+      width: 100%;
+
+      .setting-icon {
+        height: 35px;
+        width: 35px;
+        padding: 10px;
+        background: rgba(var(--white), 0.07);
+        color: rgba(var(--font-color), 1);
+
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+      }
+      h4 {
+        color: rgba(var(--white), 1);
+        margin-left: 10px;
+        [dir="rtl"] & {
+          margin-left: unset;
+          margin-right: 10px;
+        }
+      }
+      .setting-arrow {
+        display: flex;
+        align-items: center;
+        font-size: 25px;
+        color: rgba(var(--font-color), 1);
+        margin-left: auto;
+        [dir="rtl"] & {
+          margin-left: unset;
+          margin-right: auto;
+        }
+      }
+    }
+  }
+}

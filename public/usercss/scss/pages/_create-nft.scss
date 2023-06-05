@@ -1,0 +1,144 @@
+.create-form {
+  .create-content {
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(var(--white), 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h4 {
+      font-weight: 500;
+      color: rgba(var(--font-color), 1);
+      margin: 0;
+    }
+
+    h5 {
+      color: rgba(var(--content-color), 1);
+      text-align: left;
+      margin-top: 5px;
+      margin-bottom: 0;
+
+      [dir="rtl"] & {
+        text-align: unset;
+        text-align: right;
+      }
+    }
+
+    input[type="checkbox"] {
+      position: relative;
+      width: 37px;
+      height: 22px;
+      appearance: none;
+      background: rgba(var(--light-bg), 0.16);
+      outline: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: inset 0 0 5px rgba(var(--black), 0.5);
+
+      &:checked {
+        background: rgba(var(--light-bg), 0.16);
+
+        &::before {
+          transform: translateX(80%) translateY(-50%);
+          background: rgb(var(--theme-color), 1);
+        }
+      }
+
+      &:before {
+        content: "";
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: rgba(var(--light-bg), 0.16);
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        transform: translateY(-50%);
+        transition: 0.5s;
+      }
+    }
+  }
+
+  h4 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  .create-nft {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+}
+
+.nft-name {
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(var(--white), 0.1);
+}
+
+.nft-content {
+  display: flex;
+  gap: 15px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(var(--white), 0.1);
+
+  .search-form {
+    padding: calc(10px + (15 - 10) * ((100vw - 320px) / (1920 - 320)));
+    background-color: rgba(var(--light-bg), 0.1);
+    width: 100%;
+    border-radius: 6px;
+
+    .form-check {
+      display: flex;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+
+      .form-check-label {
+        font-weight: 300;
+        font-size: calc(12px + (14 - 12) * ((100vw - 320px) / (1920 - 320)));
+        color: rgb(var(--white), 1);
+        margin-right: auto;
+
+        [dir="rtl"] & {
+          margin-left: auto;
+          margin-right: unset;
+        }
+      }
+
+      .form-check-input {
+        margin: 0;
+        float: unset;
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+
+        &:checked {
+          opacity: 1;
+          background-color: rgb(var(--theme-color), 1);
+          border-color: rgb(var(--theme-color), 1);
+        }
+
+        &:focus {
+          box-shadow: none;
+        }
+      }
+
+      .form-check-input:checked[type="radio"] {
+        background-image: url(../images/svg/check.svg);
+      }
+
+      .form-check-input {
+        &[type="radio"] {
+          width: 20px;
+          height: 20px;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+}
+
+.form-control[type="date"] {
+  &::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+}

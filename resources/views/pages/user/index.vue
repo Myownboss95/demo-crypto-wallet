@@ -1,74 +1,120 @@
 <template>
   <Head title="Dashboard" />
-  <breadcrumb title="Dashboard" :crumbs="['Dashboard']" />
-  <div v-if="payment_methods.length">
-    <div class="row m-1">
-      <div
-        class="p-3 col-md-4 col-sm-12"
-        v-for="(featureds, key) in payment_methods"
-        :key="key"
-      >
-        <div class="card shadow-lg radius-20">
-          <div class="card-body">
-            <div class="row align-items-center">
-              <div class="col-3 p-0">
-                <img
+  <!-- <breadcrumb title="Dashboard" :crumbs="['Dashboard']" /> -->
+<!-- setting section start -->
+  <span id="copyResult"></span>
+  <section class="section-lg-t-space">
+    <div class="custom-container">
+      <div class="wallet-profile">
+        <h2 style="font-size: 40px;">$104,801.63</h2>
+        <h5 class="mt-3" style="font-size: 15px; color: #adb5bd;">Wallet Balance</h5>
+      </div>
+    </div>
+  </section>
+
+  <!-- options starts -->
+  <section class="section-t-space">
+    <div class="custom-container">
+      <div class="wallet-options d-flex align-items-center justify-content-center">
+        <ul class="category-slide">
+          <li>
+            <a style="background-color: transparent;" data-bs-toggle="offcanvas" data-bs-target="#choosecoin" class="category-boxes">
+              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="/storage/svg/send.svg" alt="send" />
+              <h5>Send</h5>
+            </a>
+          </li>
+          <li>
+            <a style="background-color: transparent;" data-bs-toggle="offcanvas" data-bs-target="#choosecoin" class="category-boxes">
+              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="/storage/svg/receivewallet.svg" alt="receive" />
+              <h5>Receive</h5>
+            </a>
+          </li>
+          <li>
+            <a style="background-color: transparent;" href="https://paybis.com/" class="category-boxes">
+              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="/storage/svg/shopping-cart.svg" alt="buy" />
+              <h5>Buy</h5>
+            </a>
+          </li>
+          <li>
+            <a style="background-color: transparent;" data-bs-toggle="modal" data-bs-target="#swap" class="category-boxes">
+              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="/storage/svg/arrow-swap.svg" alt="swap" />
+              <h5>Swap</h5>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <!-- options end -->
+
+<!-- wallet start -->
+  <section class="section-lg-t-space section-lg-b-space">
+    <div class="custom-container">
+      <div class="category-detail-tab">
+        <ul class="nav nav-tabs tab-style2" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="token-tab" data-bs-toggle="tab" data-bs-target="#token-tab-pane"
+              type="button" role="tab">Tokens</button>
+          </li>
+
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="nft-tab" data-bs-toggle="tab" data-bs-target="#nft-tab-pane" type="button"
+              role="tab">NFTs</button>
+          </li>
+        </ul>
+      </div>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="token-tab-pane" role="tabpanel" tabindex="0">
+          <ul class="token-box" v-if="payment_methods.length">
+            <li v-for="(featureds, key) in payment_methods"
+        :key="key">
+              <a href="coin-details.html" class="token-details">
+                <div class="token-icon">
+                  
+                  <img
                   :src="`/storage/payment_methods/${featureds.svg}`"
                   alt=""
-                  class="img-fluid"
-                  style="width: 100px"
+                  style="height: 50px; width: 50px;"
                 />
-              </div>
-              <div class="col-3 p-0">
-                <span
-                  class="mb-3 lh-1 d-block h6"
-                  style="text-transform: capitalize"
-                  >{{ featureds.type }}</span
-                >
-
-                <span
-                  class="text-muted mb-3 lh-1 d-block text"
-                  style="text-transform: capitalize"
-                >
-                  {{ data[featureds.type] }} USD</span
-                >
-
-                <!-- <inertia-link
-                  :href="route('user.deposits.create')"
-                  class="btn btn-primary"
-                  >Deposit<i class="mdi mdi-arrow-right ms-1"></i
-                ></inertia-link> -->
-              </div>
-              <div class="col-6 pe-3">
-                <div class="text-right">
-                  <h4 class="mb-3" style="text-align: right">
-                    <span
-                      class="counter-value"
-                      data-target="{{ featureds.account }}"
-                    >
-                      {{
+                </div>
+                <div style="margin-left: 20px;">
+                  <h3 class="text-light">{{ featureds.type }}</h3>
+                  <h5 style="color: #adb5bd; margin-top: 5px;">${{ data[featureds.type] }} <span class="text-success">+1.90%</span></h5>
+                </div>
+                <div class="token-price">
+                  <div>
+                    <h3 class="text-light"> {{
                         featureds.account === "0.0000" ? "0" : featureds.account
                       }}
-                      {{ featureds.symbol }}
-                    </span>
-                  </h4>
-                  <span
-                    class="text-muted mb-3 lh-1 d-block text"
-                    style="text-transform: capitalize; text-align: right"
-                  >
-                    {{
+                      {{ featureds.symbol }}</h3>
+                    <h5 style="color: #adb5bd; margin-top: 5px; text-align: right;">${{
                       (data[featureds.type] * featureds.account).toFixed(2)
                     }}
-                    USD</span
-                  >
+                    </h5>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </a>
+            </li>
+            
+          </ul>
+        </div>
+        <div class="tab-pane fade" id="nft-tab-pane" role="tabpanel" tabindex="0">
+          <div style="margin-top: -60px;" class="empty-tab">
+            <img class="img-fluid bell" style="height: 150px; width: 150px;" src="/storage/icons/nft-coming-soon.webp" alt="coming soon" />
+            <h3>Coming Soon</h3>
+            <h4>Store and exchange NFTs</h4>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+  <!-- wallet end -->
+
+  <!-- panel-space start -->
+  <section class="panel-space"></section>
+  <!-- panel-space end -->
+
+  
 </template>
 
 <script setup>
@@ -176,12 +222,12 @@ onMounted(async () => {
     const { type } = method;
     try {
       const response = await axios.get(
-        `https://api.coingecko.com/api/v3/simple/price?ids=${type}&vs_currencies=usd`
+        `https://api.coingecko.com/api/v33/simple/price?ids=${type}&vs_currencies=usd`
       );
 
       if (response.status === 200) {
         data[type] = response.data[type.toLowerCase()]["usd"];
-        console.log(data["Bitcoin"]);
+        console.log(data["bitcoin"]);
       } else {
         throw new Error();
       }
@@ -219,7 +265,7 @@ watch(
 const formatAmount = async (value, type) => {
   try {
     const response = await axios.get(
-      `https://api.coingecko.com/api/v3/simple/price?ids=${type}&vs_currencies=usd`
+      `https://api.coingecko.com/api/v33/simple/price?ids=${type}&vs_currencies=usd`
     );
 
     if (response.status === 200 && response.data[type.toLowerCase()]) {

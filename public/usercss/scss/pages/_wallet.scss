@@ -1,0 +1,205 @@
+/*=====================
+    wallet Page CSS start
+==========================*/
+.wallet-profile {
+  text-align: center;
+
+  .profile-pic {
+    border: 1px solid rgba(var(--theme-color), 1);
+    border-radius: 100%;
+    width: 106px;
+    height: 106px;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 33px;
+    margin-top: 15px;
+    color: rgba(var(--font-color), 1);
+  }
+
+  h3 {
+    color: rgba(var(--content-color), 1);
+    margin-top: 8px;
+  }
+
+  .wallet-id {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: rgba(var(--light-bg), 0.06);
+    backdrop-filter: blur(2px);
+    border-radius: 26px;
+    width: max-content;
+    justify-content: center;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+
+    .id-pic {
+      border-radius: 100%;
+      width: 24px;
+      height: 24px;
+    }
+
+    h5 {
+      margin-left: 10px;
+
+      [dir="rtl"] & {
+        margin-left: unset;
+        margin-right: 10px;
+      }
+    }
+
+    .btn {
+      width: 20px;
+      margin-left: 5px;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      color: rgba(var(--font-color), 1);
+      border: none;
+
+      [dir="rtl"] & {
+        margin-left: unset;
+        margin-right: 10px;
+      }
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+.copy-alert {
+  z-index: 11;
+
+  .toast {
+    width: 100%;
+    text-align: right;
+  }
+}
+
+.wallet-options {
+  .wallet-list {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 8px;
+    padding: 15px 0;
+    background: #111429;
+    background-clip: padding-box;
+    border: 1px solid transparent;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+      margin: -2px;
+      border-radius: inherit;
+      background: linear-gradient(
+        175deg,
+        rgba(var(--theme-color), 1) 0%,
+        rgba(var(--theme-color), 0) 47%,
+        rgba(var(--theme-color), 1) 100%
+      );
+    }
+
+    .wallet-items {
+      position: relative;
+      width: 25%;
+      text-align: center;
+
+      h6 {
+        margin-top: 8px;
+        color: rgba(var(--content-color), 1);
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 1px;
+        height: 30px;
+        background-color: rgba(var(--white), 0.1);
+        transform: translateY(-50%);
+
+        @media (max-width: 360px) {
+          display: none;
+        }
+      }
+
+      &:first-child {
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.token-box {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  gap: 15px;
+
+  li {
+    padding: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(var(--light-bg), 0.05);
+    border: 1px solid rgba(var(--white), 0.1);
+    border-radius: 6px;
+
+    .token-details {
+      display: flex;
+      align-items: center;
+      width: 100%;
+
+      .token-icon {
+        height: 35px;
+        width: 35px;
+        padding: 10px;
+        background: rgba(var(--white), 0.07);
+        color: rgba(var(--font-color), 1);
+
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+      }
+
+      h4 {
+        margin-left: 10px;
+
+        [dir="rtl"] & {
+          margin-left: unset;
+          margin-right: 10px;
+        }
+      }
+
+      .token-price {
+        display: flex;
+        align-items: center;
+        font-size: 25px;
+        color: rgba(var(--font-color), 1);
+        margin-left: auto;
+
+        [dir="rtl"] & {
+          margin-left: unset;
+          margin-right: auto;
+        }
+      }
+    }
+  }
+}

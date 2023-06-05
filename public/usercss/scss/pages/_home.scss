@@ -1,0 +1,75 @@
+/*=====================
+    Home page CSS start
+==========================*/
+.home-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .logo {
+    width: 90px;
+  }
+
+  i {
+    color: rgba(var(--font-color), 1);
+    width: 22px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, rgba(var(--theme-color), 0.55) -29.29%, rgba(var(--theme-color), 0) 122.14%);
+    backdrop-filter: blur(5px);
+  }
+}
+
+.popular-seller {
+  >.row {
+    >div {
+      &:nth-child(odd) {
+        position: relative;
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 0;
+          background-color: rgba(var(--white), 0.1);
+          width: 2px;
+          height: 50%;
+        }
+      }
+    }
+  }
+
+  .seller {
+    a {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        object-fit: cover;
+      }
+
+      .seller-detail {
+        display: block;
+        margin-left: 10px;
+
+        [dir="rtl"] & {
+          margin-left: unset;
+          margin-right: 10px;
+        }
+
+        h6 {
+          margin-top: 4px;
+          color: rgba(var(--success-color), 1);
+        }
+      }
+    }
+  }
+}

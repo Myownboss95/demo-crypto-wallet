@@ -1,0 +1,80 @@
+/*=====================
+    Search Page CSS
+==========================*/
+.search-section {
+  .form-group {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+
+    .form-input {
+      width: calc(100% - 40px - 10px);
+      .search-icon {
+        font-size: 20px;
+        &::after {
+          display: none !important;
+        }
+      }
+    }
+
+    .filter-button {
+      padding: 0;
+      background-color: rgba(var(--light-bg), 0.06);
+      backdrop-filter: blur(2px);
+      border-radius: 6px;
+      border: none;
+      color: rgba(var(--white), 1);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      i {
+        color: #848485;
+        font-size: 22px;
+      }
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+.search-form {
+  .form-group {
+    .form-input {
+      .form-control {
+        padding: 8px 8px 8px 45px;
+      }
+
+      i {
+        &::after {
+          content: none;
+        }
+      }
+    }
+  }
+}
+
+.search-content {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin: 100px auto;
+
+  h3 {
+    color: rgba(var(--font-color), 1);
+    margin-top: 20px;
+  }
+
+  h4 {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.3;
+    text-align: center;
+    margin: 10px auto 0;
+    color: rgba(var(--content-color), 1);
+  }
+}

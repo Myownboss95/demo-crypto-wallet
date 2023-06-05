@@ -1,0 +1,100 @@
+/*=====================
+    accordion CSS
+==========================*/
+/* Theme Accordion */
+.theme-accordion {
+  .accordion-item {
+    background: transparent;
+    border: none;
+    border-top: solid 1px rgba(var(--white), 0.1);
+
+    .accordion-button:not(.collapsed) {
+      &::after {
+        background-image: none;
+        transform: rotate(90deg);
+      }
+    }
+
+    .accordion-button {
+      cursor: pointer;
+      background: transparent;
+      display: flex;
+      color: rgba(var(--font-color), 1);
+      font-size: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 0;
+      padding-right: 0;
+
+      &::after {
+        margin: 0;
+        content: "\EA6E";
+        font-family: remixicon !important;
+        width: auto;
+        height: auto;
+        background: none;
+        font-size: 24px;
+        line-height: 1;
+        background-image: none;
+        transform: none;
+      }
+
+      &:focus {
+        box-shadow: none;
+      }
+
+      &:not(.collapsed) {
+        box-shadow: unset;
+      }
+    }
+
+    .accordion-body {
+      padding: 0 0 16px;
+
+      #chart {
+        width: 100%;
+        background: linear-gradient(180deg, rgba(var(--theme-color), 0.41) 0%, rgba(var(--theme-color) 0) 100%);
+      }
+    }
+  }
+}
+
+/* Buy Accordion */
+.buy-accordion {
+  margin-top: 20px;
+  border: 1px solid rgba(var(--white), 0.1);
+  border-radius: 8px;
+  padding: 0 15px;
+
+  .theme-accordion-item {
+    border-top: none;
+
+    .theme-accordion-btn {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(var(--white), 0.1);
+
+      &.collapsed {
+        border-bottom: 1px solid rgba(var(--white), 0);
+      }
+    }
+
+    .accordion-button:not(.collapsed) {
+      &::after {
+        transform: rotate(-90deg);
+        background-image: none;
+      }
+    }
+
+    .accordion-collapse {
+      .accordion-theme-body {
+        padding: 15px 0;
+
+        h5 {
+          color: rgba(var(--white), 0.6);
+        }
+      }
+    }
+  }
+}

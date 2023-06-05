@@ -1,0 +1,102 @@
+/*=====================
+  Nav CSS start
+==========================*/
+.navbar-menu {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 17px 20px;
+  z-index: 2;
+  max-width: 600px;
+  background-color: rgba(15, 10, 15, 0.8);
+  backdrop-filter: blur(27px);
+  border: 1px solid;
+  border-radius: 15px 15px 0px 0px;
+
+  @media (max-width: 767px) {
+    max-width: 100%;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    margin: -2px;
+    border-radius: inherit;
+    background: linear-gradient(180deg, rgba(10, 50, 145, 0.55) -29.29%, rgba(32, 93, 238, 0) 122.14%);
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    li {
+      color: rgba(var(--content-color), 1);
+      text-align: center;
+
+      a {
+        color: rgba(var(--content-color), 1);
+
+        .icon {
+          width: 20px;
+          font-size: 20px;
+          margin-left: auto;
+          margin-right: auto;
+
+          .active {
+            display: none;
+          }
+
+          .unactive {
+            display: block;
+          }
+        }
+
+        span {
+          font-size: 14px;
+        }
+      }
+
+      &.active {
+        .icon {
+          color: rgba(var(--theme-color), 1);
+
+          .active {
+            display: block;
+          }
+
+          .unactive {
+            display: none;
+          }
+        }
+
+        span {
+          color: rgba(var(--theme-color), 1);
+        }
+      }
+    }
+  }
+
+  .plus {
+    width: 42px;
+    height: 42px;
+    background: radial-gradient(49.52% 49.52% at 71.62% 20.27%, #6794ff 0%, #205dee 100%);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+
+    .plus-icon {
+      font-size: 25px;
+      color: rgba(var(--white), 1);
+    }
+  }
+}

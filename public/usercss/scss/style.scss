@@ -1,0 +1,43 @@
+// utils scss files
+@import "utils/variables";
+@import "utils/animation";
+
+// base scss files
+@import "base/reset";
+@import "base/typography";
+
+// components scss files
+@import "components/button";
+@import "components/form";
+@import "components/title";
+@import "components/ratio";
+@import "components/tabs";
+@import "components/accordion";
+@import "components/loader";
+@import "components/offcanvas";
+@import "components/dropdown";
+
+// layout scss files
+@import "layout/header";
+@import "layout/nav";
+@import "layout/nft-box";
+@import "layout/collection";
+@import "layout/category";
+
+// pages
+@import "pages/home";
+@import "pages/art";
+@import "pages/authentication";
+@import "pages/notification";
+@import "pages/creator";
+@import "pages/confirm-offer";
+@import "pages/buy";
+@import "pages/general";
+@import "pages/create-nft";
+@import "pages/index";
+@import "pages/nft-details.scss";
+@import "pages/page-listing";
+@import "pages/setting.scss";
+@import "pages/wallet.scss";
+@import "pages/error";
+@import "pages/search";

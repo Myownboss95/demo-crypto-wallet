@@ -1,0 +1,99 @@
+/*=====================
+    tab CSS start
+==========================*/
+.tab-style1 {
+  flex-wrap: nowrap;
+  width: 100%;
+  margin: 30px auto 0;
+  border-radius: 6px;
+  overflow: hidden;
+
+  .nav-item {
+    color: rgba(var(--white), 0.1);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style-type: none;
+    cursor: pointer;
+    border-radius: 0px;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+
+    .nav-link {
+      width: 100%;
+      padding: 10px;
+      font-weight: 500;
+      border-radius: 0;
+      color: rgba(var(--content-color), 1);
+      backdrop-filter: blur(2px);
+      background-color: rgba(var(--white), 0.06);
+
+      &.active {
+        background-color: rgba(var(--theme-color), 1);
+        color: rgba(var(--white), 1);
+
+        &:hover {
+          color: rgba(var(--white), 1);
+        }
+      }
+    }
+  }
+}
+
+.tab-style2 {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  width: 100%;
+  border-bottom: none;
+  overflow-x: auto;
+
+  .nav-item {
+    color: rgba(var(--white), 0.1);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style-type: none;
+    cursor: pointer;
+    border-radius: 0px;
+    transition: all 0.3s ease;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(var(--white), 0.1);
+
+    .nav-link {
+      color: rgba(var(--content-color), 1);
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      border-bottom: 1px solid transparent;
+      font-weight: 400;
+      font-size: 16px;
+      white-space: nowrap;
+      padding-top: 0;
+
+      &:hover {
+        border-left: none;
+        border-right: none;
+        border-top: none;
+      }
+
+      &:focus {
+        border-color: transparent;
+      }
+
+      &.active {
+        background-color: transparent;
+        color: rgba(var(--white), 1);
+        border-left: none;
+        border-right: none;
+        border-top: none;
+        border-bottom: 1px solid rgba(var(--white), 1);
+        padding-left: 15px;
+        padding-right: 15px;
+        border-radius: 0;
+      }
+    }
+  }
+}

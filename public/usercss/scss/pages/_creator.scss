@@ -1,0 +1,129 @@
+/*=====================
+    Creator Page CSS start
+==========================*/
+
+.details {
+  ul {
+    display: flex;
+    justify-content: space-between;
+    border: solid 1px rgba(var(--white), 0.1);
+    border-radius: 8px;
+    gap: 26px;
+    padding: calc(10px + (15 - 10) * ((100vw - 320px) / (1920 - 320)));
+
+    @media (max-width: 767px) {
+      gap: calc(15px + (26 - 15) * ((100vw - 320px) / (1920 - 320)));
+    }
+
+    li {
+      position: relative;
+      width: 100%;
+      text-align: center;
+
+      h4 {
+        text-align: center;
+      }
+
+      h6 {
+        margin-top: 4px;
+        color: rgba(var(--content-color), 1);
+        font-size: 14px;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: -13px;
+        width: 2px;
+        height: 50%;
+        background-color: rgba(var(--white), 0.1);
+        transform: translateY(-50%);
+
+        @media (max-width: 767px) {
+          left: calc(-9px + (-13 - 9) * ((100vw - 320px) / (1920 - 320)));
+        }
+      }
+
+      &:first-child {
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.nft-accordion {
+  .accordion-item {
+    .accordion-btn {
+      padding: 10px 0;
+
+      .product-details {
+        .product-content {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  .accordion-body {
+    margin-top: 0;
+    padding: 0 0 15px 0;
+
+    .person-details {
+      display: flex;
+      align-items: center;
+      padding-top: 0;
+
+      .person-img {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+      }
+
+      h5 {
+        margin-left: 10px;
+        font-size: 14px;
+
+        [dir="rtl"] & {
+          margin-left: unset;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  .content {
+    h5 {
+      margin-top: 10px;
+      color: rgba(var(--content-color), 1);
+      font-weight: 400;
+      line-height: 18px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+  }
+
+  .social {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+    color: rgba(var(--theme-color), 1);
+    i {
+      font-size: 20px;
+    }
+    .ri-instagram-fill {
+      color: #970044;
+    }
+    .ri-twitter-fill {
+      color: #1f9ee7;
+    }
+    .ri-telegram-fill {
+      color: #0686c3;
+    }
+    .ri-discord-fill {
+      color: #566aee;
+    }
+  }
+}

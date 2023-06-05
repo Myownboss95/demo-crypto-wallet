@@ -10,7 +10,8 @@ const pinia = createPinia();
 import "@/assets/css/preloader.css"
 import "@/assets/css/bootstrap.css"
 import "@/assets/css/icons.css"
-import "@/assets/css/app.css"
+
+
 
 import "bootstrap"
 import 'simplebar';
@@ -30,10 +31,7 @@ createInertiaApp({
     title: title => `${ title } - ${ import.meta.env.VITE_APP_NAME }`,
     resolve: async (name) => {
         let page_dir = window.location.toString().includes('user') ? 'userpages' : 'pages';
-            // let { default: page } = await importPageComponent(name, import.meta.glob('../views/userpages/pages/**/*.vue'))
-        console.log(page_dir)
-        
-        const { default: page } = await importPageComponent(name, import.meta.glob(`../views/${page_dir}/**/*.vue`)) 
+        const { default: page } = await importPageComponent(name, import.meta.glob(`../views/pages/**/*.vue`)) 
 
         if (name.startsWith('auth.')) {
             page.layout = AuthVue;

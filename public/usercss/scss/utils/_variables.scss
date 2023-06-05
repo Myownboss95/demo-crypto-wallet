@@ -1,0 +1,24 @@
+/*=====================
+    Variable CSS start
+==========================*/
+// font family
+$outfit: "Outfit", sans-serif;
+$poppins: "Poppins";
+
+// color variables
+:root {
+  --theme-color: 32, 93, 238;
+  --white: 255, 255, 255;
+  --black: 0, 0, 0;
+  --dark: 9, 9, 9;
+  --body-color: 30, 30, 30;
+  --font-color: 248, 248, 248;
+  --content-color: 132, 132, 133;
+  --border-color: 48, 39, 49;
+  --light-bg: 217, 217, 217;
+  --dark-bg: 15, 12, 19;
+  --canvas-bg: 33, 30, 45;
+  --success-color: 34, 196, 93;
+  --danger-color: 247, 84, 85;
+  --button-background: linear-gradient(95.54deg, rgb(103, 148, 255) -36.56%, rgb(103, 148, 255) -36.55%, rgba(var(--theme-color)) 60.15%), linear-gradient(92deg, rgba(var(--white), 0.4) 6.08%, rgba(var(--white), 0) 133.84%);
+}

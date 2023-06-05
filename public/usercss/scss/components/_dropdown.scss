@@ -1,0 +1,74 @@
+/*=====================
+    Dropdown CSS start
+==========================*/
+.edit-menu {
+  .btn {
+    &:focus {
+      box-shadow: none;
+    }
+  }
+  .dropdown-menu {
+    background-color: rgba(var(--canvas-bg), 1);
+    border-radius: 8px;
+    padding: 0 20px;
+
+    li {
+      width: 100%;
+      .dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: rgba(var(--font-color), 1);
+        padding: 20px 0;
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+
+    li + li {
+      border-top: 1px solid rgba(var(--white), 0.1);
+    }
+  }
+}
+
+.dropdown {
+  &:hover {
+    color: rgba(var(--white), 1);
+  }
+  .dropdown-days {
+    border: 1px solid rgba(var(--white), 0.1);
+    color: rgba(var(--white), 1);
+    &:active {
+      color: rgba(var(--white), 1);
+      border-color: rgba(var(--white), 0.1);
+      background-color: transparent;
+    }
+    &::after {
+      content: "\ea4e";
+      font-family: remixicon;
+      font-style: normal;
+      font-size: 18px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+  }
+  .dropdown-menu {
+    background-color: #0f0c13;
+    color: rgba(var(--white), 1);
+    border: 1px solid rgba(var(--white), 0.1);
+    margin-top: 7px !important;
+    li {
+      display: block;
+      .dropdown-item {
+        color: rgba(var(--white), 1);
+        &:focus,
+        &:hover,
+        &:active,
+        &.active {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}

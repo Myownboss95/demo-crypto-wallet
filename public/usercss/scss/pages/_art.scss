@@ -1,0 +1,80 @@
+/*=====================
+    Art page CSS start
+==========================*/
+.creator-details {
+  .creator-info {
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    z-index: 1;
+
+    img {
+      width: 65px;
+      height: 65px;
+      object-fit: cover;
+      position: relative;
+      border-radius: 6px;
+      margin-top: -40px;
+      border: 1px solid rgba(var(--white), 0.2);
+    }
+
+    h3 {
+      margin-left: 10px;
+      color: rgba(var(--font-color), 1);
+
+      [dir="rtl"] & {
+        margin-left: unset;
+        margin-right: 10px;
+      }
+    }
+
+    h6 {
+      margin-left: auto;
+      margin-top: 0;
+      color: rgba(var(--content-color), 1);
+
+      [dir="rtl"] & {
+        margin-left: unset;
+        margin-right: auto;
+      }
+    }
+  }
+
+  .creator-data {
+    display: flex;
+    margin-top: 15px;
+    flex-wrap: wrap;
+    gap: 6px 0;
+
+    li {
+      color: rgba(var(--font-color), 1);
+
+      + li {
+        margin-left: 13px;
+        padding-left: 13px;
+        border-left: 1px solid rgba(132, 132, 133, 0.5);
+
+        @media (max-width: 767px) {
+          margin-left: calc(5px + (13 - 5) * ((100vw - 320px) / (1920 - 320)));
+          padding-left: calc(5px + (13 - 5) * ((100vw - 320px) / (1920 - 320)));
+        }
+      }
+    }
+  }
+
+  p {
+    position: relative;
+    margin-top: 8px;
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(var(--content-color), 1);
+    letter-spacing: 0.04em;
+
+    &.art-content {
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(var(--content-color), 1);
+    }
+  }
+}

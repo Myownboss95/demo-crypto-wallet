@@ -1,0 +1,56 @@
+/*=====================
+    Error page CSS start
+==========================*/
+.error-thumnail {
+  position: relative;
+
+  .error1 {
+    display: flex;
+    justify-content: center;
+    margin: 120px auto 0;
+    width: 162px;
+  }
+
+  .error2 {
+    position: absolute;
+    top: 5px;
+    left: 16px;
+    width: 38px;
+    filter: blur(1px);
+    animation: mover-1 5s infinite 0s alternate;
+    z-index: -1;
+    opacity: 0.4;
+  }
+
+  .error3 {
+    position: absolute;
+    top: -20px;
+    right: 12px;
+    width: 54px;
+    filter: blur(1.5px);
+    animation: mover-1 4s infinite alternate;
+    animation-delay: 3s;
+    z-index: -1;
+  }
+}
+
+.error-content {
+  h2 {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 1.3;
+    margin: calc(50px + (80 - 50) * ((100vw - 320px) / (767 - 320))) 0 10px;
+    text-align: center;
+    color: rgba(var(--theme-color), 1);
+  }
+
+  h4 {
+    text-align: center;
+    color: rgba(var(--content-color), 1);
+    font-weight: 400;
+
+    + h4 {
+      margin-bottom: calc(30px + (50 - 30) * ((100vw - 320px) / (1920 - 320)));
+    }
+  }
+}

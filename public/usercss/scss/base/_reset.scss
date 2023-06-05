@@ -1,0 +1,74 @@
+/*=====================
+    Reset CSS start
+==========================*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+section,
+.section-t-space {
+  padding-top: 20px;
+}
+
+.section-b-space {
+  padding-bottom: 20px;
+}
+
+.section-lg-t-space {
+  padding-top: calc(20px + (40 - 20) * ((100vw - 320px) / (1920 - 320)));
+}
+
+.section-lg-b-space {
+  padding-bottom: calc(20px + (40 - 20) * ((100vw - 320px) / (1920 - 320)));
+}
+
+.pt-15 {
+  padding-top: 15px;
+}
+
+.custom-container {
+  padding: 0 20px;
+}
+
+.form-control {
+  &:focus {
+    color: rgba(var(--white), 1);
+    box-shadow: none;
+  }
+}
+
+.panel-space {
+  padding-top: 80px !important;
+}
+
+.success-color {
+  color: rgba(var(--success-color), 1) !important;
+}
+
+.danger-color {
+  color: rgba(var(--danger-color), 1) !important;
+}
+
+.font-color {
+  color: rgba(var(--font-color), 1) !important;
+}
+
+.dark-background {
+  background: rgb(var(--dark-bg), 1);
+}
+
+.text-content {
+  color: rgb(var(--content-color), 1);
+  font-size: 14px;
+}
+
+.text-theme {
+  color: rgb(var(--theme-color), 1);
+}
+
+.gap {
+  display: flex;
+  gap: 20px;
+}

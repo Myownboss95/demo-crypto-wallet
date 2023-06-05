@@ -1,0 +1,123 @@
+/*==================================
+    authentication page CSS start
+====================================*/
+.wallet-title {
+  text-align: center;
+
+  .wallet {
+    margin-top: calc(20px + (45 - 20) * ((100vw - 320px) / (1920 - 320)));
+  }
+
+  h1 {
+    margin-top: calc(10px + (15 - 10) * ((100vw - 320px) / (1920 - 320)));
+    text-align: center;
+    color: rgba(var(--font-color), 1);
+    font-size: 20px;
+  }
+
+  p {
+    width: 90%;
+    text-align: center;
+    margin: 4px auto 0;
+    color: rgba(var(--content-color), 1);
+  }
+}
+
+.wallet-listing {
+  border: 1px solid rgba(var(--border-color), 1);
+  border-radius: 12px;
+  margin-top: calc(15px + (25 - 15) * ((100vw - 320px) / (1920 - 320)));
+  padding-left: 0;
+
+  li {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: calc(15px + (20 - 15) * ((100vw - 320px) / (767 - 320))) 15px;
+
+    a {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+      }
+
+      h4 {
+        margin-left: 10px;
+        margin-bottom: 0;
+        padding-left: 10px;
+        color: rgba(var(--white), 1);
+
+        [dir="rtl"] & {
+          margin-left: unset;
+          margin-right: 10px;
+          padding-left: unset;
+          padding-right: 10px;
+        }
+
+        &::after {
+          content: "";
+          border: solid 1px;
+          color: rgba(var(--border-color), 1);
+          height: 12px;
+          display: flex;
+          top: 50%;
+          transform: translateY(-50%);
+          position: absolute;
+          margin-left: -11px;
+
+          [dir="rtl"] & {
+            margin-left: unset;
+            margin-right: -11px;
+          }
+        }
+      }
+    }
+  }
+
+  li + li {
+    border-top: 1px solid rgba(var(--border-color), 1);
+    width: 100%;
+  }
+}
+
+.auth-title {
+  position: relative;
+  margin-top: 85px;
+  margin-bottom: 20px;
+
+  &::after {
+    position: absolute;
+    top: -20px;
+    content: " ";
+    width: 48px;
+    background: rgba(var(--theme-color), 1);
+    height: 8px;
+    left: 0;
+
+    [dir="rtl"] & {
+      left: unset;
+      right: 0;
+    }
+  }
+
+  h1 {
+    color: rgba(var(--white), 1);
+  }
+
+  h4 {
+    color: rgba(var(--white), 1);
+    margin-top: calc(20px + (60 - 20) * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  p {
+    color: rgba(var(--content-color), 1);
+    font-size: 14px;
+    margin-top: 3px !important;
+  }
+}

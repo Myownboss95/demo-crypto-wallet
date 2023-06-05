@@ -1,0 +1,191 @@
+/*=====================
+    Index page CSS start
+==========================*/
+.intro {
+  max-width: 600px;
+  .index-slider {
+    .main-img {
+      object-fit: contain;
+      width: 100%;
+      max-width: 400px;
+      height: calc(300px + (380 - 300) * ((100vw - 320px) / (1920 - 320)));
+      padding: 0 70px;
+      margin: 30px auto 50px;
+      display: block;
+      @media (max-width: 600px) {
+        padding: 0 calc(26px + (70 - 26) * ((100vw - 320px) / (1920 - 320)));
+      }
+    }
+    h1 {
+      width: max-content;
+      font-size: 24px;
+      font-weight: 300;
+      color: rgba(var(--content-color), 1);
+      position: relative;
+      white-space: normal;
+      display: inline;
+      span {
+        color: rgba(var(--font-color), 1);
+        font-weight: 700;
+      }
+      &::after {
+        position: absolute;
+        top: -20px;
+        content: " ";
+        width: 48px;
+        background: rgba(var(--theme-color), 1);
+        height: 8px;
+        left: 0;
+        [dir="rtl"] & {
+          left: unset;
+          right: 0;
+        }
+      }
+    }
+    .index-details {
+      display: flex;
+      .title-cartoon {
+        width: 35px;
+        height: 55px;
+        margin-left: 22px;
+        object-fit: contain;
+        margin-top: -20px;
+      }
+    }
+    h5 {
+      margin-top: 10px;
+      font-weight: 300;
+      line-height: 21px;
+      width: 100%;
+      color: rgba(var(--content-color), 1);
+      font-size: 14px;
+    }
+  }
+}
+.onboarding-bottom {
+  position: fixed;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  height: 88px;
+  max-width: 600px;
+  z-index: 1;
+  background-color: rgba(15, 10, 15, 0.8);
+  border-radius: 15px 15px 0px 0px;
+  &::after {
+    content: "";
+    max-width: 600px;
+    height: 100%;
+    background-position: bottom;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    margin: -2px;
+    border-radius: 20px 20px 0 0;
+    background: linear-gradient(180deg, rgba(10, 50, 145, 0.55) -29.29%, rgba(var(--theme-color), 0) 122.14%);
+    border: 1px solid rgba(var(--white), 0.21);
+  }
+  .arrow {
+    position: absolute;
+    bottom: 88px;
+    left: 50%;
+    color: rgba(var(--white), 1);
+    transform: translateX(-50%);
+    width: 42px;
+    height: 42px;
+    background: radial-gradient(
+      49.52% 49.52% at 71.62% 20.27%,
+      rgb(var(--white), 0.8) 0%,
+      rgba(var(--theme-color), 1) 100%
+    );
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    i {
+      font-size: 25px;
+      color: rgba(var(--white), 1);
+    }
+  }
+  .swiper-button-next,
+  .swiper-button-prev {
+    position: fixed;
+    top: unset;
+    bottom: 22px;
+    font-size: 18px;
+    color: rgba(var(--white), 1);
+    width: auto;
+    text-transform: uppercase;
+    &:after {
+      font-size: 26px;
+      font-family: remixicon !important;
+      font-style: normal;
+      color: rgba(var(--theme-color), 1);
+    }
+  }
+  .swiper-button-next {
+    right: 20px;
+    left: unset;
+    &:after {
+      content: "\EA6C";
+      padding-left: 10px;
+    }
+  }
+  .swiper-button-prev {
+    left: 20px;
+    right: unset;
+    padding-left: 30px;
+    &:after {
+      content: "\EA60";
+      padding-right: 10px;
+      position: absolute;
+      left: -4px;
+      padding: 0;
+    }
+  }
+  .swiper-pagination {
+    bottom: 35px;
+    .swiper-pagination-bullet {
+      background: rgba(var(--theme-color), 1);
+      opacity: 0.35;
+      &.swiper-pagination-bullet-active {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.skip-link {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  color: rgba(var(--theme-color), 1);
+  z-index: 1;
+  font-size: 18px;
+  font-weight: 500;
+  [dir="rtl"] & {
+    right: unset;
+    left: 20px;
+  }
+}
+
+.polygon-img {
+  .left-polygon {
+    position: fixed;
+    top: 35%;
+    left: -55px;
+    opacity: 0.5;
+    animation: rotate 10s linear infinite;
+  }
+
+  .top-polygon {
+    position: fixed;
+    top: 25px;
+    right: -50px;
+    animation: rotate 5s linear infinite;
+  }
+}

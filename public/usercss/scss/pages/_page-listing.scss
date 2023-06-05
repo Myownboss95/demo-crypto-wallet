@@ -1,0 +1,26 @@
+/*=============================
+     Page-listing CSS start
+===============================*/
+.navigation {
+  .pages {
+    width: 100%;
+
+    h4 {
+      font-size: 15px;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: rgba(var(--white), 1);
+      font-size: 18px;
+      width: 100%;
+
+      i {
+        color: rgba(var(--white), 1);
+        font-size: 30px;
+      }
+    }
+  }
+}

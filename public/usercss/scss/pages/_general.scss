@@ -1,0 +1,71 @@
+/* Invite-friends */
+.invite-friends {
+  .friends {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    .friends-pro {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border: 1px solid rgba(var(--black), 1);
+      border-radius: 100%;
+    }
+    h5 {
+      color: rgba(var(--content-color), 1);
+      margin-top: 3px;
+    }
+  }
+}
+
+/* Languages */
+.language {
+  li {
+    padding: 10px 0;
+    display: block;
+    .form-check {
+      display: flex;
+      padding-left: 0;
+      width: 100%;
+      min-height: auto;
+      font-size: 16px;
+      margin: 0;
+      [dir="rtl"] & {
+        padding-right: 0;
+      }
+      .form-check-label {
+        color: rgba(var(--white), 1);
+        font-size: 16px;
+      }
+      .form-check-input {
+        margin-left: auto;
+        [dir="rtl"] & {
+          margin-left: 0;
+          margin-right: auto;
+        }
+      }
+    }
+  }
+}
+
+/* Terms and Conditions */
+.list-section {
+  padding-left: 32px;
+  li {
+    position: relative;
+    padding: 5px 0;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 15px;
+      transform: translateX(-50%);
+      left: -20px;
+      width: 6px;
+      height: 6px;
+      background-color: rgba(var(--content-color), 1);
+      border-radius: 100%;
+    }
+  }
+}
