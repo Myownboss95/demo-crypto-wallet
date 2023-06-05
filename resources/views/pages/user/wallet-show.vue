@@ -48,10 +48,10 @@
       <div class="wallet-options d-flex align-items-center justify-content-center">
         <ul class="category-slide">
           <li>
-            <a style="background-color: transparent;" data-bs-toggle="offcanvas" data-bs-target="#choosecoin" class="category-boxes">
+             <inertia-link :href="route('user.send')" class="category-boxes" style="background-color: transparent;" >
               <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="@/assets/images/send.png" alt="send" />
               <h5>Send</h5>
-            </a>
+            </inertia-link>
           </li>
           <li>
             <!-- @click="showModal(coin) -->
@@ -66,12 +66,7 @@
               <h5>Buy</h5>
             </a>
           </li>
-          <li>
-            <a style="background-color: transparent;" data-bs-toggle="modal" data-bs-target="#swap" class="category-boxes">
-              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="@/assets/images/arrow-swap.png" alt="swap" />
-              <h5>Swap</h5>
-            </a>
-          </li>
+          
         </ul>
       </div>
     </div>

@@ -113,7 +113,57 @@
   <!-- panel-space start -->
   <section class="panel-space"></section>
   <!-- panel-space end -->
-
+<!-- Dashboard Send And Receive Choose Coin-->
+  <div class="offcanvas theme-offcanvas share-offcanvas offcanvas-bottom px-4 pb-4 h-auto" tabindex="-1"
+    id="choosecoin">
+    <div class="offcanvas-header">
+      <div class="header-panel">
+        <h3 class="text-white middle-title">Select Coin</h3>
+        <a class=" right-title" data-bs-dismiss="offcanvas" aria-label="Close">
+          Done
+        </a>
+      </div>
+    </div>
+    <div style="max-width: 700px; margin: 0 auto;" class="offcanvas-body">
+      <div class="custom-container">
+        
+        <ul class="token-box">
+           <li v-for="(featureds, key) in payment_methods"
+        :key="key">
+              <inertia-link :href="route('user.wallet.show', featureds.payment_method_id)" class="token-details">
+                <div class="token-icon">
+                  
+                  <img
+                  :src="`/storage/payment_methods/${featureds.svg}`"
+                  alt=""
+                  style="height: 50px; width: 50px;"
+                />
+                </div>
+                <div style="margin-left: 20px;">
+                  <h3 class="text-light">{{ featureds.type }}</h3>
+                  <h5 style="color: #adb5bd; margin-top: 5px;">${{ data[featureds.type] }} <span class="text-success">+1.90%</span></h5>
+                </div>
+                <div class="token-price">
+                  <div>
+                    <h3 class="text-light"> {{
+                        featureds.account === "0.0000" ? "0" : featureds.account
+                      }}
+                      {{ featureds.symbol }}</h3>
+                    <h5 style="color: #adb5bd; margin-top: 5px; text-align: right;">${{
+                      (data[featureds.type] * featureds.account).toFixed(2)
+                    }}
+                    </h5>
+                  </div>
+                </div>
+              </inertia-link>
+            </li>
+         
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- Dashboard Send Choose Coin End-->
   
 </template>
 
