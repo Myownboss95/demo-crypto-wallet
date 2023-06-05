@@ -9,7 +9,6 @@
     <div class="offcanvas-header">
       <img
         class="img-fluid img"
-        src="assets/images/icons/pro11.png"
         alt="pro11"
       />
       <h3>Elon Musk</h3>

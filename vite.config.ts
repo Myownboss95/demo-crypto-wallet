@@ -1,46 +1,56 @@
-import { defineConfig, loadEnv } from 'vite'
-import laravel, { callArtisan, callShell } from 'vite-plugin-laravel'
-import vue from '@vitejs/plugin-vue'
-import inertia from './resources/scripts/vite/inertia-layout'
-import * as fs from 'fs'
-import os from 'node:os'
-import process from 'node:process'
-import {exec} from 'child_process'
+import { defineConfig, loadEnv } from "vite";
+import laravel, { callArtisan, callShell } from "vite-plugin-laravel";
+import vue from "@vitejs/plugin-vue";
+import inertia from "./resources/scripts/vite/inertia-layout";
+import * as fs from "fs";
+import os from "node:os";
+import process from "node:process";
+import { exec } from "child_process";
 
-const domain = 'binotomo.test';
+const domain = "binotomo.test";
 let certPath = `${os.homedir()}/.config/valet/Certificates/${domain}`;
 
 export default defineConfig(({ mode }) => {
     let env = loadEnv(mode, process.cwd());
 
     function serverData() {
-    if (env.VITE_APP_ENV == 'production') {
-        return {}
-    }
-    return {
-        host: domain,
-        https: {
-            key: fs.readFileSync(`${certPath}.key`),
-            cert: fs.readFileSync(`${certPath}.crt`),
+        if (env.VITE_APP_ENV == "production") {
+            return {};
         }
+        return {
+            host: domain,
+            https: {
+                key: fs.readFileSync(`${certPath}.key`),
+                cert: fs.readFileSync(`${certPath}.crt`),
+            },
+        };
     }
-}
 
     return {
         plugins: [
-		inertia(),
-		vue(),
+            inertia(),
+            vue(),
             laravel({
-            watch: [
-                {
-                    condition: file => file.includes('routes/') && file.endsWith('.php'),
-                    handle: () => callShell('php artisan ziggy:generate')
-                }
-            ]
-        }),
+                watch: [
+                    {
+                        condition: (file) =>
+                            file.includes("routes/") && file.endsWith(".php"),
+                        handle: () => callShell("php artisan ziggy:generate"),
+                    },
+                ],
+            }),
         ],
-        server: serverData()
-    }
-})
-
-
+        server: serverData(),
+        build: {
+            rollupOptions: {
+                external: [
+                    "/storage/svg/send.png",
+                    "/storage/svg/arrow-swap.png",
+                    "/storage/svg/shopping-cart.png",
+                    "/storage/svg/receivewallet.png",
+                    "/storage/icons/nft-coming-soon.webp"
+                ],
+            },
+        },
+    };
+});
