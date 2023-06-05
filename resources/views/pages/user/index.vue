@@ -25,7 +25,7 @@
           </li>
           <li>
             <a style="background-color: transparent;" data-bs-toggle="offcanvas" data-bs-target="#choosecoin" class="category-boxes">
-              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="/storage/svg/receivewallet.png" alt="receive" />
+              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="@/assets/images/receivewallet.png" alt="receive" />
               <h5>Receive</h5>
             </a>
           </li>
