@@ -100,7 +100,7 @@
         </div>
         <div class="tab-pane fade" id="nft-tab-pane" role="tabpanel" tabindex="0">
           <div style="margin-top: -60px;" class="empty-tab">
-            <img class="img-fluid bell" style="height: 150px; width: 150px;" src="/storage/icons/nft-coming-soon.webp" alt="coming soon" />
+            <img class="img-fluid bell" style="height: 150px; width: 150px;" src="/storage/svg/nft-coming-soon.webp" alt="coming soon" />
             <h3>Coming Soon</h3>
             <h4>Store and exchange NFTs</h4>
           </div>

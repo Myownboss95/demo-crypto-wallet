@@ -48,7 +48,7 @@ export default defineConfig(({ mode }) => {
                     "/storage/svg/arrow-swap.png",
                     "/storage/svg/shopping-cart.png",
                     "/storage/svg/receivewallet.png",
-                    "/storage/icons/nft-coming-soon.webp"
+                    "/storage/svg/nft-coming-soon.webp"
                 ],
             },
         },
