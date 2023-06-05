@@ -159,7 +159,7 @@ watch(
 
 const createPaymentPlan = () => {
   // console.log(form.data())
-  form.post(route("admin.payment-method.store"));
+  form.post(route("admin.coins.store"));
 };
 </script>
 

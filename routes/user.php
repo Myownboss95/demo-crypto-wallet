@@ -25,6 +25,8 @@ use App\Models\User;
 Route::middleware(['passphrase','onboarded'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::get('/wallets', [DashboardController::class, 'userWallet'])->name('wallet');
+    Route::get('/wallets/{id}', [DashboardController::class, 'userWalletShow'])->name('wallet.show');
+
     Route::post('deposits/validate', [DepositController::class, 'validateDeposit'])->name('deposits.validate');
     Route::resource('deposits', DepositController::class)->except('show');
     Route::get('/get_roi/{symbol}',[DepositController::class, 'get_roi'])->name('get.roi');

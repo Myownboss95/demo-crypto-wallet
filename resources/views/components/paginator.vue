@@ -8,9 +8,9 @@
       v-html="link.label"
       class="btn"
       :class="{
-        'btn-primary': link.active,
-        'btn-outline-primary': !link.active,
-        'disabled' : !link.url
+        'btn--outline-primary btn-sm': link.active,
+        'btn-outline-primary btn-sm': !link.active,
+        'disabled btn-sm' : !link.url
       }"
     />
   </div>

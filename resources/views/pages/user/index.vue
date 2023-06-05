@@ -68,7 +68,7 @@
           <ul class="token-box" v-if="payment_methods.length">
             <li v-for="(featureds, key) in payment_methods"
         :key="key">
-              <a href="coin-details.html" class="token-details">
+              <inertia-link :href="route('user.wallet.show', featureds.payment_method_id)" class="token-details">
                 <div class="token-icon">
                   
                   <img
@@ -93,7 +93,7 @@
                     </h5>
                   </div>
                 </div>
-              </a>
+              </inertia-link>
             </li>
             
           </ul>

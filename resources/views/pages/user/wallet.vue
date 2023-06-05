@@ -1,9 +1,6 @@
 <template>
   <Head title="My Wallet Details" />
-  <breadcrumb
-    title="My Wallet Details"
-    :crumbs="['Dashboard', 'My Wallet Details']"
-  />
+  
   <div class="row">
     <div class="col-xl-11 col-lg-11 mx-auto">
       <!-- end card -->

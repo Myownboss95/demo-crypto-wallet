@@ -119,7 +119,7 @@
           
           <SidebarItem
             name="Add Coins"
-            :url="route('admin.payment-method.index')"
+            :url="route('admin.coins.index')"
             icon="plus-square"
             v-if="is_admin"
           />

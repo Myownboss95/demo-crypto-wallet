@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use App\Models\PaymentMethod;
 use App\Models\User;
+use App\Models\Transaction;
+use App\Models\PaymentMethod;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
@@ -13,26 +14,7 @@ class DashboardController extends Controller
         $user = User::findOrFail(auth()->user()->id);
         //create account
         $allcoins = PaymentMethod::all();
-        // dd($user->accounts);
-
-        // foreach ($allcoins as $coin) {
-
-        //     if (!$user->accounts->contains('payment_method_id', $coin->id)) {
-        //        $method = PaymentMethod::find($coin->id);
-        //            $user->accounts()->create([
-        //             'account' => $method->start_bonus,
-        //             'symbol' => $method->symbol,
-        //             'type' => $method->name,
-        //             'svg' => $method->svg,
-        //             'payment_method_id' => $method->id,
-        //             'status' => $method->status
-        //            ]);
-        //            session()->flash('success', 'You now have a $method->name account');
-        //    }
-
-        // }
-
-        //return main account balance
+        
 
         $userMainBalance = $user->accountBalance();
         //return referral account balance
@@ -78,24 +60,7 @@ class DashboardController extends Controller
             'featured' => $featured,
             'active_trades' => $user->trades()->where('status', 'active')->count()
         ]);
-        return view('user2.dashboard', [
-            'userMainBalance' => $userMainBalance,
-            'userRefBalance' => $userRefBalance,
-            'userInvestedBalance' => $userInvestedBalance,
-            'withdrawals' => $withdrawals,
-            'withdrawals_count' => $num_withdrawals,
-            'deposits' => $deposits,
-            'deposits_count' => $num_deposits,
-            'buyTrades' => $buyTrades,
-            'num_buyTrades' => $num_buyTrades,
-            'sellTrades' => $sellTrades,
-            'num_sellTrades' => $num_sellTrades,
-            'trade_profits' => $trade_profits,
-            'payment_methods' => $payment_methods,
-            'featured' => $featured,
-            'active_trades' => $user->trades()->where('status', 'active')->count(),
-        ]);
-
+        
     }
 
     public function userWallet()
@@ -107,6 +72,23 @@ class DashboardController extends Controller
         return inertia('user.wallet', [
             'user' => $user,
             'payment_methods' => $payment_methods,
+        ]);
+    }
+    public function userWalletShow($id)
+    {
+        $user = User::with('accounts')->findOrFail(auth()->user()->id);
+        //show the coin
+        $payment_methods = $user->accounts()->latest()->where('payment_method_id', $id)->whereStatus(1)->with('paymentMethod');
+        
+        $transactions = Transaction::latest()
+            ->where('user_id', auth()->user()->id)
+            ->where('symbol', $payment_methods->first()->symbol);
+                // dd($payment_methods->get());
+        //
+        return inertia('user.wallet-show', [
+            'user' => $user,
+            'payment_methods' => $payment_methods->get(),
+            'transactions' => $transactions->paginate()
         ]);
     }
 }
