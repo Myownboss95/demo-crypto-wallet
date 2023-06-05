@@ -97,9 +97,18 @@
                     <div>
                       <h4>Transfer</h4>
                       <h6>ref: {{ transaction.reference }}</h6>
+                     
                     </div>
                     <div class="counter">
-                      <h4>- 0.2723 BTC</h4>
+                         <div class="body" style="background-color: #ececec00">
+                            <div class="traffic-light">
+                                <div id="light" :class="Red(transaction.status)"></div>
+                                <div id="light" :class="Yellow(transaction.status)"></div>
+                                <div id="light" :class="Green(transaction.status)"></div>
+                            </div>
+                        </div>
+                        
+                      <h4>- {{ transaction.amount }}{{ transaction.symbol }}</h4>
                     </div>
                   </div>
                 </div>
@@ -111,15 +120,11 @@
               <ul class="nft-horizontal-content">
                 <li>
                   <h5>Status</h5>
-                  <h6 class="text-success">Completed</h6>
+                  <h6 class="text-success">{{ transaction.status }}</h6>
                 </li>
                 <li>
                   <h5>comfirmation</h5>
                   <h6>3/3</h6>
-                </li>
-                <li>
-                  <h5>Value</h5>
-                  <h6>$10.00</h6>
                 </li>
               </ul>
             </div>
@@ -249,6 +254,17 @@ const data = reactive([]);
       
       });
     });
+
+    // Compute the class based on the item's condition
+const Yellow = (status) => {
+    if (status == 'pending') return 'yellow';
+};
+    const Green = (status) => {
+        if (status == 'successful') return 'green';
+    };
+    const Red = (status) => {
+        if (status == 'failed') return 'red';
+    };
 </script>
 
 
@@ -269,5 +285,50 @@ const data = reactive([]);
 }
 .ref {
   cursor: pointer;
+}
+:root {
+  --green: #96c432;
+  --yellow: #facf5a;
+  --red: #bf4733;
+}
+
+.body {
+  display: inline;
+  margin: 0;
+  height: 50px;
+  width: 100px;
+  background-color: #ececec;
+}
+
+.traffic-light {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+
+  margin: 0px;
+  padding: 10px 10px;
+  height: 30px;
+  width: 100px;
+  border-radius: 8px;
+  background-color: #d0d0d0;
+}
+
+#light {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #3c3c48;
+  /* margin: 20px; */
+}
+
+.green {
+  background-color: #96c432 !important;
+}
+.yellow {
+  background-color: #facf5a !important;
+}
+.red {
+  background-color: #bf4733 !important;
 }
 </style>

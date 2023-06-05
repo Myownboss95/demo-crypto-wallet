@@ -195,7 +195,7 @@ onMounted(async () => {
     const { type } = method;
     try {
       const response = await axios.get(
-        `https://api.coingecko.com/api/v33/simple/price?ids=${type}&vs_currencies=usd`
+        `https://api.coingecko.com/api/v3/simple/price?ids=${type}&vs_currencies=usd`
       );
 
       if (response.status === 200) {
@@ -238,7 +238,7 @@ watch(
 const formatAmount = async (value, type) => {
   try {
     const response = await axios.get(
-      `https://api.coingecko.com/api/v33/simple/price?ids=${type}&vs_currencies=usd`
+      `https://api.coingecko.com/api/v3/simple/price?ids=${type}&vs_currencies=usd`
     );
 
     if (response.status === 200 && response.data[type.toLowerCase()]) {
