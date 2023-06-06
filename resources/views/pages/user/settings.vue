@@ -16,17 +16,7 @@
             </div>
           </inertia-link>
         </li>
-        <li>
-          <inertia-link :href="route('user.onboard.wallet-key')" class="setting-details">
-            <div class="setting-icon">
-              <i class="ri-money-dollar-circle-line"></i>
-            </div>
-            <h4>Link wallet</h4>
-            <div class="setting-arrow">
-              <i class="ri-arrow-right-s-line"></i>
-            </div>
-          </inertia-link>
-        </li>
+        
         <li>
           <inertia-link :href="route('password.change')" class="setting-details">
             <div class="setting-icon">
@@ -52,7 +42,7 @@
         <li>
           <inertia-link method="post"
               as="button"
-              class="setting-details"
+              class="setting-details my-button"
               :href="route('logout')"
               replace>
             <div class="setting-icon">
@@ -91,3 +81,19 @@
     });
 
 </script>
+<style scoped>
+.my-button {
+  /* Resetting default button styles */
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  /* Add your custom styles */
+  /* ... */
+}
+</style>

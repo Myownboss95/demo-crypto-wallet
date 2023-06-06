@@ -36,7 +36,16 @@
 </template>
 
 <script setup>
-  import authVue from '@/views/layouts/auth.vue';
+import authVue from '@/views/layouts/auth.vue';
+import { onMounted, ref } from 'vue';
+const isPageReloaded = ref(false);
+
+   onMounted(() => {
+      if (!isPageReloaded.value) {
+        isPageReloaded.value = true;
+        window.location.reload();
+      }
+    });
   const goHome = ()=>window.location.replace(route('front.index'))
 </script>
 
