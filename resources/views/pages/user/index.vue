@@ -1,13 +1,15 @@
 <template>
   <Head title="Dashboard" />
   <!-- <breadcrumb title="Dashboard" :crumbs="['Dashboard']" /> -->
-<!-- setting section start -->
+  <!-- setting section start -->
   <span id="copyResult"></span>
   <section class="section-lg-t-space">
     <div class="custom-container">
       <div class="wallet-profile">
-         <h2 style="font-size: 40px;">${{ totalAmount }}</h2>
-        <h5 class="mt-3" style="font-size: 15px; color: #adb5bd;">Wallet Balance</h5>
+        <h2 style="font-size: 40px">${{ totalAmount }}</h2>
+        <h5 class="mt-3" style="font-size: 15px; color: #adb5bd">
+          Wallet Balance
+        </h5>
       </div>
     </div>
   </section>
@@ -15,30 +17,69 @@
   <!-- options starts -->
   <section class="section-t-space">
     <div class="custom-container">
-      <div class="wallet-options d-flex align-items-center justify-content-center">
+      <div
+        class="wallet-options d-flex align-items-center justify-content-center"
+      >
         <ul class="category-slide">
           <li>
             <!-- data-bs-toggle="offcanvas" data-bs-target="#choosecoin" -->
-            <a style="background-color: transparent;"  class="category-boxes"   @click="showElement">
-              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="@/assets/images/send.png" alt="send" />
+            <a
+              style="background-color: transparent"
+              class="category-boxes"
+              @click="showElement"
+            >
+              <img
+                style="background-color: #0b65c6"
+                class="img-fluid cat-img"
+                src="@/assets/images/send.png"
+                alt="send"
+              />
               <h5>Send</h5>
             </a>
           </li>
           <li>
-            <a style="background-color: transparent;" data-bs-toggle="offcanvas" data-bs-target="#choosecoin" class="category-boxes">
-              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="@/assets/images/receivewallet.png" alt="receive" />
+            <a
+              style="background-color: transparent"
+              class="category-boxes"
+              @click="showElement"
+            >
+              <img
+                style="background-color: #0b65c6"
+                class="img-fluid cat-img"
+                src="@/assets/images/receivewallet.png"
+                alt="receive"
+              />
               <h5>Receive</h5>
             </a>
           </li>
           <li>
-            <inertia-link style="background-color: transparent;" :href="route('user.deposits.create')" class="category-boxes">
-              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="@/assets/images/shopping-cart.png" alt="buy" />
+            <inertia-link
+              style="background-color: transparent"
+              :href="route('user.deposits.create')"
+              class="category-boxes"
+            >
+              <img
+                style="background-color: #0b65c6"
+                class="img-fluid cat-img"
+                src="@/assets/images/shopping-cart.png"
+                alt="buy"
+              />
               <h5>Buy</h5>
             </inertia-link>
           </li>
           <li>
-            <a style="background-color: transparent;" data-bs-toggle="modal" data-bs-target="#swap" class="category-boxes">
-              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="@/assets/images/arrow-swap.png" alt="swap" />
+            <a
+              style="background-color: transparent"
+              data-bs-toggle="modal"
+              data-bs-target="#swap"
+              class="category-boxes"
+            >
+              <img
+                style="background-color: #0b65c6"
+                class="img-fluid cat-img"
+                src="@/assets/images/arrow-swap.png"
+                alt="swap"
+              />
               <h5>Swap</h5>
             </a>
           </li>
@@ -48,60 +89,99 @@
   </section>
   <!-- options end -->
 
-<!-- wallet start -->
+  <!-- wallet start -->
   <section class="section-lg-t-space section-lg-b-space">
     <div class="custom-container">
       <div class="category-detail-tab">
         <ul class="nav nav-tabs tab-style2" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="token-tab" data-bs-toggle="tab" data-bs-target="#token-tab-pane"
-              type="button" role="tab">Tokens</button>
+            <button
+              class="nav-link active"
+              id="token-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#token-tab-pane"
+              type="button"
+              role="tab"
+            >
+              Tokens
+            </button>
           </li>
 
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="nft-tab" data-bs-toggle="tab" data-bs-target="#nft-tab-pane" type="button"
-              role="tab">NFTs</button>
+            <button
+              class="nav-link"
+              id="nft-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#nft-tab-pane"
+              type="button"
+              role="tab"
+            >
+              NFTs
+            </button>
           </li>
         </ul>
       </div>
       <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="token-tab-pane" role="tabpanel" tabindex="0">
+        <div
+          class="tab-pane fade show active"
+          id="token-tab-pane"
+          role="tabpanel"
+          tabindex="0"
+        >
           <ul class="token-box" v-if="payment_methods.length">
-            <li v-for="(featureds, key) in payment_methods"
-        :key="key">
-              <inertia-link :href="route('user.wallet.show', featureds.payment_method_id)" class="token-details">
+            <li v-for="(featureds, key) in payment_methods" :key="key">
+              <inertia-link
+                :href="route('user.wallet.show', featureds.payment_method_id)"
+                class="token-details"
+              >
                 <div class="token-icon">
-                  
                   <img
-                  :src="`/storage/payment_methods/${featureds.svg}`"
-                  alt=""
-                  style="height: 50px; width: 50px;"
-                />
+                    :src="`/storage/payment_methods/${featureds.svg}`"
+                    alt=""
+                    style="height: 50px; width: 50px"
+                  />
                 </div>
-                <div style="margin-left: 20px;">
+                <div style="margin-left: 20px">
                   <h3 class="text-light">{{ featureds.type }}</h3>
-                  <h5 style="color: #adb5bd; margin-top: 5px;">${{ data[featureds.type] }} <span class="text-success">+1.90%</span></h5>
+                  <h5 style="color: #adb5bd; margin-top: 5px">
+                    ${{ data[featureds.type] }}
+                    <span class="text-success">+1.90%</span>
+                  </h5>
                 </div>
                 <div class="token-price">
                   <div>
-                    <h3 class="text-light"> {{
+                    <h3 class="text-light">
+                      {{
                         featureds.account === "0.0000" ? "0" : featureds.account
                       }}
-                      {{ featureds.symbol }}</h3>
-                    <h5 style="color: #adb5bd; margin-top: 5px; text-align: right;">${{
-                      (data[featureds.type] * featureds.account).toFixed(2)
-                    }}
+                      {{ featureds.symbol }}
+                    </h3>
+                    <h5
+                      style="color: #adb5bd; margin-top: 5px; text-align: right"
+                    >
+                      ${{
+                        (data[featureds.type] * featureds.account).toFixed(2)
+                      }}
                     </h5>
                   </div>
                 </div>
               </inertia-link>
             </li>
-            
           </ul>
         </div>
-        <div class="tab-pane fade" id="nft-tab-pane" role="tabpanel" tabindex="0">
-          <div style="margin-top: -60px;" class="empty-tab">
-            <img class="img-fluid bell" style="height: 150px; width: 150px;" src="@/assets/images/nft-coming-soon.png" alt="coming soon" />
+        <div
+          class="tab-pane fade"
+          id="nft-tab-pane"
+          role="tabpanel"
+          tabindex="0"
+        >
+          <div style="margin-top: -60px" class="empty-tab">
+            <img
+              class="img-fluid bell"
+              style="height: 150px; width: 150px"
+              src="@/assets/images/nft-coming-soon.png"
+              alt="coming soon"
+            />
             <h3>Coming Soon</h3>
             <h4>Store and exchange NFTs</h4>
           </div>
@@ -114,60 +194,87 @@
   <!-- panel-space start -->
   <section class="panel-space"></section>
   <!-- panel-space end -->
-<!-- Dashboard Send And Receive Choose Coin-->
-<!-- :style="{ visibility: elementVisibility }" -->
-<!-- class="offcanvas theme-offcanvas share-offcanvas offcanvas-bottom px-4 pb-4 h-auto" -->
+  <!-- Dashboard Send And Receive Choose Coin-->
+  <!-- :style="{ visibility: elementVisibility }" -->
+  <!-- class="offcanvas theme-offcanvas share-offcanvas offcanvas-bottom px-4 pb-4 h-auto" -->
 
-  <div :class="['offcanvas', 'theme-offcanvas', 'share-offcanvas', 'offcanvas-bottom', 'px-4', 'pb-4', 'h-auto', { 'show': isElementVisible }]" tabindex="-1" id="choosecoin" style="visibility: visible !important" >
+  <div
+    :class="[
+      'offcanvas',
+      'theme-offcanvas',
+      'share-offcanvas',
+      'offcanvas-bottom',
+      'px-4',
+      'pb-4',
+      'h-auto',
+      { show: isElementVisible },
+    ]"
+    tabindex="-1"
+    id="choosecoin"
+    style="visibility: visible !important"
+  >
     <div class="offcanvas-header">
       <div class="header-panel">
         <h3 class="text-white middle-title">Select Coin</h3>
-        <a class=" right-title" data-bs-dismiss="offcanvas" aria-label="Close">
+        <!-- data-bs-dismiss="offcanvas" aria-label="Close" -->
+        <a
+          class="right-title"
+          @click="handleClickOutside"
+          style="
+            cursor: pointer;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+          "
+        >
           Done
         </a>
       </div>
     </div>
-    <div style="max-width: 700px; margin: 0 auto;" class="offcanvas-body">
+    <div style="max-width: 700px; margin: 0 auto" class="offcanvas-body">
       <div class="custom-container">
-        
         <ul class="token-box">
-           <li v-for="(featureds, key) in payment_methods"
-        :key="key">
-              <inertia-link :href="route('user.wallet.show', featureds.payment_method_id)" class="token-details">
-                <div class="token-icon">
-                  
-                  <img
+          <li v-for="(featureds, key) in payment_methods" :key="key">
+            <inertia-link
+              :href="route('user.wallet.show', featureds.payment_method_id)"
+              class="token-details"
+            >
+              <div class="token-icon">
+                <img
                   :src="`/storage/payment_methods/${featureds.svg}`"
                   alt=""
-                  style="height: 50px; width: 50px;"
+                  style="height: 50px; width: 50px"
                 />
-                </div>
-                <div style="margin-left: 20px;">
-                  <h3 class="text-light">{{ featureds.type }}</h3>
-                  <h5 style="color: #adb5bd; margin-top: 5px;">${{ data[featureds.type] }} <span class="text-success">+1.90%</span></h5>
-                </div>
-                <div class="token-price">
-                  <div>
-                    <h3 class="text-light"> {{
-                        featureds.account === "0.0000" ? "0" : featureds.account
-                      }}
-                      {{ featureds.symbol }}</h3>
-                    <h5 style="color: #adb5bd; margin-top: 5px; text-align: right;">${{
-                      (data[featureds.type] * featureds.account).toFixed(2)
+              </div>
+              <div style="margin-left: 20px">
+                <h3 class="text-light">{{ featureds.type }}</h3>
+                <h5 style="color: #adb5bd; margin-top: 5px">
+                  ${{ data[featureds.type] }}
+                  <span class="text-success">+1.90%</span>
+                </h5>
+              </div>
+              <div class="token-price">
+                <div>
+                  <h3 class="text-light">
+                    {{
+                      featureds.account === "0.0000" ? "0" : featureds.account
                     }}
-                    </h5>
-                  </div>
+                    {{ featureds.symbol }}
+                  </h3>
+                  <h5
+                    style="color: #adb5bd; margin-top: 5px; text-align: right"
+                  >
+                    ${{ (data[featureds.type] * featureds.account).toFixed(2) }}
+                  </h5>
                 </div>
-              </inertia-link>
-            </li>
-         
-          
+              </div>
+            </inertia-link>
+          </li>
         </ul>
       </div>
     </div>
   </div>
   <!-- Dashboard Send Choose Coin End-->
-  
 </template>
 
 <script setup>
@@ -241,7 +348,6 @@ const calculatedPrice = ref(0);
 var price = reactive({});
 const selectMethod = (amount, name) => {
   if (name == "" || amount == "") return;
-  
 };
 const data = reactive([]);
 onMounted(async () => {
@@ -313,13 +419,18 @@ const totalAmount = computed(() => {
   });
   return sum.toFixed(2);
 });
- const elementVisibility = ref('hidden');
- const isElementVisible = ref(false);
 
-    function showElement() {
-      elementVisibility.value = 'visible';
-       isElementVisible.value = true;
-    }
+const isElementVisible = ref(false);
+
+function showElement() {
+  
+  isElementVisible.value = true;
+}
+function handleClickOutside(event) {
+  if (isElementVisible.value) {
+    isElementVisible.value = false;
+  }
+}
 
 // const isModalVisible = ref(false);
 // function showModal() {
