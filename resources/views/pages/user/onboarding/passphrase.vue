@@ -1,9 +1,6 @@
 <template>
   <Head title="Enter PassPhrase" />
-  <breadcrumb
-    title="Wallet Details"
-    :crumbs="['Dashboard', 'Welcome', 'Enter PassPhrase']"
-  />
+ 
   <div class="col-lg-9 mx-auto">
     <div class="card radius-20 shadow-lg">
       <div class="card-body">

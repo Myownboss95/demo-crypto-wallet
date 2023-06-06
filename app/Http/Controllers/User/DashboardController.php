@@ -91,4 +91,13 @@ class DashboardController extends Controller
             'transactions' => $transactions->paginate(5)
         ]);
     }
+
+    public function settings()
+    {
+        $user = User::with('accounts')->findOrFail(auth()->user()->id);
+        return inertia('user.settings', [
+            'user' => $user
+        ]);
+
+    }
 }

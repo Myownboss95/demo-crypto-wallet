@@ -170,22 +170,22 @@
         </a>
       </li>
       <li>
-        <a href="browser.html">
+        <inertia-link :href="route('user.profile.view')">
           <div class="icon">
             <i class="ri-layout-grid-fill active"></i>
             <i class="ri-layout-grid-fill unactive"></i>
           </div>
-          <span>Browser</span>
-        </a>
+          <span>Profile</span>
+        </inertia-link>
       </li>
       <li>
-        <a href="settings.html">
+        <inertia-link :href="route('user.settings')">
           <div class="icon">
             <i class="ri-settings-5-fill active"></i>
             <i class="ri-settings-5-fill unactive"></i>
           </div>
           <span>Settings</span>
-        </a>
+        </inertia-link>
       </li>
     </ul>
   </div>

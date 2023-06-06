@@ -1,7 +1,6 @@
 <template>
   <Head title="Profile" />
-  <breadcrumb title="Profile" :crumbs="['Dashboard', 'Profile']" />
-
+  
   <div class="row">
     <div class="col-xl-9 col-lg-8 mx-auto">
       <div class="card">
