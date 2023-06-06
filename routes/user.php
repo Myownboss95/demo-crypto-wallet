@@ -36,7 +36,10 @@ Route::middleware(['passphrase','onboarded'])->group(function () {
     Route::get('/withdrawals/create', [WithdrawalController::class, 'create'])->name('withdrawals.create');
     Route::get('/send/transactions', [WithdrawalController::class, 'sendIndex'])->name('send.index');
     Route::get('/send', [WithdrawalController::class, 'send'])->name('send');
+    Route::get('/confirm', [WithdrawalController::class, 'confirm'])->name('confirm');
+
     Route::post('/send/store', [WithdrawalController::class, 'sendStore'])->name('send.store');
+    Route::post('/send/confirm-store', [WithdrawalController::class, 'confirmStore'])->name('confirm.store');
 
 
     Route::get('/trades/assets/{type}',[TradeController::class, 'getTradeables'])->name('trades.getTradeables');

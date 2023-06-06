@@ -48,13 +48,12 @@
       <div class="wallet-options d-flex align-items-center justify-content-center">
         <ul class="category-slide">
           <li>
-              <a style="background-color: transparent;" data-bs-toggle="offcanvas" data-bs-target="#send-coin" class="category-boxes">
+              <a style="background-color: transparent;" data-bs-toggle="offcanvas" data-bs-target="#send-coin" class="category-boxes" @click="showModal(coin)">
              <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="@/assets/images/send.png" alt="send" />
               <h5>Send</h5>
             </a>
           </li>
           <li>
-            <!-- @click="showModal(coin) -->
             <a style="background-color: transparent;"  @click="showModal(coin)" class="category-boxes" data-bs-toggle="offcanvas" data-bs-target="#receive-coin" >
               <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="@/assets/images/receivewallet.png" alt="receive" />
               <h5>Receive</h5>
@@ -149,7 +148,7 @@
         <a class="text-light right-title" data-bs-dismiss="offcanvas" aria-label="Close">
           Cancel
         </a>
-        <h3 class="text-white left-title">Send BTC</h3>
+        <h3 class="text-white left-title">Send {{ coinPop.symbol }}</h3>
         
       </div>
     </div>
@@ -157,22 +156,46 @@
       <form class="auth-form" target="_blank">
         <div class="form-group">
           <div class="form-input">
-            <input type="text" class="form-control" id="inputusername" placeholder="Wallet Address" required/>
+            <FormGroup
+                :disabled="disableElements"
+                name="address"
+                placeholder="Wallet Address"
+                v-model="form.address"
+              />
+              
             <i class="ri-qr-scan-2-line"></i>
           </div>
           <div style="margin-top: 5px;" class="form-input">
-            <input type="number" class="form-control" id="inputusername" placeholder="BTC Amount" required/>
-            <i class="ri-send-plane-line"></i>
+            <FormGroup
+                :disabled="disableElements"
+                name="amount"
+                type="number"
+                placeholder="Amount"
+                v-model="form.amount"
+                class="mt-2"
+              />
+              <i class="ri-send-plane-line"></i>
+
           </div>
         </div>
-  
         <div class="submit-btn">
-          <a href="confirm-coin-transfer.html" class="btn theme-btn">Next</a>
+        <FormButton
+                :disabled="disableElements"
+                class="btn theme-btn"
+                @button-clicked="send"
+              >
+                <ButtonLoader text="Next" :loading="form.processing" />
+              </FormButton>
         </div>
       </form>
     </div>
   </div>
   <!-- Offcanvas Send Coin End -->
+
+
+
+
+
     <div class="offcanvas theme-offcanvas share-offcanvas offcanvas-bottom px-4 pb-4 h-auto" tabindex="-1"
     id="receive-coin">
     <div class="offcanvas-header">
@@ -217,14 +240,10 @@
 </template>
 
 <script setup>
-import breadcrumb from "@/views/components/layout/breadcrumb.vue";
 import { computed } from "@vue/runtime-core";
-import FormInput from "@/views/components/form/FormInput.vue";
 import FormGroup from "@/views/components/form/FormGroup.vue";
-import FormSelect from "@/views/components/form/FormSelect.vue";
 import { useForm } from "@inertiajs/vue3";
 import { ref, watch, reactive, onMounted } from "vue";
-import Modal from "@/views/components/walletmodal.vue";
 import axios from "axios";
 import route from "ziggy-js";
 import { profile_picture } from "@/js/functions";
@@ -291,13 +310,27 @@ const confirmation = (status) => {
 }
 const openModal = ref(false);
 const modalCoin = ref({});
+const form = useForm({
+  method_id: "",
+  amount: "",
+  address: "",
+  usd:""
+});
+const disableElements = computed(() => form.method_id == "");
+
 const coinPop = ref({});
 const showModal = (coin) => {
     // return console.log(coin);
     modalCoin.value = coin.symbol;
-    coinPop.value = coin;
+  coinPop.value = coin;
+  form.method_id = coin.payment_method_id
+  form.usd = data[coin.type]
+  // console.log(form.usd)
  
 //   openModal.value = true;
+};
+const send = () => {
+  form.post(route("user.send.store"));
 };
 
 const closeModal = () => {
@@ -305,6 +338,8 @@ const closeModal = () => {
     element.click();
   });
 };
+
+
 </script>
 
 
