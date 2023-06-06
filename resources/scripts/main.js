@@ -12,8 +12,8 @@ import "@/assets/css/bootstrap.css"
 import "@/assets/css/icons.css"
 
 
-
 import "bootstrap"
+import "@/assets/bootstrap.bundle.min.js";
 import 'simplebar';
 import 'simplebar/dist/simplebar.css'
 
