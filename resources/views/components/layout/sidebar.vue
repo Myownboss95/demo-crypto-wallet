@@ -22,128 +22,49 @@
     <div class="offcanvas-body">
       <div class="sidebar-content">
         <ul class="link-section">
-          <li class="menu-title">Menu</li>
-          <SidebarItem
-            name="Dashboard"
-            :url="route(`${is_admin ? 'admin' : 'user'}.index`)"
-            icon="layers"
-          />
-          <SidebarItem
-            name="Wallet"
-            :url="route('user.wallet')"
-            icon="shopping-bag"
-            v-if="!is_admin"
-          />
-          <SidebarItem
-            name="Users"
-            :url="route('admin.users.index')"
-            icon="users"
-            v-if="is_admin"
-          />
-          <SidebarItem
-            name="KYC verification"
-            :url="route('admin.kyc.index')"
-            icon="user-x"
-            v-if="is_admin"
-          />
-          
-          <li class="menu-title">Transactions</li>
-          <SidebarItem
-            name="Send"
-            :url="route('user.send')"
-            icon="send"
-            v-if="!is_admin"
-          />
-          <SidebarItem
-            :name="`${is_admin ? 'All Purchases' : 'Buy Coin'}`"
-            :url="route(`${is_admin ? 'admin.deposits.index' : 'user.deposits.create'}`)"
-            icon="credit-card"
-          />
-          <SidebarItem
-            name="Withdrawals"
-            :url="route('admin.withdrawals.index')"
-            icon="dollar-sign"
-            v-if="is_admin"
-          />
-          <SidebarItem
-            name="Transfers"
-            :url="route('admin.transfers.index')"
-            icon="dollar-sign"
-            v-if="is_admin"
-          />
-          <SidebarItem
-            name="Withdrawals"
-            :url="route('user.withdrawals.index')"
-            icon="dollar-sign"
-            v-if="!is_admin"
-          />
-          <SidebarItem
-            name="Transactions"
-            :url="route('user.send.index')"
-            icon="dollar-sign"
-            v-if="!is_admin"
-          />
-          <SidebarItem
-            name="Request Withdrawal"
-            :url="route('user.withdrawals.create')"
-            icon="shopping-bag"
-            v-if="!is_admin"
-          />
+          <li>
+            <inertia-link :href="route('user.profile.view')" class="pages">
+              <h3>My Profile</h3>
+              <i class="ri-arrow-drop-right-line"></i>
+            </inertia-link>
+          </li>
+          <li>
+            <inertia-link :href="route('user.index')" class="pages">
+              <h3>Deposit</h3>
+              <i class="ri-arrow-drop-right-line"></i>
+            </inertia-link>
+          </li>
+          <li>
+            <inertia-link :href="route('user.index')" class="pages">
+              <h3>Withdraw</h3>
+              <i class="ri-arrow-drop-right-line"></i>
+            </inertia-link>
+          </li>
+          <li>
+            <inertia-link :href="route('user.index')" class="pages">
+              <h3>Link Wallet</h3>
+              <i class="ri-arrow-drop-right-line"></i>
+            </inertia-link>
+          </li>
+          <li>
+            <inertia-link method="post"
+              as="button"
+              class="pages my-button"
+              :href="route('logout')"
+              replace>
+              <h3>Logout</h3>
+              <i class="ri-arrow-drop-right-line"></i>
+            </inertia-link>
+          </li>
 
-          <li class="menu-title" v-if="is_admin">Communication</li>
-          <SidebarItem
-            name="Send Email"
-            :url="route('admin.mail.index')"
-            icon="mail"
-            v-if="is_admin"
-          />
-          <SidebarItem
-            name="Notifications"
-            :url="route('admin.notification.index')"
-            icon="bell"
-            v-if="is_admin"
-          />
-          <li class="menu-title">Settings</li>
-
-          <SidebarItem
-            name="My Profile"
-            :url="route('user.profile.view')"
-            icon="user"
-            v-if="!is_admin"
-          />
-          <SidebarItem
-            name="Password reset"
-            :url="route('password.change')"
-            icon="lock"
-          />
           
-          <SidebarItem
-            name="Add Coins"
-            :url="route('admin.coins.index')"
-            icon="plus-square"
-            v-if="is_admin"
-          />
-         
-          <hr />
-          <SidebarItem
-            name="Logout"
-            method="post"
-            :url="route('logout')"
-            icon="power"
-          />
-          <SidebarItem
-            name="Home"
-            :url="route('front.index')"
-            icon="home"
-            :raw="true"
-          />
         </ul>
       </div>
     </div>
   </div>
   <!-- side bar end -->
   <!-- Left Sidebar End -->
-   <!-- bottom navbar start -->
+  <!-- bottom navbar start -->
   <div class="navbar-menu">
     <ul>
       <li class="active">
@@ -165,7 +86,11 @@
         </inertia-link>
       </li>
       <li>
-        <a class="plus" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft">
+        <a
+          class="plus"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasLeft"
+        >
           <i class="ri-add-line plus-icon"></i>
         </a>
       </li>
@@ -213,5 +138,20 @@ onMounted((_) => {
 });
 </script>
 
-<style>
+<style scoped>
+.my-button {
+  /* Resetting default button styles */
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  color:white;
+  /* Add your custom styles */
+  /* ... */
+}
 </style>
