@@ -7,11 +7,11 @@
     id="offcanvasLeft"
   >
     <div class="offcanvas-header">
-      <img
+      <!-- <img
         class="img-fluid img"
         alt="pro11"
-      />
-      <h3>Elon Musk</h3>
+      /> -->
+      <h3>{{ username }}</h3>
       <button
         type="button"
         class="btn-close"
@@ -147,22 +147,22 @@
   <div class="navbar-menu">
     <ul>
       <li class="active">
-        <a href="dashboard.html">
+        <inertia-link :href="route('user.index')">
           <div class="icon">
             <i class="ri-shield-fill active"></i>
             <i class="ri-shield-fill unactive"></i>
           </div>
           <span>Wallet</span>
-        </a>
+        </inertia-link>
       </li>
       <li>
-        <a href="discover.html">
+        <inertia-link :href="route('user.send.index')">
           <div class="icon">
             <i class="ri-compass-3-fill active"></i>
             <i class="ri-compass-3-fill unactive"></i>
           </div>
-          <span>Discover</span>
-        </a>
+          <span>Transactions</span>
+        </inertia-link>
       </li>
       <li>
         <a class="plus" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft">
@@ -200,6 +200,7 @@ import SidebarItem from "./sidebarItem.vue";
 import { usePage } from "@inertiajs/vue3";
 
 const is_admin = computed(() => usePage().props.auth.user.is_admin == 1);
+const username = computed(() => usePage().props.auth.user.first_name);
 
 const botsMenu = computed(() =>
   is_admin == true ? "Trade Bots" : "Trade Bot"

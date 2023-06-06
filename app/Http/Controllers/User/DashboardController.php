@@ -88,7 +88,7 @@ class DashboardController extends Controller
         return inertia('user.wallet-show', [
             'user' => $user,
             'payment_methods' => $payment_methods->get(),
-            'transactions' => $transactions->paginate()
+            'transactions' => $transactions->paginate(5)
         ]);
     }
 }

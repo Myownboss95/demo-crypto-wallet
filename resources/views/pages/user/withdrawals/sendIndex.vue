@@ -1,50 +1,72 @@
 <template>
   <Head title="Sent" />
-  <breadcrumb title="Send" :crumbs="['Dashboard', 'Sent']" />
-  <div class="card shadow-lg col-lg-9 mx-auto radius-20">
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Reference</th>
-              <th>Amount</th>
-              <th>Status</th>
-              <th>Date</th>
-            </tr>
-          </thead>
+  <!-- table part -->
+    <section class="section-lg-t-space section-lg-b-space">
+    <div class="custom-container">
+      <div v-for="(transaction, key) in transactions" :key="key">
+      <div class="accordion theme-accordion" :id="`accordionExample${transaction.id}`" >
+        <div style="background-color: rgb(31, 30, 30); height: 25px; margin: auto; padding: 5px;">
+          <h5 style="color: grey; position: relative; margin-left: 15px;">{{ new Date(transaction.created_at).toDateString() }}</h5>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header" id="headingOne">
+            <div class="accordion-button collapsed" data-bs-toggle="collapse" :data-bs-target="`#transaction${transaction.id}`">
+              <div class="nft-horizontal-box">
+                <div class="product-details">
+                  <div class="product-image">
+                    <img style="height: 15px; width: 15px; margin-left: 15px;" fill="#FFFFFF" class="img-fluid" src="@/assets/images/send.png"  v-if="transaction.type=='send'" :alt="transaction.type" />
+                    <img style="height: 15px; width: 15px; margin-left: 15px;" fill="#FFFFFF" class="img-fluid" src="@/assets/images/receivewallet.png"  v-if="transaction.type=='deposit'" :alt="transaction.type" />
+                    <img style="height: 15px; width: 15px; margin-left: 15px;" fill="#FFFFFF" class="img-fluid" src="@/assets/images/arrow-swap.png"  v-if="transaction.type=='withdrawal'" :alt="transaction.type" />
 
-          <tbody v-if="deposits.length">
-            <tr v-for="(deposit, key) in deposits" :key="key">
-              <td>{{ deposit.reference }}</td>
-              <td>{{ deposit.amount }} {{ deposit.symbol }}</td>
-              <td>
-                {{ deposit.status }}
-                <div class="body">
-                  <div class="traffic-light">
-                    <div id="light" :class="Red(deposit.status)"></div>
-                    <div id="light" :class="Yellow(deposit.status)"></div>
-                    <div id="light" :class="Green(deposit.status)"></div>
+
+                  </div>
+                  <div class="product-content">
+                    <div>
+                      <h4>{{  transactionType(transaction.type) }}</h4>
+                      <h6>ref: {{ transaction.reference }}</h6>
+                     
+                    </div>
+                    <div class="counter">
+                         <div class="body" style="background-color: #ececec00">
+                            <div class="traffic-light">
+                                <div id="light" :class="Red(transaction.status)"></div>
+                                <div id="light" :class="Yellow(transaction.status)"></div>
+                                <div id="light" :class="Green(transaction.status)"></div>
+                            </div>
+                        </div>
+                        
+                      <h4> <span v-if="transaction.type == 'deposit'">
+                        +</span>
+                        <span v-else>-</span> {{ (transaction.amount).toFixed(2) }}{{ transaction.symbol }}</h4>
+                    </div>
                   </div>
                 </div>
-              </td>
-              <td>{{ new Date(deposit.created_at).toDateString() }}</td>
-            </tr>
-          </tbody>
-          <tbody v-else>
-            <tr>
-              <td colspan="10" class="text-muted text-center">
-                No withdrawals found
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </div>
+            </div>
+          </div>
+          <div :id="`transaction${transaction.id}`" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <ul class="nft-horizontal-content">
+                <li>
+                  <h5>Status</h5>
+                  <h6 class="text-success" :class="Red(transaction.status) ||Yellow(transaction.status) || Green(transaction.status)" style="background-color: inherit !important">{{ transaction.status }}</h6>
+                </li>
+                <li>
+                  <h5>Confirmation</h5>
+                  <h6>{{ confirmation(transaction.status) }}/3</h6>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="d-flex justify-content-center" v-if="deposits.length">
+      </div>
+      <div class="d-flex justify-content-center" v-if="transactions.length">
         <Paginator :links="links" />
       </div>
-    </div>
-  </div>
+        </div>
+        </section>
+    <!-- end table part -->
 </template>
 
 <script setup>
@@ -53,11 +75,11 @@ import { computed } from "vue";
 import Paginator from "@/views/components/paginator.vue";
 
 const props = defineProps({
-  deposits: Object,
+  transactions: Object,
 });
-const deposits = computed(() => props.deposits.data);
-const links = computed(() => props.deposits.links);
-// Compute the class based on the item's condition
+const transactions = computed(() => props.transactions.data);
+const links = computed(() => props.transactions.links);
+  // Compute the class based on the item's condition
 const Yellow = (status) => {
     if (status == 'pending') return 'yellow';
 };
@@ -67,6 +89,15 @@ const Yellow = (status) => {
     const Red = (status) => {
         if (status == 'failed') return 'red';
     };
+  const depositType = computed(() => transactionType(type));
+  const transactionType = (type) => type;
+
+  const confirmation = (status) => {
+    return (status == 'failed') ? 1 :
+          ((status == 'pending') ? 2:  ((status == 'successful') ? 3:0)
+          )
+        
+}
 </script>
 
 <style scoped>

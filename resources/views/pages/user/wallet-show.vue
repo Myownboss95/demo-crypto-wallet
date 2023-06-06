@@ -83,7 +83,7 @@
         </div>
         <div class="accordion-item">
           <div class="accordion-header" id="headingOne">
-            <div class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#transaction1">
+            <div class="accordion-button collapsed" data-bs-toggle="collapse" :data-bs-target="`#transaction${transaction.id}`">
               <div class="nft-horizontal-box">
                 <div class="product-details">
                   <div class="product-image">
@@ -117,7 +117,7 @@
               </div>
             </div>
           </div>
-          <div id="transaction1" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+          <div :id="`transaction${transaction.id}`" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
             <div class="accordion-body">
               <ul class="nft-horizontal-content">
                 <li>
@@ -299,13 +299,13 @@ const Yellow = (status) => {
     const Red = (status) => {
         if (status == 'failed') return 'red';
     };
-const depositType = computed(() => transactionType(type));
-const transactionType = (type) => type;
+  const depositType = computed(() => transactionType(type));
+  const transactionType = (type) => type;
 
-const confirmation = (status) => {
-   return (status == 'failed') ? 1 :
-        ((status == 'pending') ? 2:  ((status == 'successful') ? 3:0)
-        )
+  const confirmation = (status) => {
+    return (status == 'failed') ? 1 :
+          ((status == 'pending') ? 2:  ((status == 'successful') ? 3:0)
+          )
         
 }
 const openModal = ref(false);

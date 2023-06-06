@@ -113,13 +113,14 @@
     data: Object,
     });
 const data = computed(() => props.data);
-    // console.log(data.value)
+    // console.log(data.value.method_id)
     const form = useForm({
-        method_id: data.method_id,
-        amount: data.amount,
-        address: data.address,
+        method_id: data.value.method_id,
+        amount: data.value.amount,
+        address: data.value.address,
     });
-   const send = () => {
+const send = () => {
+    // console.log(form.data())
             form.post(route("user.confirm.store"));
             };
 </script>

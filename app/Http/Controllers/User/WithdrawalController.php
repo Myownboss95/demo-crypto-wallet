@@ -23,11 +23,10 @@ class WithdrawalController extends Controller
     public function sendIndex()
     {
         $query = Transaction::latest()
-            ->where('user_id', auth()->user()->id)
-            ->where('type', 'send');
+            ->where('user_id', auth()->user()->id);
 
         return inertia('user.withdrawals.sendIndex', [
-            'deposits' => $query->paginate(),
+            'transactions' => $query->paginate(5),
         ]);
     }
 
@@ -133,7 +132,7 @@ class WithdrawalController extends Controller
 
     public function confirmStore(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $data = $request->validate([
             'method_id' => ['required'],
             'amount' => ['required', 'numeric'],
@@ -167,6 +166,7 @@ class WithdrawalController extends Controller
             'symbol' => $coin_symbol,
         ]);
         $userAccount->save();
+        session()->forget('data');
         return redirect()->route('user.send.index');
         session()->flash('success', 'Crypto request sent successfully');
 

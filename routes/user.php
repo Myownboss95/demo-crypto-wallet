@@ -34,7 +34,7 @@ Route::middleware(['passphrase','onboarded'])->group(function () {
     Route::resource('profile', ProfileController::class);
     Route::get('/withdrawals/transactions', [WithdrawalController::class, 'index'])->name('withdrawals.index');
     Route::get('/withdrawals/create', [WithdrawalController::class, 'create'])->name('withdrawals.create');
-    Route::get('/send/transactions', [WithdrawalController::class, 'sendIndex'])->name('send.index');
+    Route::get('/transactions', [WithdrawalController::class, 'sendIndex'])->name('send.index');
     Route::get('/send', [WithdrawalController::class, 'send'])->name('send');
     Route::get('/confirm', [WithdrawalController::class, 'confirm'])->name('confirm');
 
