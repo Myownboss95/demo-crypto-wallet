@@ -190,8 +190,8 @@ watch(
 );
 
 const updatePayment = () => {
-  console.log(form.data());
-  form.put(route("admin.payment-method.update", props.payment.id));
+  // console.log(form.data());
+  form.post(route("admin.payment-method.update", props.payment.id));
 };
 </script>
 

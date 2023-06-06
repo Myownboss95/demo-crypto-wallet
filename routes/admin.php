@@ -52,7 +52,9 @@ Route::post('bots/activations/{id}', [BotController::class, 'generateBotActivati
 
 Route::resource('tradeables', TradeableController::class);
 Route::resource('settings', SettingController::class);
-Route::resource('payment-method', PaymentMethodController::class);
+Route::resource('payment-method', PaymentMethodController::class)->except(['update']);
+Route::post('payment-method/{payment_method}', [PaymentMethodController::class, 'update'])->name('payment-method.update');
+
 Route::resource('deposits', DepositController::class)->only('index');
 
 Route::get('deposits/approve/{id}', [DepositController::class, 'approve'])->name('deposits.approve');
