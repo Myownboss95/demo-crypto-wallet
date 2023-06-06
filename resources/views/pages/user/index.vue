@@ -18,7 +18,8 @@
       <div class="wallet-options d-flex align-items-center justify-content-center">
         <ul class="category-slide">
           <li>
-            <a style="background-color: transparent;" data-bs-toggle="offcanvas" data-bs-target="#choosecoin" class="category-boxes">
+            <!-- data-bs-toggle="offcanvas" data-bs-target="#choosecoin" -->
+            <a style="background-color: transparent;"  class="category-boxes"   @click="showElement">
               <img style="background-color: #0b65c6;" class="img-fluid cat-img" src="@/assets/images/send.png" alt="send" />
               <h5>Send</h5>
             </a>
@@ -114,8 +115,10 @@
   <section class="panel-space"></section>
   <!-- panel-space end -->
 <!-- Dashboard Send And Receive Choose Coin-->
-  <div class="offcanvas theme-offcanvas share-offcanvas offcanvas-bottom px-4 pb-4 h-auto" tabindex="-1"
-    id="choosecoin">
+<!-- :style="{ visibility: elementVisibility }" -->
+<!-- class="offcanvas theme-offcanvas share-offcanvas offcanvas-bottom px-4 pb-4 h-auto" -->
+
+  <div :class="['offcanvas', 'theme-offcanvas', 'share-offcanvas', 'offcanvas-bottom', 'px-4', 'pb-4', 'h-auto', { 'show': isElementVisible }]" tabindex="-1" id="choosecoin" style="visibility: visible !important" >
     <div class="offcanvas-header">
       <div class="header-panel">
         <h3 class="text-white middle-title">Select Coin</h3>
@@ -310,6 +313,18 @@ const totalAmount = computed(() => {
   });
   return sum.toFixed(2);
 });
+ const elementVisibility = ref('hidden');
+ const isElementVisible = ref(false);
+
+    function showElement() {
+      elementVisibility.value = 'visible';
+       isElementVisible.value = true;
+    }
+
+// const isModalVisible = ref(false);
+// function showModal() {
+//       isModalVisible.value = true;
+//     }
 </script>
 
 
