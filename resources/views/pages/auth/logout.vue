@@ -37,15 +37,16 @@
 
 <script setup>
 import authVue from '@/views/layouts/auth.vue';
-import { onMounted, ref } from 'vue';
-const isPageReloaded = ref(false);
-
-   onMounted(() => {
-      if (!isPageReloaded.value) {
-        isPageReloaded.value = true;
-        window.location.reload();
-      }
-    });
+import { onBeforeMount } from "vue";
+  onBeforeMount(() => {
+  loadAdminCSS();
+  import("@/assets/css/sapp.css");
+ 
+});
+async function loadAdminCSS() {
+  await import("@/assets/css/sapp.css");
+  console.log('imported')
+}
   const goHome = ()=>window.location.replace(route('front.index'))
 </script>
 
