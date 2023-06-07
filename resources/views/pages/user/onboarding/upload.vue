@@ -1,13 +1,9 @@
 <template>
   <Head title="Verification" />
-  <breadcrumb
-    title="Verification"
-    :crumbs="['Dashboard', 'Welcome', 'Verification']"
-  />
-  <div class="col-lg-6 mx-auto">
-    <div class="card radius-20 shadow-lg">
-      <div class="card-body">
-        <form class="py-3 px-2" @submit.prevent="submit">
+  
+  <section class="section-t-space">
+    <div class="custom-container">
+        <form class="auth-form create-form" @submit.prevent="submit">
           <p class="text-center">
             Congratulations, your address data has been stored successfully. We
             need to verify, you are who, you say you are. Please upload your
@@ -26,7 +22,7 @@
             v-if="form.type == 'identity' || form.type == 'licence'"
             class="d-flex justify-content-ceter row py-3 align-items-center"
           >
-            <div class="col-md-6">
+            <div class="col-md-12">
               <div class="placeholder d-block mb-3 shadow-lg">
                 <img :src="front" alt="" class="img-fluid" />
               </div>
@@ -39,7 +35,7 @@
               />
               <Error name="front" />
             </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
               <div class="placeholder d-block mb-3 shadow-lg">
                 <img :src="back" alt="" class="img-fluid" />
               </div>
@@ -58,7 +54,7 @@
             v-else-if="form.type == 'passport'"
             class="d-flex justify-content-center row py-3 align-items-center"
           >
-            <div class="col-md-6">
+            <div class="col-md-12">
               <div class="placeholder d-block mb-3 shadow-lg">
                 <img :src="datapage" alt="" class="img-fluid" />
               </div>
@@ -76,7 +72,7 @@
           <div
             class="d-flex justify-content-center row py-3 align-items-center"
           >
-            <div class="col-md-6">
+            <div class="col-md-12">
               <div class="placeholder d-block mb-3 shadow-lg">
                 <img :src="photograph" alt="" class="img-fluid" />
               </div>
@@ -92,7 +88,7 @@
           </div>
 
           <FormButton
-            class="btn btn-outline-primary w-100 mt-3"
+            class="btn theme-btn btn-inline w-100 text-center"
             type="sumbit"
             :disabled="form.processing"
           >
@@ -100,11 +96,8 @@
           </FormButton>
         </form>
       </div>
-    </div>
-  </div>
-
-
-  <section class="panel-space"></section>
+    <section class="panel-space"></section>
+  </section>
 </template>
 
 <script setup>
