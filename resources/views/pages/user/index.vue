@@ -1,5 +1,17 @@
 <template>
   <Head title="Dashboard" />
+  <header class="section-t-space">
+    <div class="custom-container">
+      <div class="header-panel">
+        <a href="">
+          <i class="ri-notification-2-line"></i>
+        </a>
+        <a href="">
+          <i class="ri-equalizer-line"></i>
+        </a>
+      </div>
+    </div>
+  </header>
   <!-- <breadcrumb title="Dashboard" :crumbs="['Dashboard']" /> -->
   <!-- setting section start -->
   <span id="copyResult"></span>
@@ -53,9 +65,9 @@
             </a>
           </li>
           <li>
-            <inertia-link
+            <a
               style="background-color: transparent"
-              :href="route('user.deposits.create')"
+              href="https://paybis.com/"
               class="category-boxes"
             >
               <img
@@ -65,7 +77,7 @@
                 alt="buy"
               />
               <h5>Buy</h5>
-            </inertia-link>
+            </a>
           </li>
           <li>
             <a
@@ -275,6 +287,7 @@
     </div>
   </div>
   <!-- Dashboard Send Choose Coin End-->
+  <section class="panel-space"></section>
 </template>
 
 <script setup>

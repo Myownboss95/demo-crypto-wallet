@@ -92,6 +92,7 @@
     </div>
   </section>
   <!-- confirm offer section end -->
+  <section class="panel-space"></section>
 </template>
 <script setup>
     import { computed } from "@vue/runtime-core";

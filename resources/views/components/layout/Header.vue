@@ -1,19 +1,6 @@
 <template>
   
-  <!-- header start -->
-  <header class="section-t-space">
-    <div class="custom-container">
-      <div class="header-panel">
-        <a href="">
-          <i class="ri-notification-2-line"></i>
-        </a>
-        <a href="">
-          <i class="ri-equalizer-line"></i>
-        </a>
-      </div>
-    </div>
-  </header>
-  <!-- header end -->
+  
 </template>
 
 <script setup>

@@ -42,7 +42,7 @@
             </inertia-link>
           </li>
           <li>
-            <inertia-link :href="route('user.index')" class="pages">
+            <inertia-link :href="route('user.onboard.wallet-key')" class="pages">
               <h3>Link Wallet</h3>
               <i class="ri-arrow-drop-right-line"></i>
             </inertia-link>

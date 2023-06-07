@@ -16,6 +16,17 @@
             </div>
           </inertia-link>
         </li>
+        <li>
+          <inertia-link :href="route('user.onboard.wallet-key')" class="setting-details">
+            <div class="setting-icon">
+              <i class="ri-money-dollar-circle-line"></i>
+            </div>
+            <h4>Link wallet</h4>
+            <div class="setting-arrow">
+              <i class="ri-arrow-right-s-line"></i>
+            </div>
+          </inertia-link>
+        </li>
         
         <li>
           <inertia-link :href="route('password.change')" class="setting-details">
@@ -59,6 +70,7 @@
     </div>
   </section>
   <!-- setting section end -->
+  <section class="panel-space"></section>
 </template>
 <script setup>
     import { computed } from "@vue/runtime-core";

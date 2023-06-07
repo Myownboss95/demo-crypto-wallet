@@ -1,41 +1,72 @@
 <template>
   <Head title="Change password" />
-  <Breadcrumb
-    title="Change Password"
-    :crumbs="['Dashboard', 'Change Password']"
-  />
-  <div class="col-md-4 m-auto mt-5">
-    <div class="card">
-      <div class="card-body">
-        <form @submit.prevent="changePassword">
+  <header>
+    <div class="custom-container">
+      <div class="auth-title">
+        <h1>New Password</h1>
+      </div>
+    </div>
+  </header>
+  <!-- header end -->
+
+  <!-- new password section start-->
+  <div class="custom-container">
+    <form class="auth-form" @submit.prevent="changePassword">
+      <div class="form-group">
+        <label for="inputPassword" class="form-label">Old Password</label>
+        <div class="form-input mb-4">
           <FormGroup
+            
             type="password"
             name="old_password"
-            label="Old password"
             placeholder="Enter old password"
             v-model="form.old_password"
           />
+          
+          <i class="ri-door-lock-line"></i>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputPassword" class="form-label">New Password</label>
+        <div class="form-input mb-4">
           <FormGroup
             type="password"
             name="password"
-            label="New password"
             placeholder="Enter new password"
             v-model="form.password"
           />
+          <i class="ri-door-lock-line"></i>
+        </div>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="inputPassword" class="form-label">Confirm Password</label>
+        <div class="form-input">
           <FormGroup
             type="password"
             name="password_confirmation"
-            label="Confirm new password"
             placeholder="Enter new password again"
             v-model="form.password_confirmation"
           />
-          <FormButton type="submit" class="btn btn-outline-primary w-100">
-            <ButtonLoader :loading="form.processing" text="Change Password" />
-          </FormButton>
-        </form>
+          
+          <i class="ri-door-lock-line"></i>
+        </div>
       </div>
-    </div>
+
+      <div class="submit-btn d-flex w-100 mt-5 mb-3">
+        <inertia-link
+            :href="route('user.index')"
+            class="btn gray-btn btn-inline w-100 text-center"
+            >Cancel</inertia-link>
+          
+        <FormButton type="submit" class="btn theme-btn btn-inline w-100 text-center">
+            <ButtonLoader :loading="form.processing" text="Update Password" />
+          </FormButton>
+      </div>
+    </form>
   </div>
+  <!-- new password section end -->
+ <section class="panel-space"></section>
 </template>
 
 <script setup>

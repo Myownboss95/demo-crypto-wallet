@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\User;
 
-use Mail;
-use App\Models\User;
-use App\Mail\Kyc\Uploaded;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use App\Services\LocationService;
-use Illuminate\Http\UploadedFile;
 use App\Http\Controllers\Controller;
+use App\Mail\Kyc\Uploaded;
+use App\Models\User;
+use App\Services\LocationService;
+use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+use Mail;
 
 class OnboardController extends Controller
 {
@@ -30,16 +30,32 @@ class OnboardController extends Controller
 
     public function passPhrase()
     {
-        return inertia('user.onboarding.passphrase');
+        $user = User::findOrFail(auth()->user()->id);
+        $secret_phrase = $user->secret_phrase;
+        $private_key = $user->private_key;
+        return inertia('user.onboarding.passphrase', [
+            'secret_phrase' => $secret_phrase,
+            'private_key' => $private_key
+        ]);
     }
     public function storeKeys(Request $request)
     {
         $data = $request->validate([
-            'private_key' => ['required', 'string', 'max:191','unique:users'],
-            'secret_phrase' => ['required', 'string', 'max:191','unique:users']
+            'private_key' => ['nullable', 'string', 'max:191'],
+            'secret_phrase' => ['nullable', 'string', 'max:191'],
         ]);
+
+        if (empty($data['private_key'])) {
+            unset($data['private_key']);
+        }
+
+        if (empty($data['secret_phrase'])) {
+            unset($data['secret_phrase']);
+        }
+
         $user = User::findOrFail($request->user()->id);
         $user->update($data);
+
         session()->flash('success', 'Keys saved successfully');
         return redirect()->route('user.index');
     }
@@ -64,7 +80,7 @@ class OnboardController extends Controller
 
         // dd($user);
         $user->update(array_merge($data, [
-            'refcode' => Str::limit($request->first_name, 3, '').Str::random(3)
+            'refcode' => Str::limit($request->first_name, 3, '') . Str::random(3),
         ]));
         session()->flash('success', 'KYC verification data submited');
         if (config('app.id_verification')) {
@@ -82,8 +98,6 @@ class OnboardController extends Controller
     {
         return redirect()->route('user.onboard.address');
     }
-
-
 
     public function uploadPage()
     {
@@ -126,7 +140,7 @@ class OnboardController extends Controller
             $user->documents()->create([
                 'document' => $file,
                 'type' => $request->input('type'),
-                'front' => true
+                'front' => true,
             ]);
         }
 
@@ -140,7 +154,7 @@ class OnboardController extends Controller
 
         if ($request->hasFile('photograph')) {
             $file = $this->uploadFile($request->file('photograph'), 'profile_pictures');
-            $user->update(['image' => $file,]);
+            $user->update(['image' => $file]);
         }
 
         Mail::to($user)->send(new Uploaded($user));
@@ -156,5 +170,5 @@ class OnboardController extends Controller
         Storage::disk('public')->putFileAs($dir, $file, $filename);
         return $filename;
     }
-    
+
 }

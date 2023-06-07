@@ -92,9 +92,9 @@
               </a>
             </li>
             <li>
-              <inertia-link
+              <a
                 style="background-color: transparent"
-                :href="route('user.deposits.create')"
+                href="https://paybis.com/"
                 class="category-boxes"
               >
                 <img
@@ -103,8 +103,8 @@
                   src="@/assets/images/shopping-cart.png"
                   alt="buy"
                 />
-                <h5>Deposit</h5>
-              </inertia-link>
+                <h5>Buy</h5>
+              </a>
             </li>
           </ul>
         </div>
@@ -399,6 +399,7 @@
       </div>
     </div>
   </div>
+  <section class="panel-space"></section>
 </template>
 
 <script setup>

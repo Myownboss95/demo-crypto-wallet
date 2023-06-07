@@ -63,6 +63,7 @@
       </div>
     </div>
   </div>
+  <section class="panel-space"></section>
 </template>
 
 <script setup>

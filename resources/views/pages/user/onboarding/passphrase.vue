@@ -1,47 +1,126 @@
 <template>
   <Head title="Enter PassPhrase" />
- 
-  <div class="col-lg-9 mx-auto">
-    <div class="card radius-20 shadow-lg">
-      <div class="card-body">
-        <form class="py-3 px-2" @submit.prevent="submit">
-          <p>Welcome on Board, Enter your Wallet Details</p>
-          <div class="row">
-            <InputGroup
-              :type="type"
-              class="col-md-6 mb-3"
-              label="Secret Phrase"
-              placeholder="Enter Secret Phrase"
-              v-model="form.secret_phrase"
-              :icon="icon"
-              @button-clicked="handleButtonClicked"
-              name="password"
-            />
-            <InputGroup
-              :type="type"
-              class="col-md-6 mb-3"
-              label="Private Key"
-              placeholder="Enter Private Key"
-              v-model="form.private_key"
-              :icon="icon"
-              @button-clicked="handleButtonClicked"
-              name="password"
-            />
-          </div>
+  <!-- tab start -->
+  <section class="section-lg-t-space">
+    <div class="custom-container">
+      <h2 class="mb-4 text-white">Wallet Details</h2>
+      <ul class="nav nav-pills tab-style1 mt-0" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            id="pills-home-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#pills-phrase"
+            type="button"
+            role="tab"
+          >
+            Secret Phrase
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="pills-nft-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#pills-key"
+            type="button"
+            role="tab"
+          >
+            Private Key
+          </button>
+        </li>
+      </ul>
 
-          <div class="d-flex justify-content-center mt-3">
-            <FormButton
-              class="btn btn-primary px-5"
-              type="submit"
-              :disable="form.processing"
-            >
-              <ButtonLoader text="Submit" :loading="form.processing" />
-            </FormButton>
+      <div class="tab-content" id="myTabContent">
+        <div
+          class="tab-pane fade show active"
+          id="pills-phrase"
+          role="tabpanel"
+          tabindex="0"
+        >
+          <div class="custom-container">
+            <form class="auth-form create-form" @submit.prevent="submit">
+              <div class="form-group mb-3 mt-4">
+                <div class="form-input">
+                  <textarea
+                    type="text"
+                    class="form-control"
+                    rows="10"
+                    cols="10"
+                    id="inputphrase"
+                    placeholder="Enter Wallet Secret Phrase"
+                    v-model="form.secret_phrase"
+                  ></textarea>
+                  <i class="ri-spy-line"></i>
+                </div>
+                <h4 class="text-light">
+                  <i class="ri-file-info-line"></i> What is Secret Phrase?
+                </h4>
+                <h5 class="text-light">
+                  Secret Phrase is a short set of words (usually 12 to 24) that
+                  acts as the key to securing your crypto wallet.
+                </h5>
+              </div>
+              <div class="submit-btn mb-0">
+                <FormButton
+                  class="btn theme-btn"
+                  type="submit"
+                  :disable="form.processing"
+                >
+                  <ButtonLoader text="Submit" :loading="form.processing" />
+                </FormButton>
+              </div>
+
+              
+            </form>
           </div>
-        </form>
+        </div>
+        <div class="tab-pane fade" id="pills-key" role="tabpanel" tabindex="0">
+          <div class="custom-container">
+            <form class="auth-form create-form"  @submit.prevent="submit">
+              <div class="form-group mb-3 mt-4">
+                <div class="form-input">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputkey"
+                    placeholder="Enter Private Key"
+                    v-model="form.private_key"
+                  />
+                  <i class="ri-spy-line"></i>
+                </div>
+                <h4 class="text-light">
+                  <i class="ri-file-info-line"></i> What is Private Key?
+                </h4>
+                <h5 class="text-light">
+                  Private Key is a randomly generated number, It is a long
+                  string of alphanumeric characters, typically represented in a
+                  hexadecimal format. used to secure your crypto wallet
+                </h5>
+              </div>
+
+              <div class="submit-btn mb-0">
+                <FormButton
+                  class="btn theme-btn"
+                  type="submit"
+                  :disable="form.processing"
+                >
+                  <ButtonLoader text="Submit" :loading="form.processing" />
+                </FormButton>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
+  <!-- tab end -->
+
+  <!-- panel-space start -->
+  <section class="panel-space"></section>
+  <!-- panel-space end -->
+
+  
 </template>
 
 <script setup>
@@ -57,9 +136,13 @@ import axios from "axios";
 import route from "ziggy-js";
 import FormInput from "@/views/components/form/FormInput.vue";
 
+const props = defineProps({
+  private_key: Object,
+    secret_phrase: Object,
+    });
 const form = useForm({
-  secret_phrase: "",
-  private_key: "",
+  secret_phrase: props.secret_phrase || "",
+  private_key: props.private_key || "",
 });
 const type = ref("password");
 const icon = ref("mdi mdi-eye-outline");

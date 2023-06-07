@@ -90,7 +90,7 @@
     <section class="panel-space"></section>
   </section>
 
-  
+  <section class="panel-space"></section>
   <!-- end row -->
 </template>
 

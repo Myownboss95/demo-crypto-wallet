@@ -1,9 +1,5 @@
 <template>
   <Head title="Welcome Onboard" />
-  <breadcrumb
-    title="Onboarding"
-    :crumbs="['Dashboard', 'Welcome', 'Onboarding']"
-  />
   <div class="col-lg-9 mx-auto">
     <div class="card radius-20 shadow-lg">
       <div class="card-body">
@@ -92,6 +88,10 @@
       </div>
     </div>
   </div>
+
+
+
+  <section class="panel-space"></section>
 </template>
 
 <script setup>
