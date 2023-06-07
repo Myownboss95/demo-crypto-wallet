@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\User;
 
-use Validator;
-use App\Models\User;
-use App\Models\Transaction;
-use Illuminate\Http\Request;
-use App\Models\PaymentMethod;
 use App\Http\Controllers\Controller;
+use App\Models\PaymentMethod;
+use App\Models\Transaction;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Validator;
 
 class DepositController extends Controller
 {
@@ -26,10 +26,23 @@ class DepositController extends Controller
 
     public function create()
     {
-        $payment_methods = PaymentMethod::latest()->where('status', 1)->get();
+        // $payment_methods = PaymentMethod::latest()->where('status', 1)->get();
+        // return inertia('user.deposits.deposit', [
+        //     'payment_methods' => $payment_methods,
+        // ]);
+        $user = User::with('accounts')->findOrFail(auth()->user()->id);
+//all the coins
+        $payment_methods = $user->accounts()->latest()->whereStatus(1)->with('paymentMethod')->get();
+        $imageUrl = asset('profile-cover.jpg');
+        $imageUrl2 = asset('comingsoon.webp');
+
         return inertia('user.deposits.deposit', [
+            'user' => $user,
+            'imageUrl' => $imageUrl,
+            'imageUrl2' => $imageUrl2,
             'payment_methods' => $payment_methods,
         ]);
+
     }
 
     public function validateDeposit(Request $request)
@@ -64,7 +77,7 @@ class DepositController extends Controller
 
         $user = User::findOrFail(auth()->user()->id);
         $amount = round($request->input('amount'), 4);
-        
+
         $user->transactions()->create([
             'amount' => $amount,
             'symbol' => strtoupper($request->input('symbol')),

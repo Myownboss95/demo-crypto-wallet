@@ -29,7 +29,7 @@
             </inertia-link>
           </li>
           <li>
-            <inertia-link :href="route('user.index')" class="pages">
+            <inertia-link :href="route('user.deposits.create')" class="pages">
               <h3>Deposit</h3>
               <i class="ri-arrow-drop-right-line"></i>
             </inertia-link>
