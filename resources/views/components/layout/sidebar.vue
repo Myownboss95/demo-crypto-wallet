@@ -66,7 +66,6 @@
   <!-- side bar end -->
   <!-- Left Sidebar End -->
   <!-- bottom navbar start -->
-  <section class="panel-space"></section>
   <div class="navbar-menu">
     <ul>
       <li class="active">
