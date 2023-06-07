@@ -24,6 +24,10 @@ use App\Models\User;
 
 Route::middleware(['passphrase','onboarded'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::get('/discover', [DashboardController::class, 'discover'])->name('discover');
+    Route::get('/browser', [DashboardController::class, 'browser'])->name('browser');
+
+
     Route::get('/wallets', [DashboardController::class, 'userWallet'])->name('wallet');
     Route::get('/settings', [DashboardController::class, 'settings'])->name('settings');
 

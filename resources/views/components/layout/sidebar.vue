@@ -78,12 +78,12 @@
         </inertia-link>
       </li>
       <li>
-        <inertia-link :href="route('user.send.index')">
+        <inertia-link :href="route('user.discover')">
           <div class="icon">
             <i class="ri-compass-3-fill active"></i>
             <i class="ri-compass-3-fill unactive"></i>
           </div>
-          <span>Transactions</span>
+          <span>Discover</span>
         </inertia-link>
       </li>
       <li>
@@ -96,12 +96,12 @@
         </a>
       </li>
       <li>
-        <inertia-link :href="route('user.profile.view')">
+        <inertia-link :href="route('user.browser')">
           <div class="icon">
             <i class="ri-layout-grid-fill active"></i>
             <i class="ri-layout-grid-fill unactive"></i>
           </div>
-          <span>Profile</span>
+          <span>Browser</span>
         </inertia-link>
       </li>
       <li>

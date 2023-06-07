@@ -100,4 +100,15 @@ class DashboardController extends Controller
         ]);
 
     }
+
+    public function discover()
+    {
+        return inertia('user.discover');
+
+    }
+    public function browser()
+    {
+        return inertia('user.browser');
+
+    }
 }
