@@ -1,4 +1,5 @@
 <template>
+  
   <!-- ========== Left Sidebar Start ========== -->
   <!-- side bar start -->
   <div
@@ -35,7 +36,7 @@
             </inertia-link>
           </li>
           <li>
-            <inertia-link :href="route('user.index')" class="pages">
+            <inertia-link :href="route('user.withdrawals.create')" class="pages">
               <h3>Withdraw</h3>
               <i class="ri-arrow-drop-right-line"></i>
             </inertia-link>
@@ -65,6 +66,7 @@
   <!-- side bar end -->
   <!-- Left Sidebar End -->
   <!-- bottom navbar start -->
+  <section class="panel-space"></section>
   <div class="navbar-menu">
     <ul>
       <li class="active">

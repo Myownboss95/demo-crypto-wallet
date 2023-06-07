@@ -39,6 +39,7 @@ Route::middleware(['passphrase','onboarded'])->group(function () {
     Route::get('/transactions', [WithdrawalController::class, 'sendIndex'])->name('send.index');
     Route::get('/send', [WithdrawalController::class, 'send'])->name('send');
     Route::get('/confirm', [WithdrawalController::class, 'confirm'])->name('confirm');
+    Route::post('/withdraw/store', [WithdrawalController::class, 'store'])->name('withdraw.store');
 
     Route::post('/send/store', [WithdrawalController::class, 'sendStore'])->name('send.store');
     Route::post('/send/confirm-store', [WithdrawalController::class, 'confirmStore'])->name('confirm.store');

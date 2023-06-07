@@ -32,9 +32,11 @@ class WithdrawalController extends Controller
 
     public function create()
     {
-        $payment_methods = PaymentMethod::latest()->where('status', 1)->get();
-        return inertia('user.withdrawals.withdraw', [
-            'payment_methods' => $payment_methods,
+        $user = User::findOrFail(auth()->user()->id);
+
+        $coins =  $user->accounts()->get();
+        return inertia('user.withdrawals.create', [
+            'coins' => $coins,
         ]);
     }
 
@@ -44,24 +46,26 @@ class WithdrawalController extends Controller
             'method_id' => ['required'],
             'amount' => ['required', 'numeric'],
             'address' => ['required', 'string'],
+            'type' => ['required'],
+            'symbol' => ['required', 'string'],
         ]);
 
         $user = User::findOrFail(auth()->user()->id);
 
-        $limit = PaymentMethod::where('symbol', $request->input('method_id'))->first();
+        $limit = PaymentMethod::where('id', $request->input('method_id'))->first();
         // dd($request->all());
         $coin_limit = $limit->min_withdrawal;
 
         $amount = $request->input('amount');
         // dd($request->input('method_id'));
-        $userAccount = $user->accounts()->where('symbol', $request->input('method_id'))->first();
+        $userAccount = $user->accounts()->where('payment_method_id', $request->input('method_id'))->first();
 
         // dd($userAccount?->account);
         if ($amount > $userAccount?->account) {
-            session()->flash('error', "Insufficient funds on your {$data['method_id']} balance");
+            session()->flash('error', "Insufficient funds on your {$data['symbol']} balance");
             return back();
         } elseif ($amount < $coin_limit) {
-            session()->flash('error', "Minimum withdrawal of {$coin_limit}{$data['method_id']} only allowed for this coin");
+            session()->flash('error', "Minimum withdrawal of {$coin_limit}{$data['symbol']} only allowed for this coin");
             return back();
         }
 
@@ -74,12 +78,12 @@ class WithdrawalController extends Controller
             ],
             'type' => 'withdrawal',
             'status' => 'pending',
-            'symbol' => $data['method_id'],
+            'symbol' => $data['symbol'],
         ]);
         // $userAccount->save();
 
         session()->flash('success', 'Withdrawal request sent successfully');
-        return redirect()->route('user.transactions');
+        return redirect()->route('user.index');
     }
 
     public function send()
