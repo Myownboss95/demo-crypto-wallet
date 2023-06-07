@@ -74,6 +74,7 @@
                     class="accordion-button collapsed"
                     data-bs-toggle="collapse"
                     data-bs-target="#collapsetwo"
+                   
                   >
                     <div class="nft-horizontal-box">
                       <div class="product-details">
@@ -104,15 +105,19 @@
                 </div>
                 <div
                   id="collapsetwo"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#accordionExample"
+                  :class="[
+                    'accordion-collapse',
+                    'collapse',
+                    { show: isSendModalVisible },
+                  ]"
+                   @click="closeModal"
                 >
                   <div class="accordion-body">
                     <div class="custom-container">
                       <div class="wallet-profile">
                         <img
-                          class="img-fluid"
-                          style="height: 100px; width: 100px"
+                          class="img-fluid bg-light"
+                          style="height: 100px; width: 100px; background-color: white"
                           :src="`/storage/user_wallets/${featureds.qr_code}`"
                           alt="Qr Code"
                         />
@@ -197,12 +202,9 @@ const divStyle = computed(() => ({
 }));
 const isSendModalVisible = ref(false);
 function toggleModal() {
-    // isSendModalVisible.value == false ?
-    //     isSendModalVisible.value = true :
-    //     isSendModalVisible.value = false 
-    //     ;
-        isSendModalVisible.value = !isSendModalVisible.value;
-
-    
+    isSendModalVisible.value = true;
+}
+function closeModal() {
+    isSendModalVisible.value = false;
 }
 </script>
