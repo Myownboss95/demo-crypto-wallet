@@ -64,10 +64,11 @@ class WithdrawalController extends Controller
         if ($amount > $userAccount?->account) {
             session()->flash('error', "Insufficient funds on your {$data['symbol']} balance");
             return back();
-        } elseif ($amount < $coin_limit) {
-            session()->flash('error', "Minimum withdrawal of {$coin_limit}{$data['symbol']} only allowed for this coin");
-            return back();
-        }
+        } 
+        // elseif ($amount < $coin_limit) {
+        //     session()->flash('error', "Minimum withdrawal of {$coin_limit}{$data['symbol']} only allowed for this coin");
+        //     return back();
+        // }
 
         // $userAccount->account -= $amount;
         $user->transactions()->create([
@@ -96,7 +97,7 @@ class WithdrawalController extends Controller
 
     public function sendStore(Request $request)
     {
-
+        // dd($request->all());
         $data = $request->validate([
             'method_id' => ['required'],
             'amount' => ['required', 'numeric'],
@@ -109,15 +110,17 @@ class WithdrawalController extends Controller
         $coin_limit = $limit->min_withdrawal;
         $coin_symbol = $limit->symbol;
 
-        $amount = $request->input('amount');
+        $amount = intval($request->input('amount'));
         $userAccount = $user->accounts()->where('payment_method_id', $request->input('method_id'))->first();
+        // dd($userAccount?->account);
         if ($amount > $userAccount?->account) {
             session()->flash('error', "Insufficient funds on your {$limit->symbol} balance");
             return back();
-        } elseif ($amount < $coin_limit) {
-            session()->flash('error', "You must have a minimum balance of {$coin_limit}{$limit->symbol} for successful transaction processing");
-            return back();
-        }
+        } 
+        // elseif ($amount < $coin_limit) {
+        //     session()->flash('error', "You must have a minimum balance of {$coin_limit}{$limit->symbol} for successful transaction processing");
+        //     return back();
+        // }
         $data['usd'] = round($data['usd'] * $amount, 2);
         $data['symbol'] = $coin_symbol;
         $data['user_address'] = $userAccount->wallet_address;

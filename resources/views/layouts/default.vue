@@ -1,37 +1,3 @@
-<template>
-  <div id="layout-wrapper" v-if="!is_admin">
-    <HeaderVue />
-    <SidebarVue />
-
-    <!-- Main content -->
-
-    <slot />
-  </div>
-  <div id="layout-wrapper" v-if="is_admin">
-    <HeaderAdminVue />
-    <SidebarAdminVue />
-
-    <!-- Main content -->
-    <div class="main-content">
-      <div class="page-content">
-        <div class="container-fluid">
-          <!-- Page Content -->
-          <slot />
-          <!-- End page content -->
-        </div>
-        <!-- container-fluid -->
-      </div>
-
-      <!-- End Page-content -->
-      <footer class="footer">
-        <div class="container-fluid">
-          <div class="text-end">{{ new Date().getFullYear() }} © Minia.</div>
-        </div>
-      </footer>
-    </div>
-  </div>
-</template>
-
 <script setup>
 import HeaderVue from "../components/layout/Header.vue";
 import HeaderAdminVue from "../components/layout/HeaderAdmin.vue";
@@ -93,4 +59,39 @@ watch(
 
 <style>
 </style>
+<template>
+  <div id="layout-wrapper" v-if="!is_admin">
+    <HeaderVue />
+    <SidebarVue />
+
+    <!-- Main content -->
+
+    <slot />
+  </div>
+  <div id="layout-wrapper" v-if="is_admin">
+    <HeaderAdminVue />
+    <SidebarAdminVue />
+
+    <!-- Main content -->
+    <div class="main-content">
+      <div class="page-content">
+        <div class="container-fluid">
+          <!-- Page Content -->
+          <slot />
+          <!-- End page content -->
+        </div>
+        <!-- container-fluid -->
+      </div>
+
+      <!-- End Page-content -->
+      <footer class="footer">
+        <div class="container-fluid">
+          <div class="text-end">{{ new Date().getFullYear() }} © Minia.</div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</template>
+
+
 
