@@ -37,7 +37,7 @@
                         
                       <h4> <span v-if="transaction.type == 'deposit'">
                         +</span>
-                        <span v-else>-</span> {{ (transaction.amount).toFixed(2) }}{{ transaction.symbol }}</h4>
+                        <span v-else>-</span> {{ (transaction.amount).toFixed(4) }}{{ transaction.symbol }}</h4>
                     </div>
                   </div>
                 </div>

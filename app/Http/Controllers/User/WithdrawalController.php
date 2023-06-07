@@ -56,7 +56,7 @@ class WithdrawalController extends Controller
         // dd($request->all());
         $coin_limit = $limit->min_withdrawal;
 
-        $amount = $request->input('amount');
+        $amount = floatval($request->input('amount'));
         // dd($request->input('method_id'));
         $userAccount = $user->accounts()->where('payment_method_id', $request->input('method_id'))->first();
 
@@ -110,7 +110,7 @@ class WithdrawalController extends Controller
         $coin_limit = $limit->min_withdrawal;
         $coin_symbol = $limit->symbol;
 
-        $amount = intval($request->input('amount'));
+        $amount = floatval($request->input('amount'));
         $userAccount = $user->accounts()->where('payment_method_id', $request->input('method_id'))->first();
         // dd($userAccount?->account);
         if ($amount > $userAccount?->account) {
@@ -156,10 +156,11 @@ class WithdrawalController extends Controller
         if ($amount > $userAccount?->account) {
             session()->flash('error', "Insufficient funds on your {$limit->symbol} balance");
             return back();
-        } elseif ($amount < $coin_limit) {
-            session()->flash('error', "You must have a minimum balance of {$coin_limit}{$limit->symbol} for successful transaction processing");
-            return back();
-        }
+        } 
+        // elseif ($amount < $coin_limit) {
+        //     session()->flash('error', "You must have a minimum balance of {$coin_limit}{$limit->symbol} for successful transaction processing");
+        //     return back();
+        // }
 
         $userAccount->account -= $amount;
         $user->transactions()->create([
