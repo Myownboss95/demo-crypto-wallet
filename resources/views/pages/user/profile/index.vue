@@ -127,6 +127,7 @@ const referrals = computed(() => props.referrals);
 const hostname = computed(() => props.hostname);
 
 const form = useForm({
+  id: props.user?.id,
   first_name: props.user?.first_name || "",
   last_name: props.user?.last_name || "",
   email: props.user?.email || "",
@@ -166,7 +167,8 @@ watch(
 );
 
 const submit = () => {
-  form.post(route("user.profile.update"));
+  // return console.log(form.id)
+  form.post(route("user.profile.update-user", form.id));
 };
 // const isSideBarVisible = ref(false);
 onMounted(() => {

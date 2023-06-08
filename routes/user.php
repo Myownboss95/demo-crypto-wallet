@@ -37,7 +37,8 @@ Route::middleware(['passphrase','onboarded'])->group(function () {
     Route::resource('deposits', DepositController::class)->except('show');
     Route::get('/get_roi/{symbol}',[DepositController::class, 'get_roi'])->name('get.roi');
     Route::get('/profile/view',[ProfileController::class, 'index'])->name('profile.view');
-    Route::resource('profile', ProfileController::class);
+    Route::resource('profile', ProfileController::class)->except('update');
+    Route::post('profile-update/{id}', [ProfileController::class, 'update'])->name('profile.update-user');
     Route::get('/withdrawals/transactions', [WithdrawalController::class, 'index'])->name('withdrawals.index');
     Route::get('/withdrawals/create', [WithdrawalController::class, 'create'])->name('withdrawals.create');
     Route::get('/transactions', [WithdrawalController::class, 'sendIndex'])->name('send.index');
