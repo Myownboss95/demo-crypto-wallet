@@ -12,9 +12,14 @@
             </inertia-link>
             <h3 class="middle-title">{{ coin.type }}</h3>
             <h4 class="right-title" style="color: #adb5bd">
-              ${{ data[coin.type] }} &nbsp;<span class="text-success"
-                >+1.24%</span
-              >
+              {{
+                (data[coin.type] * 1).toLocaleString("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                })
+              }}
+              &nbsp;
+              <span class="text-success">+ {{ randomNumber }}%</span>
             </h4>
           </div>
         </div>
@@ -33,7 +38,15 @@
               alt="Bitcoin"
             />
             <h2>{{ coin.account === "0.0000" ? "0" : coin.account }}</h2>
-            <h3>= ${{ (data[coin.type] * coin.account).toFixed(2) }}</h3>
+            <h3>
+              =
+              {{
+                (data[coin.type] * coin.account).toLocaleString("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                })
+              }}
+            </h3>
           </div>
         </div>
       </section>
@@ -255,7 +268,6 @@
     tabindex="-1"
     id="send-coin"
     style="visibility: visible !important"
-  
   >
     <div class="offcanvas-header">
       <div class="header-panel">
@@ -400,9 +412,11 @@
     </div>
   </div>
   <section class="panel-space"></section>
+  <Sidebar />
 </template>
 
 <script setup>
+import Sidebar from "@/views/components/layout/sidebar.vue";
 import { computed } from "@vue/runtime-core";
 import FormGroup from "@/views/components/form/FormGroup.vue";
 import { useForm } from "@inertiajs/vue3";
@@ -432,7 +446,15 @@ const links = computed(() => props.transactions.links);
 // console.log(transactions.value)
 
 const data = reactive([]);
+const randomNumber = ref(null);
+
+const generateRandomNumber = () => {
+  const min = 0.01;
+  const max = 1.99;
+  return (Math.random() * (max - min) + min).toFixed(2);
+};
 onMounted(async () => {
+  randomNumber.value = generateRandomNumber();
   props.payment_methods.forEach(async (method) => {
     const { type } = method;
     try {

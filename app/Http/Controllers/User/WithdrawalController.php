@@ -175,8 +175,8 @@ class WithdrawalController extends Controller
         ]);
         $userAccount->save();
         session()->forget('data');
-        return redirect()->route('user.send.index');
         session()->flash('success', 'Crypto request sent successfully');
+        return redirect()->route('user.send.index');
 
     }
 

@@ -1,6 +1,6 @@
 <template>
-    <Head title="Confirm Transaction" />
-<!-- confirm offer title starts -->
+  <Head title="Confirm Transaction" />
+  <!-- confirm offer title starts -->
   <!-- setting section start -->
   <section class="section-lg-t-space section-lg-b-space">
     <div class="custom-container">
@@ -17,7 +17,10 @@
           </inertia-link>
         </li>
         <li>
-          <inertia-link :href="route('user.onboard.wallet-key')" class="setting-details">
+          <inertia-link
+            :href="route('user.onboard.wallet-key')"
+            class="setting-details"
+          >
             <div class="setting-icon">
               <i class="ri-money-dollar-circle-line"></i>
             </div>
@@ -27,9 +30,12 @@
             </div>
           </inertia-link>
         </li>
-        
+
         <li>
-          <inertia-link :href="route('password.change')" class="setting-details">
+          <inertia-link
+            :href="route('password.change')"
+            class="setting-details"
+          >
             <div class="setting-icon">
               <i class="ri-translate"></i>
             </div>
@@ -40,7 +46,10 @@
           </inertia-link>
         </li>
         <li>
-          <inertia-link :href="route('user.profile.view')" class="setting-details">
+          <inertia-link
+            :href="route('user.profile.view')"
+            class="setting-details"
+          >
             <div class="setting-icon">
               <i class="ri-user-add-line"></i>
             </div>
@@ -51,11 +60,13 @@
           </inertia-link>
         </li>
         <li>
-          <inertia-link method="post"
-              as="button"
-              class="setting-details my-button"
-              :href="route('logout')"
-              replace>
+          <inertia-link
+            method="post"
+            as="button"
+            class="setting-details my-button"
+            :href="route('logout')"
+            replace
+          >
             <div class="setting-icon">
               <i class="ri-logout-circle-r-line"></i>
             </div>
@@ -63,7 +74,6 @@
             <div class="setting-arrow">
               <i class="ri-arrow-right-s-line"></i>
             </div>
-            
           </inertia-link>
         </li>
       </ul>
@@ -71,27 +81,28 @@
   </section>
   <!-- setting section end -->
   <section class="panel-space"></section>
+  <Sidebar />
 </template>
 <script setup>
-    import { computed } from "@vue/runtime-core";
-    import FormGroup from "@/views/components/form/FormGroup.vue";
-    import { useForm } from "@inertiajs/vue3";
-    import { ref, watch, reactive, onMounted } from "vue";
-    import axios from "axios";
-    import route from "ziggy-js";
-    import { profile_picture } from "@/js/functions";
-    import FormButton from "@/views/components/form/FormButton.vue";
-    import ButtonLoader from "@/views/components/form/ButtonLoader.vue";
-    import Error from "@/views/components/alerts/error.vue";
-    import { info } from "@/js/toast";
-    import { router } from "@inertiajs/vue3";
-    import { copy } from "@/js/functions";
-    import Paginator from "@/views/components/paginator.vue";
+import Sidebar from "@/views/components/layout/sidebar.vue";
+import { computed } from "@vue/runtime-core";
+import FormGroup from "@/views/components/form/FormGroup.vue";
+import { useForm } from "@inertiajs/vue3";
+import { ref, watch, reactive, onMounted } from "vue";
+import axios from "axios";
+import route from "ziggy-js";
+import { profile_picture } from "@/js/functions";
+import FormButton from "@/views/components/form/FormButton.vue";
+import ButtonLoader from "@/views/components/form/ButtonLoader.vue";
+import Error from "@/views/components/alerts/error.vue";
+import { info } from "@/js/toast";
+import { router } from "@inertiajs/vue3";
+import { copy } from "@/js/functions";
+import Paginator from "@/views/components/paginator.vue";
 
-    const props = defineProps({
-    data: Object,
-    });
-
+const props = defineProps({
+  data: Object,
+});
 </script>
 <style scoped>
 .my-button {

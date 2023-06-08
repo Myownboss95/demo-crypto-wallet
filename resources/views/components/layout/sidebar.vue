@@ -3,7 +3,12 @@
   <!-- ========== Left Sidebar Start ========== -->
   <!-- side bar start -->
   <div
-    class="offcanvas sidebar-offcanvas offcanvas-start"
+    :class="[
+    'offcanvas',
+     'sidebar-offcanvas',
+    'offcanvas-start',
+    {show: isSideBarVisible}
+    ]"
     tabindex="-1"
     id="offcanvasLeft"
   >
@@ -68,7 +73,7 @@
   <!-- bottom navbar start -->
   <div class="navbar-menu">
     <ul>
-      <li class="active">
+      <li :class="{ active: isPageActive('user.index') }">
         <inertia-link :href="route('user.index')">
           <div class="icon">
             <i class="ri-shield-fill active"></i>
@@ -77,7 +82,7 @@
           <span>Wallet</span>
         </inertia-link>
       </li>
-      <li>
+      <li :class="{ active: isPageActive('user.discover') }">
         <inertia-link :href="route('user.discover')">
           <div class="icon">
             <i class="ri-compass-3-fill active"></i>
@@ -95,7 +100,7 @@
           <i class="ri-add-line plus-icon"></i>
         </a>
       </li>
-      <li>
+      <li :class="{ active: isPageActive('user.browser') }">
         <inertia-link :href="route('user.browser')">
           <div class="icon">
             <i class="ri-layout-grid-fill active"></i>
@@ -104,7 +109,7 @@
           <span>Browser</span>
         </inertia-link>
       </li>
-      <li>
+      <li :class="{ active: isPageActive('user.settings') }">
         <inertia-link :href="route('user.settings')">
           <div class="icon">
             <i class="ri-settings-5-fill active"></i>
@@ -119,24 +124,46 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from "vue";
+import { computed, onMounted, ref } from "vue";
 import feather from "feather-icons";
 // import MetisMenu from "metismenujs";
 import SidebarItem from "./sidebarItem.vue";
 import { usePage } from "@inertiajs/vue3";
+import { router } from "@inertiajs/vue3"
 
 const is_admin = computed(() => usePage().props.auth.user.is_admin == 1);
 const username = computed(() => usePage().props.auth.user.first_name);
-
+const currentPage = usePage();
 const botsMenu = computed(() =>
   is_admin == true ? "Trade Bots" : "Trade Bot"
 );
 const stakes = computed(() => (is_admin == true ? "All Stakes" : "My Stakes"));
-
+const isSideBarVisible = ref(true);
 onMounted((_) => {
   // new MetisMenu("#side-menu");
+  if (isSideBarVisible)
+    isSideBarVisible.value=false;
+    
+  const offcanvasLeft = document.getElementById('offcanvasLeft');
+  if (offcanvasLeft) {
+    offcanvasLeft.classList.remove('show');
+  }
+   const offcanvasBackdrops = document.querySelectorAll('.offcanvas-backdrop');
+  offcanvasBackdrops.forEach((element) => {
+    element.classList.remove('show');
+     element.remove();
+  });
   feather.replace();
 });
+ 
+//for active li tags
+const isPageActive = (routeName) => {
+  const currentRoute = route().current();
+  if(routeName == currentRoute)
+  return true;
+  // console.log( currentRoute && currentRoute.name == routeName);
+  
+};
 </script>
 
 <style scoped>

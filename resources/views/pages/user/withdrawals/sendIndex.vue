@@ -66,10 +66,12 @@
       </div>
         </div>
         </section>
+        <Sidebar />
     <!-- end table part -->
 </template>
 
 <script setup>
+import Sidebar from "@/views/components/layout/sidebar.vue";
 import breadcrumb from "@/views/components/layout/breadcrumb.vue";
 import { computed } from "vue";
 import Paginator from "@/views/components/paginator.vue";

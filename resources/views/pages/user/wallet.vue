@@ -64,9 +64,11 @@
     </div>
   </div>
   <section class="panel-space"></section>
+  <Sidebar />
 </template>
 
 <script setup>
+import Sidebar from "@/views/components/layout/sidebar.vue";
 import breadcrumb from "@/views/components/layout/breadcrumb.vue";
 import { computed } from "@vue/runtime-core";
 import FormInput from "@/views/components/form/FormInput.vue";

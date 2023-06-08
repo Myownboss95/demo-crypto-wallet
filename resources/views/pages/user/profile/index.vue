@@ -91,17 +91,19 @@
   </section>
 
   <section class="panel-space"></section>
+  <Sidebar />
   <!-- end row -->
 </template>
 
 <script setup>
+import Sidebar from "@/views/components/layout/sidebar.vue";
 import breadcrumb from "@/views/components/layout/breadcrumb.vue";
 import { computed } from "@vue/runtime-core";
 import FormInput from "@/views/components/form/FormInput.vue";
 import FormGroup from "@/views/components/form/FormGroup.vue";
 import FormSelect from "@/views/components/form/FormSelect.vue";
 import { useForm } from "@inertiajs/vue3";
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 import axios from "axios";
 import route from "ziggy-js";
 import { profile_picture } from "@/js/functions";
@@ -166,6 +168,14 @@ watch(
 const submit = () => {
   form.post(route("user.profile.update"));
 };
+// const isSideBarVisible = ref(false);
+onMounted(() => {
+  // if (isSideBarVisible) {
+  //   isSideBarVisible.value=true;
+    
+  // }
+  // console.log(isSideBarVisible.value)
+});
 </script>
 
 

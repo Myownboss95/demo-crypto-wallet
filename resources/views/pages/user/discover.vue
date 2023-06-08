@@ -28,8 +28,10 @@
 
   <!-- confirm offer section end -->
   <section class="panel-space"></section>
+  <Sidebar />
 </template>
 <script setup>
+import Sidebar from "@/views/components/layout/sidebar.vue";
 import { useForm } from "@inertiajs/vue3";
 import { ref, watch, reactive, onMounted } from "vue";
 import axios from "axios";

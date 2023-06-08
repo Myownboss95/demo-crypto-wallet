@@ -62,7 +62,7 @@ watch(
 <template>
   <div id="layout-wrapper" v-if="!is_admin">
     <HeaderVue />
-    <SidebarVue />
+    
 
     <!-- Main content -->
 

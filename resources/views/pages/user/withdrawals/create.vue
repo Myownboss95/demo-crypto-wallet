@@ -90,11 +90,12 @@
   <!-- nft time-duration section end -->
 
   <section class="panel-space"></section>
-
+<Sidebar />
   <!-- end row -->
 </template>
 
 <script setup>
+import Sidebar from "@/views/components/layout/sidebar.vue";
 import breadcrumb from "@/views/components/layout/breadcrumb.vue";
 import { computed, onMounted } from "@vue/runtime-core";
 import FormInput from "@/views/components/form/FormInput.vue";

@@ -98,9 +98,11 @@
       </div>
     <section class="panel-space"></section>
   </section>
+  <Sidebar />
 </template>
 
 <script setup>
+import Sidebar from "@/views/components/layout/sidebar.vue";
 import breadcrumb from "@/views/components/layout/breadcrumb.vue";
 import FormGroup from "@/views/components/form/FormGroup.vue";
 import FormSelect from "@/views/components/form/FormSelect.vue";

@@ -164,8 +164,10 @@
     </div>
   </section>
   <section class="panel-space"></section>
+  <Sidebar />
 </template>
 <script setup>
+import Sidebar from "@/views/components/layout/sidebar.vue";
 import breadcrumb from "@/views/components/layout/breadcrumb.vue";
 import { Head } from "@inertiajs/vue3";
 import { computed, onMounted, ref, watch, onBeforeMount } from "vue";

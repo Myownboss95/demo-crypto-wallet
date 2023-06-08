@@ -18,7 +18,7 @@
   <section class="section-lg-t-space">
     <div class="custom-container">
       <div class="wallet-profile">
-        <h2 style="font-size: 40px">${{ totalAmount }}</h2>
+        <h2 style="font-size: 40px">{{ totalAmount }}</h2>
         <h5 class="mt-3" style="font-size: 15px; color: #adb5bd">
           Wallet Balance
         </h5>
@@ -156,8 +156,13 @@
                 <div style="margin-left: 20px">
                   <h3 class="text-light">{{ featureds.type }}</h3>
                   <h5 style="color: #adb5bd; margin-top: 5px">
-                    ${{ data[featureds.type] }}
-                    <span class="text-success">+1.90%</span>
+                    {{
+                      (data[featureds.type] * 1).toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                      })
+                    }}
+                    <span class="text-success">+ {{ randomNumber }}%</span>
                   </h5>
                 </div>
                 <div class="token-price">
@@ -171,8 +176,13 @@
                     <h5
                       style="color: #adb5bd; margin-top: 5px; text-align: right"
                     >
-                      ${{
-                        (data[featureds.type] * featureds.account).toFixed(2)
+                      {{
+                        (
+                          data[featureds.type] * featureds.account
+                        ).toLocaleString("en-US", {
+                          style: "currency",
+                          currency: "USD",
+                        })
                       }}
                     </h5>
                   </div>
@@ -261,8 +271,13 @@
               <div style="margin-left: 20px">
                 <h3 class="text-light">{{ featureds.type }}</h3>
                 <h5 style="color: #adb5bd; margin-top: 5px">
-                  ${{ data[featureds.type] }}
-                  <span class="text-success">+1.90%</span>
+                  {{
+                    (data[featureds.type] * 1).toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    })
+                  }}
+                  <span class="text-success">+ {{ randomNumber }}%</span>
                 </h5>
               </div>
               <div class="token-price">
@@ -276,7 +291,15 @@
                   <h5
                     style="color: #adb5bd; margin-top: 5px; text-align: right"
                   >
-                    ${{ (data[featureds.type] * featureds.account).toFixed(2) }}
+                    {{
+                      (data[featureds.type] * featureds.account).toLocaleString(
+                        "en-US",
+                        {
+                          style: "currency",
+                          currency: "USD",
+                        }
+                      )
+                    }}
                   </h5>
                 </div>
               </div>
@@ -287,10 +310,12 @@
     </div>
   </div>
   <!-- Dashboard Send Choose Coin End-->
-  <section class="panel-space"></section>
+  <section class="panel-space my-5"></section>
+  <Sidebar />
 </template>
 
 <script setup>
+import Sidebar from "@/views/components/layout/sidebar.vue";
 import breadcrumb from "@/views/components/layout/breadcrumb.vue";
 import { Head } from "@inertiajs/vue3";
 import { computed, onMounted, ref, watch, onBeforeMount } from "vue";
@@ -302,6 +327,7 @@ import FormSelect from "@/views/components/form/FormSelect.vue";
 import Error from "@/views/components/alerts/error.vue";
 import { reactive } from "@vue/reactivity";
 import { router } from "@inertiajs/vue3";
+// import { format_money } from "@/scripts/mixins/money";
 
 const props = defineProps({
   userMainBalance: Number,
@@ -321,6 +347,10 @@ const props = defineProps({
   featured: Object,
 });
 onMounted(() => {
+  const offCanvasLeft = document.getElementById("offCanvasLeft");
+  if (offCanvasLeft) {
+    offCanvasLeft.classList.remove("show");
+  }
   feather.replace();
 });
 
@@ -340,12 +370,12 @@ const sellTrades = computed(() => props.sellTrades);
 const trade_profits = computed(() => props.trade_profits);
 const activeTrades = computed(() => props.active_trades);
 const payment_methods = computed(() => props.payment_methods);
+import { format_money } from "@/scripts/mixins/money";
 
 const pm = computed(() => {
   let pms = { "": "Choose Coin" };
   props.payment_methods.forEach(function (method) {
     pms[method.type] = method.type;
-    // console.log(pms);
   });
   return pms;
 });
@@ -362,8 +392,16 @@ var price = reactive({});
 const selectMethod = (amount, name) => {
   if (name == "" || amount == "") return;
 };
+const randomNumber = ref(null);
+
+const generateRandomNumber = () => {
+  const min = 0.01;
+  const max = 1.99;
+  return (Math.random() * (max - min) + min).toFixed(2);
+};
 const data = reactive([]);
 onMounted(async () => {
+  randomNumber.value = generateRandomNumber();
   props.payment_methods.forEach(async (method) => {
     const { type } = method;
     try {
@@ -373,13 +411,10 @@ onMounted(async () => {
 
       if (response.status === 200) {
         data[type] = response.data[type.toLowerCase()]["usd"];
-        // console.log(data["bitcoin"]);
       } else {
         throw new Error();
       }
-    } catch (error) {
-      // console.log(error);
-    }
+    } catch (error) {}
   });
 });
 
@@ -399,7 +434,6 @@ watch(
       .then((response) => {
         if (response.status == 200) {
           roi.value = response.data.data / 100;
-          // console.log(roi.value)
         } else {
           throw Error();
         }
@@ -430,13 +464,12 @@ const totalAmount = computed(() => {
     const amount = data[featureds.type] * featureds.account;
     sum += amount;
   });
-  return sum.toFixed(2);
+  return format_money.methods.format_money(sum);
 });
 
 const isElementVisible = ref(false);
 
 function showElement() {
-  
   isElementVisible.value = true;
 }
 function handleClickOutside(event) {
