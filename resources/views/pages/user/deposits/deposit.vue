@@ -62,20 +62,8 @@
                 v-for="(featureds, key) in payment_methods"
                 :key="key"
               >
-                <div
-                  :class="[
-                    'accordion-header',
-                    { show: isSendModalVisible },
-                  ]"
-                  :id="`heading${featureds.id}`"
-                  @click="toggleModal"
-                >
-                  <div
-                    class="accordion-button collapsed"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapsetwo"
-                   
-                  >
+                <div class="accordion-header" id="headingOne" @click="toggleCollapse(key)">
+                   <div :class="['accordion-button', { collapsed: isCollapsed[key] }]">
                     <div class="nft-horizontal-box">
                       <div class="product-details">
                         <div class="product-image">
@@ -103,15 +91,7 @@
                     </div>
                   </div>
                 </div>
-                <div
-                  id="collapsetwo"
-                  :class="[
-                    'accordion-collapse',
-                    'collapse',
-                    { show: isSendModalVisible },
-                  ]"
-                   @click="closeModal"
-                >
+                 <div class="accordion-collapse" v-if="!isCollapsed[key]">
                   <div class="accordion-body">
                     <div class="custom-container">
                       <div class="wallet-profile">
@@ -188,16 +168,7 @@ onMounted(() => {
 
 const payment_methods = computed(() => props.payment_methods);
 
-const isElementVisible = ref(false);
 
-function showElement() {
-  isElementVisible.value = true;
-}
-function handleClickOutside(event) {
-  if (isElementVisible.value) {
-    isElementVisible.value = false;
-  }
-}
 
 const divStyle = computed(() => ({
   backgroundImage: `url(${props.imageUrl})`,
@@ -208,5 +179,11 @@ function toggleModal() {
 }
 function closeModal() {
     isSendModalVisible.value = false;
+}
+
+const isCollapsed = ref(Array(props.payment_methods.length).fill(true));
+
+function toggleCollapse(key) {
+  isCollapsed.value[key] = !isCollapsed.value[key];
 }
 </script>

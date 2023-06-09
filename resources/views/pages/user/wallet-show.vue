@@ -148,13 +148,15 @@
           </h5>
         </div>
         <div class="accordion-item">
-          <div class="accordion-header" id="headingOne" @click="toggleCollapse(key)">
+          <div
+            class="accordion-header"
+            id="headingOne"
+            @click="toggleCollapse(key)"
+          >
             <!-- class="accordion-button collapsed"
               data-bs-toggle="collapse"
               :data-bs-target="`#transaction${transaction.id}`" -->
-            <div
-              :class="['accordion-button',{ collapsed: isCollapsed[key] }]"
-            >
+            <div :class="['accordion-button', { collapsed: isCollapsed[key] }]">
               <div class="nft-horizontal-box">
                 <div class="product-details">
                   <div class="product-image">
@@ -218,12 +220,8 @@
             </div>
           </div>
           <!-- data-bs-parent="#accordionExample" -->
-            <!-- :id="`transaction${transaction.id}`" -->
-          <div
-            class="accordion-collapse"
-            
-            v-if="!isCollapsed[key]"
-          >
+          <!-- :id="`transaction${transaction.id}`" -->
+          <div class="accordion-collapse" v-if="!isCollapsed[key]">
             <div class="accordion-body">
               <ul class="nft-horizontal-content">
                 <li>
@@ -474,11 +472,6 @@ onMounted(async () => {
       console.log(error);
     }
   });
-});
-onMounted(() => {
-  const script = document.createElement("script");
-  script.src = "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js";
-  document.body.appendChild(script);
 });
 
 // Compute the class based on the item's condition

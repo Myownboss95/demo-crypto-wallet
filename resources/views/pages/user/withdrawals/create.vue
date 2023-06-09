@@ -26,6 +26,7 @@
                   v-model="form.method_id"
                   @change="selectMethod"
                 >
+                <option value="">Select Coin</option>
                   <option
                     :value="coin.payment_method_id"
                     v-for="(coin, key) in props.coins"
