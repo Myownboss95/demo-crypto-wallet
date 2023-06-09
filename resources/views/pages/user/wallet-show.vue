@@ -148,11 +148,12 @@
           </h5>
         </div>
         <div class="accordion-item">
-          <div class="accordion-header" id="headingOne">
-            <div
-              class="accordion-button collapsed"
+          <div class="accordion-header" id="headingOne" @click="toggleCollapse(key)">
+            <!-- class="accordion-button collapsed"
               data-bs-toggle="collapse"
-              :data-bs-target="`#transaction${transaction.id}`"
+              :data-bs-target="`#transaction${transaction.id}`" -->
+            <div
+              :class="['accordion-button',{ collapsed: isCollapsed[key] }]"
             >
               <div class="nft-horizontal-box">
                 <div class="product-details">
@@ -216,10 +217,12 @@
               </div>
             </div>
           </div>
+          <!-- data-bs-parent="#accordionExample" -->
+            <!-- :id="`transaction${transaction.id}`" -->
           <div
-            :id="`transaction${transaction.id}`"
-            class="accordion-collapse collapse"
-            data-bs-parent="#accordionExample"
+            class="accordion-collapse"
+            
+            v-if="!isCollapsed[key]"
           >
             <div class="accordion-body">
               <ul class="nft-horizontal-content">
@@ -472,6 +475,11 @@ onMounted(async () => {
     }
   });
 });
+onMounted(() => {
+  const script = document.createElement("script");
+  script.src = "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js";
+  document.body.appendChild(script);
+});
 
 // Compute the class based on the item's condition
 const Yellow = (status) => {
@@ -556,6 +564,12 @@ function closeReceiveModal(event) {
   if (isReceiveModalVisible.value) {
     isReceiveModalVisible.value = false;
   }
+}
+
+const isCollapsed = ref(Array(props.transactions.data.length).fill(true));
+
+function toggleCollapse(key) {
+  isCollapsed.value[key] = !isCollapsed.value[key];
 }
 </script>
 
