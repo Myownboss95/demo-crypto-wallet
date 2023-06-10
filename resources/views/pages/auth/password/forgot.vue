@@ -1,15 +1,31 @@
 <template>
-  <div class="auth-content my-auto">
-    <div class="text-center">
-      <h5>Forgot your password?</h5>
+    <!-- header start -->
+  <header>
+    <div class="custom-container">
+      <div class="auth-title">
+        <h1>Forgot Password</h1>
+      </div>
     </div>
-    <p class="pt-2 fw-semibold text-muted text-center">
-      Enter your Email and instructions will be sent to you!
-    </p>
-    <form class="mt-4" @submit.prevent="sendInstructions">
-      <FormGroup name="email" v-model="form.email" placeholder="Enter email" />
-      <FormButton
-        class="btn btn-primary w-100 waves-effect waves-light"
+  </header>
+  <!-- header end -->
+
+  <!-- forgot password start-->
+  <div class="custom-container">
+    <form class="auth-form" @submit.prevent="sendInstructions">
+      <div class="form-group">
+        <label for="inputusername" class="form-label">Email</label>
+        <div class="form-input">
+          
+          <input type="email" v-model="form.email" class="form-control" id="inputusername" placeholder="Enter Your Email" />
+          <Error name="password_confirmation" />
+          
+          <i class="ri-mail-line"></i>
+        </div>
+      </div>
+
+      <div class="submit-btn">
+        <FormButton
+        class="btn theme-btn"
         type="submit"
         :disabled="form.processing"
       >
@@ -17,19 +33,14 @@
           class="spinner-border spinner-border-sm"
           v-if="form.processing"
         ></span>
-        <span v-else>Send instructions</span>
+        <span v-else>Send OTP</span>
       </FormButton>
+      </div>
     </form>
-
-    <div class="mt-5 text-center">
-      <p class="text-muted mb-0">
-        Remembered It ?
-        <inertia-link :href="route('login')" class="text-primary fw-semibold">
-          Sign In
-        </inertia-link>
-      </p>
-    </div>
   </div>
+  <!-- forgot password end -->
+
+ 
 </template>
 
 <script setup>
@@ -38,6 +49,7 @@ import { useForm } from "@inertiajs/vue3";
 import { watch } from "vue";
 import { info } from "@/js/toast";
 import FormGroup from "@/views/components/form/FormGroup.vue";
+import Error from "@/views/components/alerts/error.vue";
 
 const props = defineProps(["flash"]);
 

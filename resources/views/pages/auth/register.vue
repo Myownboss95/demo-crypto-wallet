@@ -1,68 +1,97 @@
 <template>
   <Head title="Register" />
-  <div class="auth-content my-auto">
-    <div class="text-center">
-      <h5 class="mb-0">Register Account</h5>
-      <p class="text-muted mt-2">Get a trading account with us.</p>
+   <header>
+    <div class="custom-container">
+      <div class="auth-title">
+        <h1>Create an Account</h1>
+      </div>
     </div>
-    <form class="mt-4 pt-2" @submit.prevent="submit">
-      <FormGroup
-        label="Email"
-        placeholder="you@example.com"
-        v-model="form.email"
-        name="email"
-      />
+  </header>
+  <!-- header start-->
 
-      <InputGroup
-        :type="type"
-        class="mb-3"
-        label="Password"
-        placeholder="Enter password"
-        v-model="form.password"
-        :icon="icon"
-        @button-clicked="handleButtonClicked"
-        name="password"
-      />
+  <div class="custom-container">
+    <form class="auth-form" @submit.prevent="submit">
+      
 
-      <InputGroup
-        :type="type"
-        class="mb-3"
-        label="Confirm password"
-        placeholder="Confirm password"
-        v-model="form.password_confirmation"
-        :icon="icon"
-        @button-clicked="handleButtonClicked"
-        name="password_confirmation"
-      />
+      <div class="form-group mb-3">
+        <label for="inputusername" class="form-label">Email</label>
+        <div class="form-input">
+          <input
+            type="text"
+            class="form-control"
+            id="inputemail"
+            placeholder="Enter Email Address"
+            v-model="form.email"
+            name="
+          email"
+          />
 
-      <div class="mb-4">
-        <p class="text-muted">
-          By registering you agree to our
-          <a href="#" class="text-primary">Terms of Use</a>
-        </p>
+          <i class="ri-user-line user"></i>
+          <Error name="email" />
+        </div>
       </div>
 
-      <FormButton
-        type="submit"
-        class="btn btn-primary w-100 waves-effect waves-light"
-      >
-        <span
-          class="spinner-border spinner-border-sm"
-          v-if="form.processing"
-        ></span>
-        <span v-else>Register</span>
-      </FormButton>
-    </form>
+      <div class="form-group mb-3">
+        <label for="inputPassword" class="form-label">Password</label>
+        <div class="form-input">
+          <input
+            type="password"
+            class="form-control"
+            id="inputPassword"
+            placeholder="Enter Your Password"
+            v-model="form.password"
+            name="password"
+          />
 
-    <div class="mt-5 text-center">
-      <p class="text-muted mb-0">
+          <i class="ri-door-lock-line"></i>
+          <Error name="password" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputConfirmPassword" class="form-label">Confirm Password</label>
+        <div class="form-input">
+          <input
+            type="password"
+            class="form-control"
+            id="inputPassword"
+            placeholder="Confirm Password"
+            v-model="form.password_confirmation"
+            name="password_confirmation"
+          />
+
+          <i class="ri-door-lock-line"></i>
+          <Error name="password_confirmation" />
+        </div>
+      </div>
+
+      <div class="submit-btn">
+        <ButtonVue
+          class="btn theme-btn"
+          type="submit"
+          :disabled="form.processing"
+        >
+          <span
+            class="spinner-border spinner-border-sm"
+            v-if="form.processing"
+          ></span>
+          <span v-else>Continue</span>
+        </ButtonVue>
+      </div>
+
+      <div class="division">
+        <span>OR</span>
+      </div>
+
+      <h5 class="signup">
         Already have an account ?
-        <inertia-link :href="route('login')" class="text-primary fw-semibold">
-          Login
-        </inertia-link>
-      </p>
-    </div>
+        <inertia-link :href="route('login')"> Sign in now </inertia-link>
+      </h5>
+    </form>
+    <!-- Sign Form end -->
   </div>
+  
+    
+  
 </template>
 
 <script setup>
@@ -71,6 +100,7 @@ import { useForm } from "@inertiajs/vue3";
 import InputGroup from "@/views/components/form/InputGroup.vue";
 import FormButton from "@/views/components/form/FormButton.vue";
 import { ref } from "@vue/reactivity";
+import Error from "@/views/components/alerts/error.vue";
 
 const type = ref("password");
 const icon = ref("mdi mdi-eye-outline");

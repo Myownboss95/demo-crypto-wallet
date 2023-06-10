@@ -1,28 +1,36 @@
 <template>
-  <div class="auth-content my-auto">
-    <div class="text-center">
-      <h5 class="mb-0">Reset Password</h5>
+    <!-- header start -->
+  <header>
+    <div class="custom-container">
+      <div class="auth-title">
+        <h1>Enter New Password</h1>
+      </div>
     </div>
-    <p class="text-center">
-      Now you can reset your password by filling the form below.
-    </p>
-    <form class="mt-4" @submit.prevent="resetPassword">
-      <FormGroup
-        label="New password"
-        placeholder="Enter new password"
-        name="password"
-        type="password"
-        v-model="form.password"
-      />
-      <FormGroup
-        label="Confirm new password"
-        placeholder="Confirm new password"
-        name="password"
-        type="password"
-        v-model="form.password_confirmation"
-      />
-      <ButtonVue
-        class="btn btn-primary w-100 waves-effect waves-light"
+  </header>
+  <!-- header end -->
+
+  <!-- new password section start-->
+  <div class="custom-container">
+    <form class="auth-form" @submit.prevent="resetPassword">
+      <div class="form-group">
+        <label for="inputPassword" class="form-label">New Password</label>
+        <div class="form-input mb-4">
+          <input type="password" class="form-control" id="inputPassword" placeholder="Enter New Password" name="password" v-model="form.password" />
+          <i class="ri-door-lock-line"></i>
+        </div>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="inputPassword" class="form-label">Confirm Password</label>
+        <div class="form-input">
+          <input type="password" name="password_confirmation" class="form-control" id="inputnewPassword" placeholder="Enter Confirm Password"  v-model="form.password_confirmation"/>
+          <i class="ri-door-lock-line"></i>
+        </div>
+      </div>
+
+      <div class="submit-btn">
+        <ButtonVue
+        class="btn theme-btn"
         type="submit"
         :disabled="form.processing"
       >
@@ -30,19 +38,14 @@
           class="spinner-border spinner-border-sm"
           v-if="form.processing"
         ></span>
-        <span v-else>Reset</span>
+        <span v-else>Continue</span>
       </ButtonVue>
+      </div>
     </form>
-
-    <div class="mt-5 text-center">
-      <p class="text-muted mb-0">
-        Remembered It ?
-        <inertia-link :href="route('login')" class="text-primary fw-semibold">
-          Log In
-        </inertia-link>
-      </p>
-    </div>
   </div>
+  <!-- new password section end -->
+
+
 </template>
 
 <script setup>

@@ -1,52 +1,53 @@
 <template>
-  <div class="auth-content my-auto">
-    <div class="text-center">
-      <div class="avatar-xl mx-auto">
-        <div class="avatar-title bg-soft-light text-primary h1 rounded-circle">
-          <i class="bx bxs-user"></i>
-        </div>
+  <!-- header start -->
+  <header>
+    <div class="custom-container">
+      <div class="auth-title">
+        <h1>You are Logged Out</h1>
       </div>
+    </div>
+  </header>
+  <!-- header end -->
+  <div class="custom-container">
+    <div class="submit-btn" style="margin-top: 120px; margin-bottom: 10px">
 
-      <div class="mt-4 pt-2">
-        <h5>You are Logged Out</h5>
-        <div class="mt-4">
-          <inertia-link
+    <inertia-link
             :href="route('login')"
-            class="btn btn-primary w-100 waves-effect waves-light"
+            class="btn theme-btn w-100"
             replace
             >
                 Login Again
             </inertia-link>
-        </div>
-      </div>
     </div>
-
-    <div class="mt-5 text-center">
-      <p class="text-muted mb-0">
-        <span
-          class="text-primary fw-semibold cursor-pointer"
+    <div class="division">
+        <span>OR</span>
+      </div>
+    <h5 class="signup">
+      <span
+          class="text-primary fw-semibold cursor-pointer text-center"
           :href="route('front.index')"
           @click="goHome"
         >
           Or go back home <i class="bx bx-home"></i>
       </span>
-      </p>
-    </div>
+      </h5>
   </div>
+
+
+
+
+ 
 </template>
 
 <script setup>
 import authVue from '@/views/layouts/auth.vue';
 import { onBeforeMount } from "vue";
   onBeforeMount(() => {
-  loadAdminCSS();
-  import("@/assets/css/sapp.css");
+  
+  import("@/assets/css/app.css");
  
 });
-async function loadAdminCSS() {
-  await import("@/assets/css/sapp.css");
-  console.log('imported')
-}
+
   const goHome = ()=>window.location.replace(route('front.index'))
 </script>
 
