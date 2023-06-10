@@ -1,32 +1,46 @@
-<head>
-    <meta charset="utf-8">
-    <title>Coin Staking  | No hassle | Deposit &amp; Earn</title>
-    <link rel="icon" href="/favicon.png">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="viewport" content="width=device-width">
-    <meta name="description" content="Earn staking rewards by holding digital tokens on Coin Staking.">
-    <meta name="keywords" content="bitcoin,exchange,bitcoin exchange,litecoin,zcash,ethereum,margin,trade">
-    <meta property="og:url" content="https://stakinglord.com/">
-    <meta property="og:site_name" content="Coin Staking ">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Coin Staking  | No hassle | Deposit &amp; Earn">
-    <meta property="og:description" content="Earn staking rewards by holding digital tokens on Staking Room.">
-    <meta property="og:image" content="https://coinstaking.app/thumbnail-1.png">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="Coin Staking">
-    <meta name="twitter:title" content="Coin Staking  | No hassle | Deposit &amp; Earn">
-    <meta name="twitter:description" content="Earn staking rewards by holding digital tokens on Coin Staking.">
-    <meta name="twitter:image" content="https://coinstaking.app/.app/thumbnail-2.png">
-    <meta name="referrer" content="origin">
-    <link rel="apple-touch-icon" href="/thumbnail-2.png">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" type="text/css" href="/static/css/3.chunk.css">
-    <script charset="utf-8" src="{{asset('stake/3.chunk.js')}}"></script>
-    <link rel="stylesheet" type="text/css" href="/static/css/4.chunk.css">
-    <script charset="utf-8" src="{{asset('stake/4.chunk.js')}}"></script>
-    <link rel="stylesheet" type="text/css" href="{{asset('stake/styling.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('stake/style2.css')}}">
+<!DOCTYPE html>
+<html lang="en">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js" integrity="sha512-BdHyGtczsUoFcEma+MfXc71KJLv/cd+sUsUaYYf2mXpfG/PtBjNXsPo78+rxWjscxUYN2Qr2+DbeGGiJx81ifg==" crossorigin="anonymous"></script>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="nfty" />
+  <meta name="keywords" content="nfty" />
+  <meta name="author" content="nfty" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" href="assets/images/logo/logo.png" type="image/x-icon" />
+  <title>{{ config('app.name')}}</title>
+  <link rel="icon" href="assets/images/logo/logo.png" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="assets/images/logo/logo.png" />
+  <meta name="theme-color" content="#205dee" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="nfty" />
+  <meta name="msapplication-TileImage" content="assets/images/logo/logo.png" />
+  <meta name="msapplication-TileColor" content="#FFFFFF" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!--Google font-->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+
+  <!-- bootstrap css -->
+  <link rel="stylesheet" id="rtl-link" type="text/css" href="{{asset('front/css/vendors/bootstrap.css')}}" />
+  <!-- swiper css -->
+  <link rel="stylesheet" href="{{asset('front/css/vendors/swiper-bundle.min.css')}}" />
+
+  <!-- remixicon css -->
+  <link rel="stylesheet" type="text/css" href="{{asset('front/css/vendors/remixicon.css')}}" />
+
+  <!-- Theme css -->
+  <link rel="stylesheet" id="change-link" type="text/css" href="{{asset('front/css/style.css')}}" />
 </head>
+
 <body>

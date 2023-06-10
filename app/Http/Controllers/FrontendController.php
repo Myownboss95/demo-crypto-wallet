@@ -12,7 +12,7 @@ class FrontendController extends Controller
     public $theme;
     public function __construct()
     {
-        $this->theme = config('app.theme', 'front2');
+        $this->theme = config('app.theme', 'front');
     }
     public function home()
     {
@@ -20,7 +20,7 @@ class FrontendController extends Controller
         $notification = Notification::whereStatus(1)->latest()->first();
         // dd($notification);
         $payment_methods = PaymentMethod::latest()->where('status', 1)->get();
-        return view("$this->theme.home", compact('setting', 'payment_methods', 'notification'));
+        return view("$this->theme.home1", compact('setting', 'payment_methods', 'notification'));
     }
 
     public function about()
