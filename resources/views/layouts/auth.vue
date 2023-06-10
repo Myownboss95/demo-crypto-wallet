@@ -14,7 +14,7 @@
   import feather from 'feather-icons';
   import { useTheme } from '@/stores/theme';
   import { error, success } from '@/js/toast';
-  import "@/assets/css/app.css"
+  import "@/assets/css/sapp.css"
 
   // const theme = useTheme();
 
